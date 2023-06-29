@@ -29,7 +29,7 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Role::orderBy('id', 'DESC')->paginate(5);
+        $data = Role::orderBy('id', 'DESC')->paginate(10);
 
         return view('back.roles.index', compact('data'));
     }
@@ -62,7 +62,7 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('back.roles.index')
+        return redirect()->route('roles.index')
             ->with('success', 'Role created successfully.');
     }
 
@@ -120,7 +120,7 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('back.roles.index')
+        return redirect()->route('roles.index')
             ->with('success', 'Role updated successfully.');
     }
 
@@ -134,7 +134,7 @@ class RoleController extends Controller
     {
         Role::find($id)->delete();
 
-        return redirect()->route('back.roles.index')
+        return redirect()->route('roles.index')
             ->with('success', 'Role deleted successfully');
     }
 }

@@ -27,7 +27,7 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Ticket::latest()->paginate(5);
+        $data = Ticket::latest()->paginate(10);
 
         return view('back.tickets.index', compact('data'));
     }
@@ -58,7 +58,7 @@ class TicketController extends Controller
 
         Ticket::create($input);
 
-        return redirect()->route('back.tickets.index')
+        return redirect()->route('tickets.index')
             ->with('success', 'Ticket created successfully.');
     }
 
@@ -70,7 +70,7 @@ class TicketController extends Controller
      */
     public function show($id)
     {
-        $Ticket = Ticket::find($id);
+        $ticket = Ticket::find($id);
 
         return view('back.tickets.show', compact('ticket'));
     }
@@ -83,7 +83,7 @@ class TicketController extends Controller
      */
     public function edit($id)
     {
-        $Ticket = Ticket::find($id);
+        $ticket = Ticket::find($id);
 
         return view('back.tickets.edit', compact('ticket'));
     }
@@ -102,11 +102,11 @@ class TicketController extends Controller
             'body' => 'required',
         ]);
 
-        $Ticket = Ticket::find($id);
+        $ticket = Ticket::find($id);
 
-        $Ticket->update($request->all());
+        $ticket->update($request->all());
 
-        return redirect()->route('back.tickets.index')
+        return redirect()->route('tickets.index')
             ->with('success', 'Ticket updated successfully.');
     }
 
@@ -120,7 +120,7 @@ class TicketController extends Controller
     {
         Ticket::find($id)->delete();
 
-        return redirect()->route('back.tickets.index')
+        return redirect()->route('tickets.index')
             ->with('success', 'Ticket deleted successfully.');
     }
 }
