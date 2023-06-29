@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<div class="container pt-5 pb-5 my-5">
     <div class="justify-content-center">
         @if (count($errors) > 0)
         <div class="alert alert-danger">
