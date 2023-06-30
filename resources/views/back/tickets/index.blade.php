@@ -37,7 +37,7 @@
                         <td>{{ $ticket->id }}</td>
                         <td>{{ $ticket->ticketsImportant->title }}</td>
                         <td>{{ $ticket->title }}</td>
-                        <td>{{ $ticket->status }}</td>
+                        <td>{{ $ticket->status_id }}</td>
                         <td>{{ $ticket->user_id }}</td>
                         <td>{{ $ticket->attach }}</td>
                         <td>{{ $ticket->created_at }}</td>

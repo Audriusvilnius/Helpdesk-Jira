@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->string('important')->nullable();
+            $table->string('important_id')->nullable();
             $table->text('title');
             $table->text('message_json');
-            $table->unsignedBigInteger('status')->nullable();
+            $table->unsignedBigInteger('status_id')->nullable();
             $table->unsignedBigInteger('user_group')->nullable();
             $table->text('share_user_id_json')->nullable();
             $table->text('attach_json')->nullable();

@@ -21,8 +21,9 @@
                     {{ $ticket->title }}
                 </div>
                 <div class="lead">
-                    <strong>Body:</strong>
-                    {{ $ticket->body }}
+                    <strong>Message:</strong>
+                    {{ $ticket->message_json }}
+
                 </div>
             </div>
         </div>

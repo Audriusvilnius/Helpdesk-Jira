@@ -12,11 +12,14 @@ class Ticket extends Model
     protected $fillable = [
         'title',
         'message_json',
-        'important',
+        'important_id',
+        'user_id',
+        'status_id',
+        'user_name',
     ];
 
     public function ticketsImportant()
     {
-        return $this->belongsTo(Important::class, 'important', 'id');
+        return $this->belongsTo(Important::class, 'important_id', 'id');
     }
 }

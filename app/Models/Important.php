@@ -15,6 +15,6 @@ class Important extends Model
     ];
     public function importantTicket()
     {
-        return $this->hasMany(Ticket::class, 'important', 'id');
+        return $this->hasMany(Ticket::class, 'important_id', 'id');
     }
 }

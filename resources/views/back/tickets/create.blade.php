@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <strong>Important:</strong>
-                    {!! Form::select('ticket[]', $important,[], array('class' => 'form-control','multiple')) !!}
+                    {!! Form::select('important_id', $important,[], array('class' => 'form-control','multiple')) !!}
                 </div>
                 <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
                 {!! Form::close() !!}
