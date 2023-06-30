@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Status;
+use App\Models\Important;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class StatusSeeder extends Seeder
+class ImportantSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,14 +14,15 @@ class StatusSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            'Open',
-            'Close',
-            'In progres',
-            'Wait answer',
+            'Very high',
+            'High',
+            'Medium',
+            'Very low',
+            'Low',
         ];
 
         foreach ($data as $status) {
-            Status::create(['title' => $status]);
+            Important::create(['title' => $status]);
         }
     }
 }

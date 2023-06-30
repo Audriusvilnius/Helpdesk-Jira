@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('share_user_id')->nullable();
             $table->text('user_id')->nullable();
             $table->text('status')->nullable();
+            $table->text('important')->nullable();
             $table->text('rest_json')->nullable();
             $table->text('photo_json')->nullable();
             $table->string('photo', 500)->nullable()->nullable();

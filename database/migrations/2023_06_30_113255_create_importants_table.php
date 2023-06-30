@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('statuses', function (Blueprint $table) {
+        Schema::create('importants', function (Blueprint $table) {
             $table->id();
             $table->text('title');
-            $table->text('status_color_text')->nullable();
-            $table->text('status_color_back')->nullable();
+            $table->text('important_color_text')->nullable();
+            $table->text('importanr_color_back')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('statuses');
+        Schema::dropIfExists('importants');
     }
 };

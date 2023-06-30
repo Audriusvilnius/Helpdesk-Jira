@@ -36,14 +36,3 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('tickets', TicketController::class);
     Route::resource('status', StatusController::class);
 });
-
-
-// Route::prefix('admin/category')->name('category-')->group(function () {
-//     Route::get('/', [Category::class, 'index'])->name('index')->middleware('roles:A|M');
-//     Route::get('/create', [Category::class, 'create'])->name('create')->middleware('roles:A|M');
-//     Route::post('/create', [Category::class, 'store'])->name('store')->middleware('roles:A|M');
-//     Route::get('/show/{category}', [Category::class, 'show'])->name('show')->middleware('roles:A|M');
-//     Route::get('/edit/{category}', [Category::class, 'edit'])->name('edit')->middleware('roles:A|M');
-//     Route::put('/edit/{category}', [Category::class, 'update'])->name('update')->middleware('roles:A|M');
-//     Route::delete('/delete/{category}', [Category::class, 'destroy'])->name('delete')->middleware('roles:A|M');
-// });
