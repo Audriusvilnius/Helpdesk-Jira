@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
+            $table->text('title')->nullable();
             $table->timestamps();
         });
     }

@@ -50,6 +50,9 @@
                         @can('user-list')
                         <li><a class="nav-link" href="{{ route('users.index') }}">Users</a></li>
                         @endcan
+                        @can('status-list')
+                        <li><a class="nav-link" href="{{ route('status.index') }}">Status</a></li>
+                        @endcan
                         @can('role-list')
                         <li><a class="nav-link" href="{{ route('roles.index') }}">Roles</a></li>
 
