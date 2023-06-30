@@ -13,4 +13,8 @@ class Important extends Model
         'important_color_text',
         'importanr_color_back',
     ];
+    public function importantTicket()
+    {
+        return $this->hasMany(Ticket::class, 'important', 'id');
+    }
 }

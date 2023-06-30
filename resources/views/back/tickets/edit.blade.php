@@ -27,6 +27,10 @@
                 <div class="form-group">
                     <strong>Message:</strong>
                     {!! Form::textarea('message_json', null, array('placeholder' => 'Message','class' => 'form-control')) !!}
+                </div>
+                <div class="form-group">
+                    <strong>Important:</strong>
+                    {!! Form::select('important[]', $important, $ticketsImportant, array('class' => 'form-control','multiple')) !!}
 
                 </div>
                 <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>

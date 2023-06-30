@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Important;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -39,7 +41,8 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return view('back.tickets.create');
+        $important = Important::pluck('title', 'title')->all();
+        return view('back.tickets.create', compact('important'));
     }
 
     /**
@@ -52,7 +55,7 @@ class TicketController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required',
+            'message_json' => 'required',
         ]);
         $input = $request->except(['_token']);
 
@@ -84,8 +87,17 @@ class TicketController extends Controller
     public function edit($id)
     {
         $ticket = Ticket::find($id);
+        $important = Important::pluck('title', 'title')->all();
 
-        return view('back.tickets.edit', compact('ticket'));
+        dump($ticket);
+        dump($important);
+        dump($ticket->ticketsImportant->title);
+
+        $ticketsImportant = $ticket->ticketsImportant->title;
+        $ticketsImportant = [$ticketsImportant => $ticketsImportant];
+        dd($ticketsImportant);
+
+        return view('back.tickets.edit', compact('ticket', 'important', 'ticketsImportant'));
     }
 
     /**
@@ -99,7 +111,7 @@ class TicketController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required',
+            'message_json' => 'required',
         ]);
 
         $ticket = Ticket::find($id);

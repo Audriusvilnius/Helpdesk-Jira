@@ -35,7 +35,7 @@
                     @foreach ($data as $key => $ticket)
                     <tr>
                         <td>{{ $ticket->id }}</td>
-                        <td>{{ $ticket->important }}</td>
+                        <td>{{ $ticket->ticketsImportant->title }}</td>
                         <td>{{ $ticket->title }}</td>
                         <td>{{ $ticket->status }}</td>
                         <td>{{ $ticket->user_id }}</td>

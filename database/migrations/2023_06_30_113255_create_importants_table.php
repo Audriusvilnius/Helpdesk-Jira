@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('importants', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
+            $table->string('title');
             $table->text('important_color_text')->nullable();
             $table->text('importanr_color_back')->nullable();
             $table->timestamps();
