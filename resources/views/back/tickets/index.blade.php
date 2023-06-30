@@ -11,7 +11,7 @@
             <div class="card-header">Tickets
                 @can('role-create')
                 <span class="float-right">
-                    <a class="btn btn-primary" href="{{ route('tickets.create') }}">New ticket</a>
+                    <a class="btn btn-primary float-end" href="{{ route('tickets.create') }}">New ticket</a>
                 </span>
                 @endcan
             </div>
@@ -29,6 +29,10 @@
                         <tr>
                             <td>{{ $ticket->id }}</td>
                             <td>{{ $ticket->title }}</td>
+                            <td>{{ $ticket->status }}</td>
+                            <td>{{ $ticket->status }}</td>
+                            <td>{{ $ticket->created_at }}</td>
+                            <td>{{ $ticket->updated_at }}</td>
                             <td>
                                 <a class="btn btn-success" href="{{ route('tickets.show',$ticket->id) }}">Show</a>
                                 @can('ticket-edit')

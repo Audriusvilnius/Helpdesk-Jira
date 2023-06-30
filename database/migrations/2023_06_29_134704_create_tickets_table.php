@@ -15,6 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('body');
+            $table->text('user_group')->nullable();
+            $table->text('share_user_id')->nullable();
+            $table->text('user_id')->nullable();
+            $table->text('status')->nullable();
+            $table->text('rest_json')->nullable();
+            $table->text('photo_json')->nullable();
+            $table->string('photo', 500)->nullable()->nullable();
             $table->timestamps();
         });
     }

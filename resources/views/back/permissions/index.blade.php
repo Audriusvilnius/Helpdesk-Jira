@@ -11,7 +11,7 @@
             <div class="card-header">Permissions
                 @can('role-create')
                 <span class="float-right">
-                    <a class="btn btn-primary" href="{{ route('permissions.create') }}">New Permission</a>
+                    <a class="btn btn-primary float-end" href="{{ route('permissions.create') }}">New Permission</a>
                 </span>
                 @endcan
             </div>

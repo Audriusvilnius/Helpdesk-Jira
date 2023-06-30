@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-header">Create ticket
                 <span class="float-right">
-                    <a class="btn btn-primary" href="{{ route('tickets.index') }}">Tickets</a>
+                    <a class="btn btn-primary float-end" href="{{ route('tickets.index') }}">Tickets</a>
                 </span>
             </div>
             <div class="card-body">
@@ -28,7 +28,8 @@
                     <strong>Body:</strong>
                     {!! Form::textarea('body', null, array('placeholder' => 'Body','class' => 'form-control')) !!}
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
+
                 {!! Form::close() !!}
             </div>
         </div>

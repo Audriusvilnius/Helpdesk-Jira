@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-header">Create user
                 <span class="float-right">
-                    <a class="btn btn-primary" href="{{ route('users.index') }}">Users</a>
+                    <a class="btn btn-primary float-end" href="{{ route('users.index') }}">Users</a>
                 </span>
             </div>
             <div class="card-body">
@@ -40,7 +40,7 @@
                     <strong>Role:</strong>
                     {!! Form::select('roles[]', $roles, $userRole, array('class' => 'form-control','multiple')) !!}
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
                 {!! Form::close() !!}
             </div>
         </div>
