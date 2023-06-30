@@ -13,20 +13,16 @@
         </div>
         @endif
         <div class="card">
-            <div class="card-header">Create ticket
+            <div class="card-header">Edit important
                 <span class="float-right">
-                    <a class="btn btn-primary float-end" href="{{ route('tickets.index') }}">Tickets</a>
+                    <a class="btn btn-primary float-end" href="{{ route('important.index') }}">Important</a>
                 </span>
             </div>
             <div class="card-body">
-                {!! Form::open(array('route' => 'tickets.store', 'method'=>'POST')) !!}
+                {!! Form::model($important, ['route' => ['important.update', $important->id], 'method'=>'PATCH']) !!}
                 <div class="form-group">
                     <strong>Title:</strong>
                     {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control')) !!}
-                </div>
-                <div class="form-group">
-                    <strong>Massege:</strong>
-                    {!! Form::textarea('message_json', null, array('placeholder' => 'Massege','class' => 'form-control')) !!}
                 </div>
                 <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
                 {!! Form::close() !!}

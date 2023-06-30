@@ -21,10 +21,11 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>#</th>
+                        <th>!</th>
                         <th>Title</th>
                         <th>Status</th>
                         <th>User open</th>
-                        <th>User open</th>
+                        <th>Attach</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th width="280px">Action</th>
@@ -34,9 +35,11 @@
                     @foreach ($data as $key => $ticket)
                     <tr>
                         <td>{{ $ticket->id }}</td>
+                        <td>{{ $ticket->important }}</td>
                         <td>{{ $ticket->title }}</td>
                         <td>{{ $ticket->status }}</td>
                         <td>{{ $ticket->user_id }}</td>
+                        <td>{{ $ticket->attach }}</td>
                         <td>{{ $ticket->created_at }}</td>
                         <td>{{ $ticket->updated_at }}</td>
                         <td>

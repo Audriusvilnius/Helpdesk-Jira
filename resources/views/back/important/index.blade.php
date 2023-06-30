@@ -8,10 +8,10 @@
         </div>
         @endif
         <div class="card">
-            <div class="card-header">Status
-                @can('status-create')
+            <div class="card-header">Important
+                @can('important-create')
                 <span class="float-right">
-                    <a class="btn btn-primary float-end" href="{{ route('status.create') }}">New Status</a>
+                    <a class="btn btn-primary float-end" href="{{ route('important.create') }}">New Important</a>
                 </span>
                 @endcan
             </div>
@@ -25,17 +25,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data as $key => $status)
+                        @foreach ($data as $key => $important)
+
                         <tr>
-                            <td>{{ $status->id }}</td>
-                            <td>{{ $status->title }}</td>
+                            <td>{{ $important->id }}</td>
+                            <td>{{ $important->title }}</td>
                             <td>
-                                <a class="btn btn-success" href="{{ route('status.show',$status->id) }}">Show</a>
-                                @can('status-edit')
-                                <a class="btn btn-primary" href="{{ route('status.edit',$status->id) }}">Edit</a>
+                                <a class="btn btn-success" href="{{ route('important.show',$important->id) }}">Show</a>
+                                @can('important-edit')
+                                <a class="btn btn-primary" href="{{ route('important.edit',$important->id) }}">Edit</a>
                                 @endcan
-                                @can('status-delete')
-                                {!! Form::open(['method' => 'DELETE','route' => ['status.destroy', $status->id],'style'=>'display:inline']) !!}
+                                @can('important-delete')
+                                {!! Form::open(['method' => 'DELETE','route' => ['important.destroy', $important->id],'style'=>'display:inline']) !!}
+
                                 {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                                 {!! Form::close() !!}
                                 @endcan

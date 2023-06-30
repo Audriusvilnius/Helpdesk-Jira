@@ -25,8 +25,9 @@
                     {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control')) !!}
                 </div>
                 <div class="form-group">
-                    <strong>Body:</strong>
-                    {!! Form::textarea('body', null, array('placeholder' => 'Body','class' => 'form-control')) !!}
+                    <strong>Message:</strong>
+                    {!! Form::textarea('message_json', null, array('placeholder' => 'Message','class' => 'form-control')) !!}
+
                 </div>
                 <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
                 {!! Form::close() !!}

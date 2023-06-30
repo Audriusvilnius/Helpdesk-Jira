@@ -61,7 +61,7 @@
                                 <a class="dropdown-item" href="{{ route('status.index') }}">Status</a>
                                 @endcan
                                 @can('user-list')
-                                <a class="dropdown-item" href="{{ route('status.index') }}">Important</a>
+                                <a class="dropdown-item" href="{{ route('important.index') }}">Important</a>
                                 @endcan
                                 @can('user-list')
                                 <a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a>

@@ -17,8 +17,8 @@ class ImportantSeeder extends Seeder
             'Very high',
             'High',
             'Medium',
-            'Very low',
             'Low',
+            'Very low',
         ];
 
         foreach ($data as $status) {
