@@ -19,17 +19,17 @@
                 {!! Form::open(array('route' => 'tickets.store', 'method'=>'POST')) !!}
                 <div class="form-group">
                     <strong>Title:</strong>
-                    {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control')) !!}
+                    {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control','minlength'=>'3', 'maxlength'=>'50')) !!}
+                </div>
+                <div class="form-group">
+                    <strong>Important:</strong>
+                    {!! Form::select('important_id', $important,[], array('class' => 'form-control important-conteiner','multiple')) !!}
                 </div>
                 <div class="form-group">
                     <strong>Massege:</strong>
                     {!! Form::textarea('message_json', null, array('placeholder' => 'Massege','class' => 'form-control')) !!}
                 </div>
-                <div class="form-group">
-                    <strong>Important:</strong>
-                    {!! Form::select('important_id', $important,[], array('class' => 'form-control','multiple')) !!}
-                </div>
-                <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
+                <button type="submit" class="btn btn-primary float-end mt-3">Create</button>
                 {!! Form::close() !!}
             </div>
         </div>

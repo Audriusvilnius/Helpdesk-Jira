@@ -17,10 +17,11 @@ class TicketController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show']]);
         $this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:ticket-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:ticket-message', ['only' => ['message']]);
     }
 
     /**
@@ -122,11 +123,39 @@ class TicketController extends Controller
         ]);
 
         $ticket = Ticket::find($id);
+        $important = Important::pluck('title', 'id')->all();
+        $input['important_id'] = array_search($request->important_id, $important);
 
-        $ticket->update($request->all());
+        if ($request->important_id) {
+            $ticket->important_id = $input['important_id'];
+        }
+        $ticket->title = $request->title;
+        $ticket->message_json = $request->message_json;
+        $ticket->update();
 
         return redirect()->route('tickets.index')
             ->with('success', 'Ticket updated successfully.');
+    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    public function message(Request $request)
+    {
+        $this->validate($request, [
+            'message_json' => 'required',
+        ]);
+
+        $ticket = Ticket::find($request->id);
+        // dump($request->id);
+        // dd($request->message_json);
+        // $ticket->message_json = $request->message_json;
+        $ticket->update($request->all());
+
+        return view('back.tickets.show', compact('ticket'))->with('success', 'Ticket updated successfully.');
     }
 
     /**

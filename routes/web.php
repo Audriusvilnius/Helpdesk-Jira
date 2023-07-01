@@ -38,3 +38,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('status', StatusController::class);
     Route::resource('important', ImportantController::class);
 });
+Route::post('/ticket/rewiew', [TicketController::class, 'message'])->name('ticket-message');

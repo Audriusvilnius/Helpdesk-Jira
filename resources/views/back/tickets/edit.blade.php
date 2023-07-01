@@ -17,16 +17,17 @@
                 {!! Form::model($ticket, ['route' => ['tickets.update', $ticket->id], 'method'=>'PATCH']) !!}
                 <div class="form-group">
                     <strong>Title:</strong>
-                    {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control')) !!}
+                    {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control','minlength'=>'3', 'maxlength'=>'80')) !!}
+                </div>
+                <div class="form-group">
+                    <strong>Important:</strong>
+                    {!! Form::select('important_id', $important,[], array('class' => 'form-control important-conteiner','multiple')) !!}
                 </div>
                 <div class="form-group">
                     <strong>Message:</strong>
                     {!! Form::textarea('message_json', null, array('placeholder' => 'Message','class' => 'form-control')) !!}
                 </div>
-                <div class="form-group">
-                    <strong>Important:</strong>
-                    {!! Form::select('important[]', $important, $ticketsImportant, array('class' => 'form-control','multiple')) !!}
-                </div>
+
                 <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
                 {!! Form::close() !!}
             </div>

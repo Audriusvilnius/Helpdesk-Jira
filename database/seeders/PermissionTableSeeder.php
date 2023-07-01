@@ -31,6 +31,7 @@ class PermissionTableSeeder extends Seeder
             'ticket-create',
             'ticket-edit',
             'ticket-delete',
+            'ticket-message',
             'status-list',
             'status-create',
             'status-edit',

@@ -34,7 +34,8 @@
                     <tr>
                         <td>{{ $ticket->id }}</td>
                         <td>{{ $ticket->ticketsImportant->title }}</td>
-                        <td>{{ $ticket->title }}</td>
+                        <td class="length">{{ $ticket->title }}</td>
+
                         <td>{{ $ticket->status_id }}</td>
                         <td>{{ $ticket->user_id }}</td>
                         <td>{{ $ticket->attach }}</td>
