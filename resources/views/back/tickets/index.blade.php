@@ -2,12 +2,8 @@
 @section('content')
 <div class="container pt-5 pb-5 my-5">
     <div class="justify-content-center">
-        @if (\Session::has('success'))
-        <div class="alert alert-success">
-            <p>{{ \Session::get('success') }}</p>
-        </div>
-        @endif
-        {{-- <div class="card"> --}}
+        @include('alerts.alert-success')
+        @include('alerts.alert-danger')
         <div class="card-header card-header justify-content-between align-content-between d-flex ">
             <h2 class="text-light">Tickets list</h2>
             @can('role-create')
@@ -61,5 +57,4 @@
         </div>
     </div>
 </div>
-{{-- </div> --}}
 @endsection

@@ -2,22 +2,17 @@
 @section('content')
 <div class="container pt-5 pb-5 my-5">
     <div class="justify-content-center">
-        @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <strong>Opps!</strong> Something went wrong, please check below errors.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        @include('alerts.alert-success')
+        @include('alerts.alert-danger')
+        <div class="card-header card-header justify-content-between align-content-between d-flex ">
+            <h2 class="text-light">Create ticket</h2>
+            @can('role-create')
+            <span class="float-end ">
+                <a class="btn btn-primary d-flex justify-content-center align-content-center m-2 " href="{{ route('tickets.index') }}">Tickets</a>
+            </span>
+            @endcan
         </div>
-        @endif
         <div class="card">
-            <div class="card-header">Create ticket
-                <span class="float-right">
-                    <a class="btn btn-primary float-end" href="{{ route('tickets.index') }}">Tickets</a>
-                </span>
-            </div>
             <div class="card-body">
                 {!! Form::open(array('route' => 'tickets.store', 'method'=>'POST')) !!}
                 <div class="form-group">
