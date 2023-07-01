@@ -2,8 +2,10 @@
 @section('content')
 <div class="container pt-5 pb-5 my-5">
     <div class="justify-content-center">
+
         @include('alerts.alert-success')
         @include('alerts.alert-danger')
+
         <div class="card-header card-header justify-content-between align-content-between d-flex ">
             <h2 class="text-light">Create ticket</h2>
             @can('role-create')

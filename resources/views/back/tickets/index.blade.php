@@ -2,13 +2,15 @@
 @section('content')
 <div class="container pt-5 pb-5 my-5">
     <div class="justify-content-center">
+
         @include('alerts.alert-success')
         @include('alerts.alert-danger')
+
         <div class="card-header card-header justify-content-between align-content-between d-flex ">
             <h2 class="text-light">Tickets list</h2>
             @can('role-create')
             <span class="float-end ">
-                <a class="btn btn-primary d-flex justify-content-center align-content-center m-2 " href="{{ route('tickets.create') }}">New ticket</a>
+                <a class="btn btn-primary d-flex justify-content-center align-content-center m-2" href="{{ route('tickets.create') }}">New ticket</a>
             </span>
             @endcan
         </div>
