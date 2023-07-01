@@ -14,23 +14,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inspiration&family=Kolker+Brush&family=WindSong:wght@500&display=swap" rel="stylesheet">
 
-
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="{{asset('assets/js/jquery-3.6.4.min.js')}}"></script>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js','resources/js/jquery-3.6.4.min.js'])
+    {{-- <script src="{{asset('assets/js/jquery-3.6.4.min.js')}}"></script> --}}
 
 </head>
 <body>
     <div id="app">
         <nav id="navbar" class="navbar navbar-expand-md navbar-light bg-body-tertiary shadow sticky-top">
             <div class="container-fluid">
-
                 <a class="navbar-brand name ms-5" href="{{ url('/') }}">Help Desk</a>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -100,7 +95,6 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>

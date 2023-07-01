@@ -26,7 +26,6 @@
                 <div class="form-group">
                     <strong>Important:</strong>
                     {!! Form::select('important[]', $important, $ticketsImportant, array('class' => 'form-control','multiple')) !!}
-
                 </div>
                 <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
                 {!! Form::close() !!}
