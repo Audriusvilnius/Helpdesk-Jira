@@ -53,6 +53,7 @@
                         @can('ticket-list')
                         <li><a class="nav-link" href="{{ route('tickets.index') }}">My Tickets</a></li>
                         @endcan
+                        @can('setings')
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 Setings </a>
@@ -60,19 +61,21 @@
                                 @can('user-list')
                                 <a class="dropdown-item" href="{{ route('users.index') }}">Users</a>
                                 @endcan
-                                @can('user-list')
+                                @can('status-list')
                                 <a class="dropdown-item" href="{{ route('status.index') }}">Status</a>
                                 @endcan
-                                @can('user-list')
+                                @can('important-list')
                                 <a class="dropdown-item" href="{{ route('important.index') }}">Important</a>
                                 @endcan
-                                @can('user-list')
+                                @can('role-list')
                                 <a class="dropdown-item" href="{{ route('roles.index') }}">Roles</a>
                                 @endcan
-                                @can('user-list')
+                                @can('permission-list')
                                 <a class="dropdown-item" href="{{ route('permissions.index') }}">Permission</a>
                                 @endcan
                         </li>
+                        @endcan
+
                         {{-- Menu end --}}
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

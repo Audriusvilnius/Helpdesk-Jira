@@ -40,6 +40,7 @@ class PermissionTableSeeder extends Seeder
             'important-create',
             'important-edit',
             'important-delete',
+            'setings',
         ];
 
         foreach ($data as $permission) {

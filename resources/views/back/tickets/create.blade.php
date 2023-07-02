@@ -19,7 +19,7 @@
                 {!! Form::open(array('route' => 'tickets.store', 'method'=>'POST')) !!}
                 <div class="form-group">
                     <strong>Title:</strong>
-                    {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control','minlength'=>'3', 'maxlength'=>'50')) !!}
+                    {!! Form::text('title', null, array('placeholder' => 'Title','class' => 'form-control','minlength'=>'3', 'maxlength'=>'150')) !!}
                 </div>
                 <div class="form-group">
                     <strong>Important:</strong>

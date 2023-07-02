@@ -64,8 +64,13 @@ class TicketController extends Controller
         $important = Important::pluck('title', 'id')->all();
         $input = $request->except(['_token']);
         $input['user_id'] = Auth::user()->id;
+        $input['user_name'] = Auth::user()->name;
+
         $input['status_id'] = 1;
         $input['important_id'] = array_search($request->important_id, $important);
+
+        $input['message_json'] = [Auth::user()->id => ['user_name' => Auth::user()->name, 'message' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()]];
+        $input['message_json'] = json_encode($input['message_json']);
 
         Ticket::create($input);
 
@@ -82,8 +87,15 @@ class TicketController extends Controller
     public function show($id)
     {
         $ticket = Ticket::find($id);
+        $message = json_decode($ticket->message_json, 1);
 
-        return view('back.tickets.show', compact('ticket'));
+        if ($message != null) {
+            usort($message, function ($b, $a) {
+                return $a['date'] <=> $b['date'];
+            });
+        }
+
+        return view('back.tickets.show', compact('ticket', 'message'));
     }
 
     /**
@@ -96,14 +108,8 @@ class TicketController extends Controller
     {
         $ticket = Ticket::find($id);
         $important = Important::pluck('title', 'title')->all();
-
-        // dump($ticket);
-        // dump($important);
-        // dump($ticket->ticketsImportant->title);
-
         $ticketsImportant = $ticket->ticketsImportant->title;
         $ticketsImportant = [$ticketsImportant => $ticketsImportant];
-        // dd($ticketsImportant);
 
         return view('back.tickets.edit', compact('ticket', 'important', 'ticketsImportant'));
     }
@@ -150,12 +156,28 @@ class TicketController extends Controller
         ]);
 
         $ticket = Ticket::find($request->id);
-        // dump($request->id);
-        // dd($request->message_json);
-        // $ticket->message_json = $request->message_json;
-        $ticket->update($request->all());
+        $ticket->updated_at = date('Y-m-d G:i:s');
 
-        return view('back.tickets.show', compact('ticket'))->with('success', 'Ticket updated successfully.');
+        $ticket->touch();
+        $messaj_json = json_decode($ticket->message_json, 1);
+
+        if ($messaj_json) {
+            $messaj_json[uniqid()] = ['user_name' => Auth::user()->name, 'message' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()];
+        } else {
+            $messaj_json = [uniqid() => ['user_name' => Auth::user()->name, 'review' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()]];
+        }
+
+        $messaj_json = json_encode($messaj_json);
+        DB::table('tickets')->where('id', $request->id)->update(['message_json' => $messaj_json]);
+
+        $message = json_decode($messaj_json, 1);
+        if ($message != null) {
+            usort($message, function ($b, $a) {
+                return $a['insert_at'] <=> $b['insert_at'];
+            });
+        }
+
+        return view('back.tickets.show', compact('ticket', 'message'))->with('success', 'Ticket updated successfully.');
     }
 
     /**

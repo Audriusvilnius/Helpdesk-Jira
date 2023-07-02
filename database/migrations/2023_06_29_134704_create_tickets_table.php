@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->text('user_name');
             $table->string('important_id')->nullable();
             $table->text('title');
             $table->text('message_json');

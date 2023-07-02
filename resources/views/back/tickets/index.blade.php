@@ -8,7 +8,7 @@
 
         <div class="card-header card-header justify-content-between align-content-between d-flex ">
             <h2 class="text-light">Tickets list</h2>
-            @can('role-create')
+            @can('ticket-create')
             <span class="float-end ">
                 <a class="btn btn-primary d-flex justify-content-center align-content-center m-2" href="{{ route('tickets.create') }}">New ticket</a>
             </span>
@@ -37,7 +37,7 @@
                         <td class="length">{{ $ticket->title }}</td>
 
                         <td>{{ $ticket->status_id }}</td>
-                        <td>{{ $ticket->user_id }}</td>
+                        <td>{{ $ticket->user_name }}</td>
                         <td>{{ $ticket->attach }}</td>
                         <td>{{ $ticket->created_at }}</td>
                         <td>{{ $ticket->updated_at }}</td>
