@@ -1,8 +1,16 @@
+// Variables
+
+// @import 'variables';
+@import 'functions';
+// @import 'mixins';
+
+// Bootstrap
 
 
-@import "bootstrap/functions";
-@import "bootstrap/variables";
-@import "bootstrap/mixins";
+// Bootstrap Icon
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
+
+
 
 $font-family-sans-serif-2: 'Roboto', sans-serif;
 $font-family-serif: 'Source Serif Pro', serif;
@@ -36,16 +44,16 @@ h2 {
 }
 
 .content {
-	.bg {
-		@include media-breakpoint-down(md) {
-			height: 500px;
-		}
-	}
+	// .bg {
+	// 	@include media-breakpoint-down(md) {
+	// 		height: 500px;
+	// 	}
+	// }
 	.contents, .bg {
-		width: 50%;
-		@include media-breakpoint-down(lg) {
-			width: 100%;
-		}
+		// width: 50%;
+		// @include media-breakpoint-down(lg) {
+		// 	width: 100%;
+		// }
 		.form-group	{
 			overflow: hidden;
 			margin-bottom: 0;
@@ -81,9 +89,9 @@ h2 {
 				margin-bottom: 0;
 				color: darken(#ccc, 10%);
 			}
-			&.focus {
-				background: $white;
-			}
+			// &.focus {
+			// 	background: $white;
+			// }
 			&.field--not-empty {
 				label {
 					margin-top: -20px;
@@ -128,7 +136,7 @@ h2 {
 		
 		position: relative;
 		text-align: center;
-		color: $white;
+		color: white;
 		margin-bottom: 10px;
 		width: 50px;
 		height: 50px;
@@ -141,7 +149,7 @@ h2 {
 			transform: translate(-50%, -50%);
 		}
 		&:hover {
-			color: $white;
+			color: white;
 		}
 		&.facebook {
 			background: #3b5998;
@@ -200,11 +208,11 @@ h2 {
   background: #ccc;
 }
 .control input:checked ~ .control__indicator {
-  background: $primary;
+//   background: $primary;
 }
 .control:hover input:not([disabled]):checked ~ .control__indicator,
 .control input:checked:focus ~ .control__indicator {
-  background: lighten($primary, 5%);
+//   background: lighten($primary, 5%);
 }
 .control input:disabled ~ .control__indicator {
   background: #e6e6e6;

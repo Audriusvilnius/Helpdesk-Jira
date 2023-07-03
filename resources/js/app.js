@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../sass/app.scss'
+import '../sass/style.scss'
 
 
 let prevScrollpos = window.pageYOffset;
@@ -18,3 +19,4 @@ setTimeout(function () {
         $(this).remove();
     });
 }, 10000);
+

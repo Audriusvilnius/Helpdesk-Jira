@@ -22,7 +22,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/jquery-3.6.4.min.js', 'resources/css/owl.carousel.min.css', 'resources/fonts/icomoon/style.css', 'resources/css/style.css'])
+    @vite(['resources/sass/app.scss', 'resources/sass/style.scss', 'resources/js/app.js', 'resources/js/jquery-3.6.4.min.js', 'resources/css/owl.carousel.min.css', 'resources/fonts/icomoon/style.css'])
 
 </head>
 
