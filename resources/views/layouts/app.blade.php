@@ -30,7 +30,7 @@
     <div id="app">
         <nav id="navbar" class="navbar navbar-expand-md navbar-light bg-body-tertiary shadow sticky-top">
             <div class="container-fluid">
-                <a class="navbar-brand name ms-5" href="{{ url('/') }}">Help Desk</a>
+                <a class="navbar-brand name ms-5  " href="{{ url('/') }}">Help Desk</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -52,7 +52,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Sign In') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Sign Up') }}</a>
                                 </li>
                             @endif
                         @else

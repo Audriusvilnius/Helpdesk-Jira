@@ -19,7 +19,7 @@
                             <div class="form-group first">
                                 <form method="POST" action="{{ route('verification.resend') }}">
                                     @csrf
-                                    <button type="submit" class="btn btn-block btn-warning"> {{ __('Register') }}
+                                    <button type="submit" class="fs-5 btn btn-block btn-warning"> {{ __('Register') }}
                                     </button>
                                     <div class="social-login my-5">
                                         <a href="#" class="facebook">

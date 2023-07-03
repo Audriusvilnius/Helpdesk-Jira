@@ -12,8 +12,8 @@
                         <div class="col-md-8">
                             <div class="mb-4 ">
                                 <h3 class="text-black fs-3">{{ __('Reset Password') }}</h3>
-                                <p class="mb-4 text-black">Lorem ipsum dolor sit amet elit. Sapiente sit eosconsectetur
-                                    adipisicing.</p>
+                                <p class="mb-4 mt-4 fw-normal text-black">Please enter your email address. You
+                                    will receive a link to create a new password via email.</p>
                             </div>
                             @if (session('status'))
                                 <section id="alert">
@@ -39,7 +39,7 @@
                                     @enderror
                                 </div>
                                 <button type="submit"
-                                    class="btn btn-block btn-warning">{{ __('Send Password Reset Link') }}
+                                    class="fs-5 btn btn-block btn-warning">{{ __('Send Password Reset Link') }}
                                 </button>
                                 <div class="social-login my-5">
                                     <a href="#" class="facebook">

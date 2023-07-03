@@ -10,9 +10,11 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="mb-4 ">
-                                <h3 class="text-back fs-3">{{ __('Register') }}</h3>
-                                <p class="mb-4 text-black">Lorem ipsum dolor sit amet elit. Sapiente sit eosconsectetur
-                                    adipisicing.</p>
+                                <h3 class="text-back fs-3">{{ __('Sign Up') }}</h3>
+                                <p class="mb-4 mt-4 fw-normal text-black">Sign Up to your Helpdesk account to contribute to
+                                    JRA, get
+                                    help in
+                                    the support forum, or rate and review.</p>
                             </div>
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
@@ -57,7 +59,7 @@
                                     <input id="password-confirm" type="password" class="form-control"
                                         name=" password_confirmation" required autocomplete="new-password">
                                 </div>
-                                <button type="submit" class="btn btn-block btn-warning"> {{ __('Register') }}
+                                <button type="submit" class="fs-5 btn btn-block btn-warning"> {{ __('Sign Up') }}
                                 </button>
                                 <div class="social-login my-5">
                                     <a href="#" class="facebook">

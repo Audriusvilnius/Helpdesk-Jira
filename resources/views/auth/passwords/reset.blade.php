@@ -10,7 +10,8 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="mb-4 ">
-                                <p class="mb-4 text-black">{{ __('Reset Password') }}</p>
+                                <h3 class="text-back fs-3">{{ __('Reset Password') }}</h3>
+                                <p class="mb-4 mt-4 fw-normal text-black">Reset password for your Helpdesk account.</p>
                             </div>
                             <form method="POST" action="{{ route('password.update') }}">
                                 @csrf
@@ -26,7 +27,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="form-group last mb-4">
+                                <div class="form-group">
                                     <label for="password">{{ __('Password') }}</label>
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
@@ -43,8 +44,11 @@
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password">
                                 </div>
-                                <button type="submit" class="btn btn-block btn-warning"> {{ __('Reset Password') }}
+
+                                <button type="submit" class="fs-5 btn btn-block btn-warning">
+                                    {{ __('Reset Password') }}
                                 </button>
+
                                 <div class="social-login my-5">
                                     <a href="#" class="facebook">
                                         <span class="icon-facebook mr-3"></span>
