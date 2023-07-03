@@ -1,45 +1,65 @@
 @extends('layouts.app')
-@section('content')
-<div class="container pt-5 pb-5 my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
-                <div class="card-body">
-                    {{ __('Please confirm your password before continuing.') }}
-                    <form method="POST" action="{{ route('password.confirm') }}">
-                        @csrf
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+@section('content')
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ asset('/assets/images/undraw_remotely_2j6y.svg') }}" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="mb-4 ">
+                                <p class="mb-4 text-black"> {{ __('Please confirm your password before continuing.') }}</p>
+                            </div>
+
+
+                            action="{{ route('password.confirm') }}">
+                            @csrf
+
+                            <div class="form-group first">
+                                <label for="username">{{ __('Password') }}</label>
+
+
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password" required
+                                    autocomplete="current-password">
 
                                 @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                 @enderror
+
                             </div>
-                        </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Confirm Password') }}
-                                </button>
 
-                                @if (Route::has('password.request'))
+                            <button type="submit" class="btn btn-block btn-warning"> {{ __('Confirm Password') }}
+                            </button>
+
+                            @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
-                                @endif
-                            </div>
+
+                                <div class="social-login my-5">
+                                    <a href="#" class="facebook">
+                                        <span class="icon-facebook mr-3"></span>
+                                    </a>
+                                    <a href="#" class="twitter">
+                                        <span class="icon-twitter mr-3"></span>
+                                    </a>
+                                    <a href="#" class="google">
+                                        <span class="icon-google mr-3"></span>
+                                    </a>
+                                </div>
+
+                                </form>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

@@ -10,6 +10,11 @@
                 <div class="col-md-6 contents">
                     <div class="row justify-content-center">
                         <div class="col-md-8">
+                            <div class="mb-4 ">
+                                <h3 class="text-back fs-3">{{ __('Register') }}</h3>
+                                <p class="mb-4 text-black">Lorem ipsum dolor sit amet elit. Sapiente sit eosconsectetur
+                                    adipisicing.</p>
+                            </div>
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
                                 <div class="form-group first">
