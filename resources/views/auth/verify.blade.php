@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="content">
         <div class="container">
@@ -17,13 +16,9 @@
                             @endif
                             {{ __('Before proceeding, please check your email for a verification link.') }}
                             {{ __('If you did not receive the email') }},
-
                             <div class="form-group first">
-
                                 <form method="POST" action="{{ route('verification.resend') }}">
                                     @csrf
-
-
                                     <button type="submit" class="btn btn-block btn-warning"> {{ __('Register') }}
                                     </button>
                                     <div class="social-login my-5">
@@ -44,4 +39,5 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

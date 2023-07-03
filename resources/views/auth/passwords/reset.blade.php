@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="content">
         <div class="container">
@@ -16,7 +15,6 @@
                             <form method="POST" action="{{ route('password.update') }}">
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
-
                                 <div class="form-group first">
                                     <label for="email">{{ __('Email Address') }}</label>
                                     <input id="email" type="email"

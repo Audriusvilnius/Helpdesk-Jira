@@ -23,11 +23,9 @@
                                             @endauth
                                     @endif
                                 </div>
-
                                 <p class="mb-4 text-black">Lorem ipsum dolor sit amet elit. Sapiente sit eosconsectetur
                                     adipisicing.</p>
                             </div>
-
                             @if (Route::has('login'))
                                 @auth
                                 @else
@@ -49,13 +47,11 @@
                                             <input id="password" type="password"
                                                 class="form-control @error('password') is-invalid @enderror" name="password"
                                                 required autocomplete="current-password" id="password">
-
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
-
                                         <button type="submit" class="btn btn-block btn-warning">{{ __('Login') }}
                                         </button>
                                         @if (Route::has('password.request'))
@@ -66,7 +62,6 @@
                                         @endif
                                     @endauth
                             @endif
-
                             <div class="social-login my-5">
                                 <a href="#" class="facebook">
                                     <span class="icon-facebook mr-3"></span>
@@ -78,7 +73,6 @@
                                     <span class="icon-google mr-3"></span>
                                 </a>
                             </div>
-
                             </form>
                         </div>
                     </div>
