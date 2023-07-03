@@ -18,7 +18,7 @@
                                                 <h3>Home</h3>
                                             @else
                                                 <a href="{{ route('register') }}" class="ml-4 text-decoration-none text-black">
-                                                    <h3>Sign In</h3>
+                                                    <h3 class="fs-3">Sign In</h3>
                                                 </a>
                                             @endauth
                                     @endif
@@ -59,17 +59,15 @@
                                         <button type="submit" class="btn btn-block btn-warning">{{ __('Login') }}
                                         </button>
                                         @if (Route::has('password.request'))
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            <span class="d-block my-4 text-muted"> </span>
+                                            <a class="my-5" href="{{ route('password.request') }}">
                                                 {{ __('Forgot Your Password?') }}
                                             </a>
                                         @endif
-
-
                                     @endauth
                             @endif
-                            <span class="d-block text-left my-4 text-muted"></span>
 
-                            <div class="social-login">
+                            <div class="social-login my-5">
                                 <a href="#" class="facebook">
                                     <span class="icon-facebook mr-3"></span>
                                 </a>
@@ -80,6 +78,7 @@
                                     <span class="icon-google mr-3"></span>
                                 </a>
                             </div>
+
                             </form>
                         </div>
                     </div>

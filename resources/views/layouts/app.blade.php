@@ -67,7 +67,7 @@
                                         Setings </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         @can('user-list')
-                                            <a class="dropdown-item" href="{{ route('users.index') }}">Users</a>
+                                            <a class="dropdown-item text-muted" href="{{ route('users.index') }}">Users</a>
                                         @endcan
                                         @can('status-list')
                                             <a class="dropdown-item" href="{{ route('status.index') }}">Status</a>
