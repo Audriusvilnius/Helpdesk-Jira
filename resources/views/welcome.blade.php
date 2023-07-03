@@ -37,12 +37,22 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="mb-4 ">
-                                <a href="{{ route('register') }}" class="ml-4 text-decoration-none text-black">
-                                    <h3>Sign In</h3>
-                                </a>
+                                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                                    @if (Route::has('login'))
+                                        @auth
+                                            <a href="{{ route('home') }}" class="ml-4 text-decoration-none text-black">
+                                                <h3>Home</h3>
+                                            @else
+                                                <a href="{{ route('register') }}"
+                                                    class="ml-4 text-decoration-none text-black">
+                                                    <h3>Sign In</h3>
+                                                </a>
+                                            @endauth
+                                    @endif
+                                </div>
 
-                                <p class="mb-4 text-black">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
-                                    consectetur adipisicing.</p>
+                                <p class="mb-4 text-black">Lorem ipsum dolor sit amet elit. Sapiente sit eosconsectetur
+                                    adipisicing.</p>
                             </div>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf

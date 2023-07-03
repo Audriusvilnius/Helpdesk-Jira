@@ -44,11 +44,9 @@ h2 {
 }
 
 .content {
-	// .bg {
-	// 	@include media-breakpoint-down(md) {
-	// 		height: 500px;
-	// 	}
-	// }
+
+			min-height: 920px;
+
 	.contents, .bg {
 		// width: 50%;
 		// @include media-breakpoint-down(lg) {
@@ -64,7 +62,7 @@ h2 {
 			background: #edf2f5;
 			border-bottom: 1px solid darken(#edf2f5, 2%);
 			label {
-				position: absolute;
+				position:relative;
 				top: 50%;
 				transform: translateY(-50%);
 				transition: .3s all ease;
@@ -207,13 +205,13 @@ h2 {
 .control input:focus ~ .control__indicator {
   background: #ccc;
 }
-.control input:checked ~ .control__indicator {
-//   background: $primary;
-}
-.control:hover input:not([disabled]):checked ~ .control__indicator,
-.control input:checked:focus ~ .control__indicator {
-//   background: lighten($primary, 5%);
-}
+// .control input:checked ~ .control__indicator {
+// //   background: $primary;
+// }
+// .control:hover input:not([disabled]):checked ~ .control__indicator,
+// .control input:checked:focus ~ .control__indicator {
+// //   background: lighten($primary, 5%);
+// }
 .control input:disabled ~ .control__indicator {
   background: #e6e6e6;
   opacity: 0.9;
