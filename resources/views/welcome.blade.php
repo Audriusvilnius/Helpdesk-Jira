@@ -41,7 +41,7 @@
                                     @if (Route::has('login'))
                                         @auth
                                             <a href="{{ route('home') }}" class="ml-4 text-decoration-none text-black">
-                                                <h3>Home</h3>
+                                                <button class="btn btn-warning">Home</button>
                                             @else
                                                 <a href="{{ route('register') }}"
                                                     class="ml-4 text-decoration-none text-black">
@@ -54,55 +54,61 @@
                                 <p class="mb-4 text-black">Lorem ipsum dolor sit amet elit. Sapiente sit eosconsectetur
                                     adipisicing.</p>
                             </div>
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
-                                <div class="form-group first">
 
-                                    <label for="username">{{ __('Email Address') }}</label>
-                                    {{-- <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label> --}}
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                            @if (Route::has('login'))
+                                @auth
+                                @else
+                                    <form method="POST" action="{{ route('login') }}">
+                                        @csrf
+                                        <div class="form-group first">
+                                            <label for="username">{{ __('Email Address') }}</label>
+                                            <input id="email" type="email"
+                                                class="form-control @error('email') is-invalid @enderror" name="email"
+                                                value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group last mb-4">
+                                            <label for="password">{{ __('Password') }}</label>
+                                            <input id="password" type="password"
+                                                class="form-control @error('password') is-invalid @enderror" name="password"
+                                                required autocomplete="current-password" id="password">
 
-                                </div>
-                                <div class="form-group last mb-4">
-                                    <label for="password">{{ __('Password') }}</label>
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="current-password" id="password">
+                                            @error('password')
+                                                <span class="invalid-feedback"
+                                                    role="alert"><strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-block btn-warning">{{ __('Login') }}
+                                            </button>
+                                        </div>
+                                        @if (Route::has('password.request'))
+                                            <a class="btn btn-link text-black-50" href="{{ route('password.request') }}">
+                                                {{ __('Forgot Your Password?') }}
+                                            </a>
+                                        @endif
 
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
 
-                                <button type="submit" class="btn btn-block btn-primary">{{ __('Login') }}
-                                </button>
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+                                    @endauth
+                            @endif
+                            <span class="d-block text-left my-4 text-muted"></span>
 
-                                <span class="d-block text-left my-4 text-muted"></span>
-
-                                <div class="social-login">
-                                    <a href="#" class="facebook">
-                                        <span class="icon-facebook mr-3"></span>
-                                    </a>
-                                    <a href="#" class="twitter">
-                                        <span class="icon-twitter mr-3"></span>
-                                    </a>
-                                    <a href="#" class="google">
-                                        <span class="icon-google mr-3"></span>
-                                    </a>
-                                </div>
+                            <div class="social-login">
+                                <a href="#" class="facebook">
+                                    <span class="icon-facebook mr-3"></span>
+                                </a>
+                                <a href="#" class="twitter">
+                                    <span class="icon-twitter mr-3"></span>
+                                </a>
+                                <a href="#" class="google">
+                                    <span class="icon-google mr-3"></span>
+                                </a>
+                            </div>
                             </form>
                         </div>
                     </div>
