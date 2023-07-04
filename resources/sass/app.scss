@@ -118,3 +118,55 @@ main {
     color: #282c34;
 }
 
+.container-btn {
+    margin: 10px;
+    width: 170px;
+    height: 50px;
+    // max-height: 100px;
+    /* background-color: #282c34; */
+    background-color: #ddd;
+    color: #ddd;
+    color: #282c34;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    border-radius: 6px;
+    line-height: 50px;
+    align-items: center;
+    display: inline-block;
+    justify-content: space-evenly;
+    filter: drop-shadow(2px 2px 3px rgba(135, 118, 118, 1));
+    transition: 500ms;
+    /* border: #ddd solid 1px; */
+    // border: #282c34 solid 1px;
+}
+
+.container-btn:hover {
+    transition: 500ms;
+    color: #282c34;
+    background-color: #ddd;
+    /* line-height: 15px; */
+    filter: drop-shadow(5px 15px 15px rgba(35, 18, 18, 1));
+    transform: translateY(-5px);
+    // border: #282c34 solid 1px;
+}
+
+.typed {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typing;
+    animation-duration: 2s;
+    animation-timing-function: steps(100, end);
+    animation-fill-mode: forwards;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 100%
+    }
+}

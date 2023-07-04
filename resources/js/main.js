@@ -1,3 +1,6 @@
+import './bootstrap';
+import '../sass/style.scss'
+
 $(function () {
     'use strict';
 

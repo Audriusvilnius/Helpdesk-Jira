@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/sass/style.scss',
                 'resources/js/app.js',
+                'resources/js/main.js',
                 'resources/js/jquery-3.6.4.min.js',
                 'resources/css/owl.carousel.min.css',
                 'resources/fonts/icomoon/style.css',

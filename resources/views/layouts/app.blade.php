@@ -20,9 +20,11 @@
         href="https://fonts.googleapis.com/css2?family=Inspiration&family=Kolker+Brush&family=WindSong:wght@500&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/sass/style.scss', 'resources/js/app.js', 'resources/js/jquery-3.6.4.min.js', 'resources/css/owl.carousel.min.css', 'resources/fonts/icomoon/style.css'])
+    @vite(['resources/sass/app.scss', 'resources/sass/style.scss', 'resources/js/app.js', 'resources/js/main.js', 'resources/js/jquery-3.6.4.min.js', 'resources/css/owl.carousel.min.css', 'resources/fonts/icomoon/style.css'])
 
 </head>
 

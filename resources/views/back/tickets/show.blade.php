@@ -38,16 +38,14 @@
             <div class="justify-content-center">
                 @if ($message)
                     @foreach ($message as $id => $data)
-                        <div class="col-md-12 mt-5">
+                        <div class="col-md-12 mt-4">
                             <div id={{ $id }} class="card mt-2 mb-2 d-flex justify-content-md-between shadow">
-                                @if ($ticket->user_id != Auth::user()->id)
-                                    <div class="col-md-3 z-3 position-absolute text-center "
-                                        style="transform: translateX(10px) translateY(-20px) ">
-                                        <div class=" lead rounded-2 p-0 bg-dark-subtle">
-                                            <strong class=" text-muted"> {{ $data['user_name'] }}</strong>
-                                        </div>
+                                <div class="col-md-3 z-3 position-absolute text-center "
+                                    style="transform: translateX(10px) translateY(-20px) ">
+                                    <div class=" lead rounded-2 p-0 bg-dark-subtle">
+                                        <strong class=" text-muted"> {{ $data['user_name'] }}</strong>
                                     </div>
-                                @endif
+                                </div>
                                 <div class="row g-0 p-3 bg-body-tertiary rounded">
                                     <div class="col-md-12 d-flex">
                                         <div class="card-body ms-5 me-5">

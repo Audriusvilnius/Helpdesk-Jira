@@ -9,9 +9,12 @@
             <div class="card-header card-header justify-content-between align-content-between d-flex ">
                 <h2 class="text-light">Tickets list</h2>
                 @can('ticket-create')
-                    <span class="float-end ">
+                    <span class=" d-flex">
+                        <a class="btn btn-warning d-flex justify-content-center align-content-center m-2"
+                            href="{{ route('home') }}">Home</a>
                         <a class="btn btn-primary d-flex justify-content-center align-content-center m-2"
                             href="{{ route('tickets.create') }}">New ticket</a>
+
                     </span>
                 @endcan
             </div>
@@ -40,8 +43,11 @@
                                 <td>{{ $ticket->status_id }}</td>
                                 <td>{{ $ticket->user_name }}</td>
                                 <td>{{ $ticket->attach }}</td>
-                                <td>{{ $ticket->created_at }}</td>
-                                <td>{{ $ticket->updated_at }}</td>
+                                <td>{{ $ticket->created_at->format('Y-m-d H:i') }}</td>
+                                <td>
+                                    <small class="fs-6 ">{{ $ticket->updated_at->format('Y-m-d H:i') }}
+                                    </small>
+                                </td>
                                 <td>
                                     <a class="btn btn-success" href="{{ route('tickets.show', $ticket->id) }}">Show</a>
                                     @can('ticket-edit')
@@ -58,6 +64,7 @@
                     </tbody>
                 </table>
                 {{ $data->appends($_GET)->links() }}
+
             </div>
         </div>
     </div>

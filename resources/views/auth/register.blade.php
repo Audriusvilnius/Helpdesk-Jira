@@ -59,8 +59,10 @@
                                     <input id="password-confirm" type="password" class="form-control"
                                         name=" password_confirmation" required autocomplete="new-password">
                                 </div>
-                                <button type="submit" class="fs-5 btn btn-block btn-warning"> {{ __('Sign Up') }}
+                                <button type="submit" class="fs-5 btn btn-block btn-warning">
+                                    {{ __('Sign Up') }}
                                 </button>
+
                                 <div class="social-login my-5">
                                     <a href="#" class="facebook">
                                         <span class="icon-facebook mr-3"></span>
@@ -80,3 +82,7 @@
         </div>
     </div>
 @endsection
+
+{{-- <a href="{{ route('login') }}" class="text-decoration-none text-black float-end">
+        <span class="fs-5 btn btn-block btn-success">Log In</span>
+    </a> --}}
