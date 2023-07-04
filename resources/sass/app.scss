@@ -2,7 +2,7 @@
 // @import url('https://fonts.bunny.net/css?family=Nunito');
 
 // Variables
-// @import 'variables';
+@import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
@@ -84,12 +84,13 @@ main {
 .btn-primary{
     background-color: #292b34be;
     border-color: #292b34be;
-    // color: #282c34;
+    color: white;
 }
 
 .btn-primary:hover {
     background-color: #282c34;
     border-color: #282c34;
+    color: white;
 }
 
 .length {

@@ -75,6 +75,10 @@
                                 <a href="#" class="google">
                                     <span class="icon-google mr-3"></span>
                                 </a>
+                                <a href="#" class="instagram">
+                                    <span class="icon-instagram mr-3"></span>
+                                </a>
+
                             </div>
                     </div>
                 </div>
