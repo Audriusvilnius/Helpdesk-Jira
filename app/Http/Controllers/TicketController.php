@@ -31,7 +31,7 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Ticket::latest()->paginate(10);
+        $data = Ticket::latest()->paginate(5);
 
         return view('back.tickets.index', compact('data'));
     }

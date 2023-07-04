@@ -92,9 +92,20 @@ main {
     border-color: #282c34;
     color: white;
 }
-
 .length {
     max-width: 25ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.length_title {
+    max-width: 50ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.length_message {
+    max-width: 100ch;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -169,5 +180,11 @@ main {
 
     to {
         width: 100%
+    }
+}
+
+@media (max-width: 767.98px) {
+    .border-sm-start-none {
+        border-left: none !important;
     }
 }

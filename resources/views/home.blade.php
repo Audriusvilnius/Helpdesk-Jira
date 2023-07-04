@@ -21,15 +21,15 @@
                         </a>
                         {{-- </div> --}}
                         {{-- <div class="col-md-12 "> --}}
-                        <a href="{{ route('tickets.index') }}"
+                        <a href="{{ route('tickets.create') }}"
                             class="text-decoration-none text-black container-btn shadow bg-warning">
-                            Open
+                            Create
                         </a>
                         {{-- </div> --}}
                         {{-- <div class="col-md-12 "> --}}
                         <a href="{{ route('tickets.index') }}"
                             class="text-decoration-none text-white container-btn shadow bg-danger">
-                            Waiting
+                            Open
                         </a>
                         {{-- </div> --}}
                         {{-- <div class="col-md-12 "> --}}
