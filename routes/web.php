@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\ContactController as Contact;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -39,3 +40,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('important', ImportantController::class);
 });
 Route::post('/ticket/rewiew', [TicketController::class, 'message'])->name('ticket-message');
+
+Route::get('contact-us', [Contact::class, 'index']);
+Route::post('contact-us', [Contact::class, 'store'])->name('contact.us.store');
