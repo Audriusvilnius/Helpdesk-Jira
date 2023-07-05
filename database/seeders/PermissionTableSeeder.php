@@ -41,6 +41,9 @@ class PermissionTableSeeder extends Seeder
             'important-edit',
             'important-delete',
             'setings',
+            'ticket-status',
+            'ticket-important',
+            'edit-ticket',
         ];
 
         foreach ($data as $permission) {

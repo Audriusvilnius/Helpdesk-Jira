@@ -16,10 +16,15 @@ class Ticket extends Model
         'user_id',
         'status_id',
         'user_name',
+        'request',
     ];
 
     public function ticketsImportant()
     {
         return $this->belongsTo(Important::class, 'important_id', 'id');
+    }
+    public function ticketsStatus()
+    {
+        return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 }

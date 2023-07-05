@@ -4,8 +4,8 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <img src="{{ asset('/assets/images/undraw_remotely_2j6y.svg') }}" alt="Image" class="img-fluid">
+                <div class="col-md-6 mt-5 pe-5">
+                    <img src="{{ asset('/assets/images/undraw_remotely_2j6y.svg') }}" alt="Image" class="img-fluid my-5">
                 </div>
                 <div class="col-md-6 contents">
                     <div class="row justify-content-center">

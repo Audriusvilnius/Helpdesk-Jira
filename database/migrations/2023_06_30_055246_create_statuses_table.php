@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
+            $table->string('title');
             $table->text('status_color_text')->nullable();
             $table->text('status_color_back')->nullable();
             $table->timestamps();

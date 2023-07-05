@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Important;
+use App\Models\Status;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,6 @@ class TicketController extends Controller
     public function index(Request $request)
     {
         $data = Ticket::latest()->paginate(5);
-
         return view('back.tickets.index', compact('data'));
     }
 
@@ -43,8 +43,8 @@ class TicketController extends Controller
      */
     public function create()
     {
-        $important = Important::pluck('title', 'title')->all();
-
+        // $important = Important::pluck('title', 'title')->all();
+        $important = Important::all();
         return view('back.tickets.create', compact('important'));
     }
 
@@ -61,13 +61,16 @@ class TicketController extends Controller
             'message_json' => 'required',
             'important_id' => 'required',
         ]);
-        $important = Important::pluck('title', 'id')->all();
+
         $input = $request->except(['_token']);
         $input['user_id'] = Auth::user()->id;
         $input['user_name'] = Auth::user()->name;
+        $input['request'] = $request->message_json;
 
         $input['status_id'] = 1;
-        $input['important_id'] = array_search($request->important_id, $important);
+        // $input['important_id'] = array_search($request->important_id, $important);
+        $input['important_id'] = $request->important_id;
+
 
         $input['message_json'] = [Auth::user()->id => ['user_name' => Auth::user()->name, 'message' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()]];
         $input['message_json'] = json_encode($input['message_json']);
@@ -86,6 +89,8 @@ class TicketController extends Controller
      */
     public function show($id)
     {
+        $status = Status::all();
+        $important = Important::all();
         $ticket = Ticket::find($id);
         $message = json_decode($ticket->message_json, 1);
 
@@ -95,7 +100,7 @@ class TicketController extends Controller
             });
         }
 
-        return view('back.tickets.show', compact('ticket', 'message'));
+        return view('back.tickets.show', compact('ticket', 'message', 'status'));
     }
 
     /**
@@ -107,11 +112,14 @@ class TicketController extends Controller
     public function edit($id)
     {
         $ticket = Ticket::find($id);
-        $important = Important::pluck('title', 'title')->all();
-        $ticketsImportant = $ticket->ticketsImportant->title;
-        $ticketsImportant = [$ticketsImportant => $ticketsImportant];
+        $status = Status::all();
+        $important = Important::all();
+        // $important = Important::pluck('title', 'title')->all();
+        // $ticketsImportant = $ticket->ticketsImportant->title;
+        // $ticketsImportant = [$ticketsImportant => $ticketsImportant];
 
-        return view('back.tickets.edit', compact('ticket', 'important', 'ticketsImportant'));
+        return view('back.tickets.edit', compact('ticket', 'important', 'status'));
+        // return view('back.tickets.edit', compact('ticket', 'important', 'ticketsImportant', 'status'));
     }
 
     /**
@@ -129,12 +137,18 @@ class TicketController extends Controller
         ]);
 
         $ticket = Ticket::find($id);
-        $important = Important::pluck('title', 'id')->all();
-        $input['important_id'] = array_search($request->important_id, $important);
-
+        // $ticket->important_id = $request->important_id;
+        // $input['important_id'] = array_search($request->important_id, $important);
+        // dd($request->important_id);
         if ($request->important_id) {
-            $ticket->important_id = $input['important_id'];
+            $ticket->important_id = $request->important_id;
         }
+        if ($request->status_id) {
+            $ticket->status_id = $request->status_id;
+        }
+        // if ($request->important_id) {
+        //     $ticket->important_id = $input['important_id'];
+        // }
         $ticket->title = $request->title;
         $ticket->message_json = $request->message_json;
         $ticket->update();
@@ -157,7 +171,6 @@ class TicketController extends Controller
 
         $ticket = Ticket::find($request->id);
         $ticket->updated_at = date('Y-m-d G:i:s');
-
         $ticket->touch();
         $messaj_json = json_decode($ticket->message_json, 1);
 
@@ -169,6 +182,7 @@ class TicketController extends Controller
 
         $messaj_json = json_encode($messaj_json);
         DB::table('tickets')->where('id', $request->id)->update(['message_json' => $messaj_json]);
+        DB::table('tickets')->where('id', $request->id)->update(['status_id' => $ticket->status_id]);
 
         $message = json_decode($messaj_json, 1);
         if ($message != null) {
@@ -176,6 +190,7 @@ class TicketController extends Controller
                 return $a['insert_at'] <=> $b['insert_at'];
             });
         }
+
 
         return view('back.tickets.show', compact('ticket', 'message'))->with('success', 'Ticket updated successfully.');
     }

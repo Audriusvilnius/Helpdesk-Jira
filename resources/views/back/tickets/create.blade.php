@@ -27,10 +27,18 @@
                             'maxlength' => '150',
                         ]) !!}
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <strong>Important:</strong>
                         {!! Form::select('important_id', $important, [], ['class' => 'form-control important-conteiner', 'multiple']) !!}
-                    </div>
+                    </div> --}}
+                    <select class="form-select" name="important_id">
+                        <option value="5">{{ __('Very low') }}</option>
+                        @foreach ($important as $status)
+                            <option value="{{ $status->id }}" @if ($status->id == old('important_id')) selected @endif>
+                                <b>{{ $status->title }}</b>
+                            </option>
+                        @endforeach
+                    </select>
                     <div class="form-group">
                         <strong>Massege:</strong>
                         {!! Form::textarea('message_json', null, ['placeholder' => 'Massege', 'class' => 'form-control']) !!}

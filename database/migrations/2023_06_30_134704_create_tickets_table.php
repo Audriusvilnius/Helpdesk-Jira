@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->text('user_name');
-            $table->string('important_id')->nullable();
+            $table->unsignedBigInteger('important_id')->nullable();
             $table->text('title');
+            $table->text('request')->nullable();
             $table->text('message_json');
             $table->unsignedBigInteger('status_id')->nullable();
             $table->unsignedBigInteger('user_group')->nullable();
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->text('attach_json')->nullable();
             $table->text('photo_json')->nullable();
             $table->string('photo', 500)->nullable()->nullable();
+            $table->foreign('important_id')->references('id')->on('importants');
+            $table->foreign('status_id')->references('id')->on('statuses');
             $table->timestamps();
         });
     }
