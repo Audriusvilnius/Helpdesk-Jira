@@ -14,58 +14,38 @@
                             status and
                             progres.
                         </p>
-                        {{-- <div class="col-md-12 "> --}}
                         <a href="{{ route('tickets.index') }}"
                             class="text-decoration-none text-black container-btn shadow ">
                             All
                         </a>
-                        {{-- </div> --}}
-                        {{-- <div class="col-md-12 "> --}}
                         <a href="{{ route('tickets.create') }}"
                             class="text-decoration-none text-black container-btn shadow bg-warning">
                             Create
                         </a>
-                        {{-- </div> --}}
-                        {{-- <div class="col-md-12 "> --}}
                         <a href="{{ route('tickets.index') }}"
                             class="text-decoration-none text-white container-btn shadow bg-danger">
                             Open
                         </a>
-                        {{-- </div> --}}
-                        {{-- <div class="col-md-12 "> --}}
-                        <a href="{{ route('tickets.index') }}"
-                            class="text-decoration-none text-white container-btn shadow bg-success">
-                            Closed
-                        </a>
-                        {{-- </div> --}}
-                        {{-- <div class="col-md-12 "> --}}
                         <a href="{{ route('tickets.index') }}"
                             class="text-decoration-none text-black container-btn shadow bg-info">
                             Processing
                         </a>
-                        {{-- </div> --}}
-
-
-                        <!--Section: Contact v.2-->
+                        <a href="{{ route('tickets.index') }}"
+                            class="text-decoration-none text-white container-btn shadow bg-success">
+                            Closed
+                        </a>
                         <section class="mb-4">
-
-                            <!--Section heading-->
                             <h3 class="h1-responsive text-white font-weight-bold text-center my-4 mt-5">Contact us</h3>
-                            <!--Section description-->
                             <p class="fw-lighter text-white text-center mt-3">Do you have any questions? Please do not
                                 hesitate to contact us directly. Our team will come back to you within
                                 a matter of hours to help you.</p>
-
                             @include('alerts.alert-success')
-
                             <div class="row">
-                                <!--Grid column-->
                                 <div class="col-md-12 mb-md-0 mb-5">
                                     <form method="POST" action="{{ route('contact.us.store') }}" id="contactUSForm">
-                                        {{ csrf_field() }}
-                                        <!--Grid row-->
+                                        {{-- {{ csrf_field() }} --}}
+                                        @csrf
                                         <div class="row">
-                                            <!--Grid column-->
                                             <div class="col-md-6">
                                                 <div class="md-form mb-0">
                                                     <input type="text" name="name" class="form-control"
@@ -76,9 +56,6 @@
                                                     <label for="name" class="text-white-50">Your name</label>
                                                 </div>
                                             </div>
-                                            <!--Grid column-->
-
-                                            <!--Grid column-->
                                             <div class="col-md-6">
                                                 <div class="md-form mb-0">
                                                     <input type="text" name="email" class="form-control"
@@ -89,12 +66,7 @@
                                                     <label for="email" class="text-white-50">Your email</label>
                                                 </div>
                                             </div>
-                                            <!--Grid column-->
-
-
-                                            <!--Grid row-->
-
-                                            <!--Grid column-->
+                                            <!--Grid column phone-->
                                             {{-- <div class="col-md-4">
                                                 <div class="md-form mb-0">
                                                     <input type="text" name="phone" class="form-control"
@@ -106,9 +78,6 @@
                                                 </div>
                                             </div> --}}
                                         </div>
-                                        <!--Grid column-->
-
-                                        <!--Grid row-->
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="md-form mb-0">
@@ -121,10 +90,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--Grid row-->
-
-                                        <!--Grid row-->
-                                        <!--Grid column-->
                                         <div class="col-md-12">
                                             <div class="md-form">
                                                 <textarea type="text" name="message" rows="5" placeholder="Leave message here"class="form-control md-textarea">{{ old('message') }}</textarea>
@@ -139,23 +104,18 @@
                                         </div>
                                     </form>
                                 </div>
-                                <!--Grid row-->
                                 <div class="status"></div>
                             </div>
-                            <!--Grid column-->
-
-                            <!--Grid column-->
+                            <!--Grid column personal info-->
                             {{-- <div class="col-md-3 text-center">
                                 <ul class="list-unstyled mb-0">
                                     <li><i class="bi bi-geo"></i></i>
                                         <p>Vilnius, LT 1119, Lithuania</p>
                                     </li>
-
                                     <li>
                                         <i class="bi bi-telephone"></i>
                                         <p>+ 370 698 73063</p>
                                     </li>
-
                                     <li><i class="bi bi-envelope"></i></i>
                                         <p>audrius@ivko.org</p>
                                     </li>

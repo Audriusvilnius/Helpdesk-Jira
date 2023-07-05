@@ -20,9 +20,26 @@ class ImportantSeeder extends Seeder
             'Low',
             'Very low',
         ];
-
-        foreach ($data as $status) {
-            Important::create(['title' => $status]);
+        $color_bg = [
+            'crimson',
+            'orangered',
+            'green',
+            'moccasin',
+            'whitesmoke',
+        ];
+        $color = [
+            'white',
+            'white',
+            'whitesmoke',
+            'black',
+            'black',
+        ];
+        foreach ($data as $key => $_) {
+            Important::create([
+                'title' => $data[$key],
+                'important_bc' => $color_bg[$key],
+                'important_tc' => $color[$key],
+            ]);
         }
     }
 }

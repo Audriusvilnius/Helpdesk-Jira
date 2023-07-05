@@ -27,4 +27,8 @@ class Ticket extends Model
     {
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
+    public function ticketsUser()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

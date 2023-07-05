@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('status_color_text')->nullable();
-            $table->text('status_color_back')->nullable();
+            $table->text('status_tc')->nullable();
+            $table->text('status_bc')->nullable();
             $table->timestamps();
         });
     }

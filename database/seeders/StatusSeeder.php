@@ -15,13 +15,32 @@ class StatusSeeder extends Seeder
     {
         $data = [
             'Open',
-            'Close',
             'In progres',
             'Wait answer',
+            'Suspended',
+            'Close',
+        ];
+        $color_bg = [
+            'skyblue',
+            'orangered',
+            'green',
+            'moccasin',
+            'whitesmoke',
+        ];
+        $color = [
+            'white',
+            'white',
+            'whitesmoke',
+            'black',
+            'black',
         ];
 
-        foreach ($data as $status) {
-            Status::create(['title' => $status]);
+        foreach ($data as $key => $_) {
+            Status::create([
+                'title' => $data[$key],
+                'status_bc' => $color_bg[$key],
+                'status_tc' => $color[$key],
+            ]);
         }
     }
 }

@@ -25,14 +25,20 @@
                                     <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0 ">
                                         <div class="col-md-8 col-lg-8 col-xl-8">
                                             <h6> {{ '# ' . $ticket->id }}
-                                                <span class="fs-6 d-flex float-end">{{ $ticket->user_name }}</span>
+                                                <span class="fs-6 d-flex float-end">{{ $ticket->ticketsUser->name }}</span>
                                             </h6>
                                         </div>
                                         <div class="text-center">
-                                            <span class="fs-6 d-flex text-white bg-danger rounded-2">
+                                            <span class="fs-6 d-flex rounded-2"
+                                                style=" color:{{ $ticket->ticketsImportant->important_tc }};
+                                                background-color:{{ $ticket->ticketsImportant->important_bc }}
+                                                ">
                                                 {{ $ticket->ticketsImportant->title }}
                                             </span>
-                                            <div class="fs-6 d-flex flex-row text-black-50 ">
+                                            <div class="fs-6 d-flex flex-row text-black-50 "
+                                                style=" color:{{ $ticket->ticketsStatus->status_tc }};
+                                                background-color:{{ $ticket->ticketsStatus->status_bc }}
+                                                ">
                                                 {{ $ticket->ticketsStatus->title }}
                                             </div>
                                         </div>

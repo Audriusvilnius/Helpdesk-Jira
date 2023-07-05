@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('share', function (Blueprint $table) {
             $table->id();
+            $table->text('user_id')->nullable();
             $table->text('share_user_id')->nullable();
-            $table->text('share_ticket')->nullable();
+            $table->text('share_ticket_id')->nullable();
             $table->timestamps();
         });
     }

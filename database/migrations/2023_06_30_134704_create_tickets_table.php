@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->text('user_name');
-            $table->unsignedBigInteger('important_id')->nullable();
             $table->text('title');
+            $table->unsignedBigInteger('important_id')->nullable();
+            $table->unsignedBigInteger('status_id')->nullable();
             $table->text('request')->nullable();
             $table->text('message_json');
-            $table->unsignedBigInteger('status_id')->nullable();
             $table->unsignedBigInteger('user_group')->nullable();
             $table->text('share_user_id_json')->nullable();
             $table->text('attach_json')->nullable();
@@ -27,6 +26,7 @@ return new class extends Migration
             $table->string('photo', 500)->nullable()->nullable();
             $table->foreign('important_id')->references('id')->on('importants');
             $table->foreign('status_id')->references('id')->on('statuses');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

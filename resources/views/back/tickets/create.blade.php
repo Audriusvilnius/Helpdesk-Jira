@@ -22,17 +22,14 @@
                         <strong>Title:</strong>
                         {!! Form::text('title', null, [
                             'placeholder' => 'Title',
-                            'class' => 'form-control',
+                            'class' => 'form-control mb-3',
                             'minlength' => '3',
                             'maxlength' => '150',
                         ]) !!}
                     </div>
-                    {{-- <div class="form-group">
-                        <strong>Important:</strong>
-                        {!! Form::select('important_id', $important, [], ['class' => 'form-control important-conteiner', 'multiple']) !!}
-                    </div> --}}
-                    <select class="form-select" name="important_id">
-                        <option value="5">{{ __('Very low') }}</option>
+                    <label for="important_id"><b>{{ __('Important:') }}</b></label>
+                    <select class="form-select mb-3" name="important_id">
+                        {{-- <option value="3">{{ __('Medium') }}</option> --}}
                         @foreach ($important as $status)
                             <option value="{{ $status->id }}" @if ($status->id == old('important_id')) selected @endif>
                                 <b>{{ $status->title }}</b>
@@ -41,9 +38,9 @@
                     </select>
                     <div class="form-group">
                         <strong>Massege:</strong>
-                        {!! Form::textarea('message_json', null, ['placeholder' => 'Massege', 'class' => 'form-control']) !!}
+                        {!! Form::textarea('message_json', null, ['placeholder' => 'Massege', 'class' => 'form-control mb-3']) !!}
                     </div>
-                    <button type="submit" class="btn btn-primary float-end mt-3">Create</button>
+                    <button type="submit" class="btn btn-primary float-end">Create</button>
                     {!! Form::close() !!}
                 </div>
             </div>

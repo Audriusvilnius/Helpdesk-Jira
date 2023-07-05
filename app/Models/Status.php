@@ -13,8 +13,4 @@ class Status extends Model
         'status_color_text',
         'status_color_back',
     ];
-    // public function statusTicket()
-    // {
-    //     return $this->hasMany(Ticket::class, 'status_id', 'id');
-    // }
 }

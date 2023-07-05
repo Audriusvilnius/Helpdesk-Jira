@@ -44,7 +44,7 @@ class TicketController extends Controller
     public function create()
     {
         // $important = Important::pluck('title', 'title')->all();
-        $important = Important::all();
+        $important = Important::orderBy('id', 'desc')->get();
         return view('back.tickets.create', compact('important'));
     }
 
@@ -64,7 +64,6 @@ class TicketController extends Controller
 
         $input = $request->except(['_token']);
         $input['user_id'] = Auth::user()->id;
-        $input['user_name'] = Auth::user()->name;
         $input['request'] = $request->message_json;
 
         $input['status_id'] = 1;

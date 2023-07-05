@@ -31,16 +31,19 @@
                         <h5 class="">{{ $ticket->title }}</h5>
                         {!! Form::hidden('title', null) !!}
                     @endcannot
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <strong>Important:</strong>
                         {!! Form::select('important_id', $important, [], ['class' => 'form-control important-conteiner', 'multiple']) !!}
-                    </div>
+                    </div> --}}
+
+                    <label for="important_id">{{ __('Important:') }}</label>
                     <select class="form-select" name="important_id">
                         @foreach ($important as $status_s)
                             <option value="{{ $status_s->id }}" @if ($status_s->id == old('important_id', $ticket->important_id)) selected @endif>
                                 {{ $status_s->title }}</option>
                         @endforeach
                     </select>
+                    <label for="status_id">{{ __('Status:') }}</label>
                     <select class="form-select" name="status_id">
                         @foreach ($status as $status_s)
                             <option value="{{ $status_s->id }}" @if ($status_s->id == old('status_id', $ticket->status_id)) selected @endif>

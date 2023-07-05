@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('importants', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('important_color_text')->nullable();
-            $table->text('importanr_color_back')->nullable();
+            $table->text('title')->nullable();
+            $table->text('important_tc')->nullable();
+            $table->text('important_bc')->nullable();
             $table->timestamps();
         });
     }
