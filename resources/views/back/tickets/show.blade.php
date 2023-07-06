@@ -10,26 +10,15 @@
                 <h4 class="up text-center">{{ '# ' . $ticket->id }}</h4>
                 <h2 class="text-light ms-5 me-5 mb-5">{!! nl2br(e($ticket->title)) !!}</h2>
                 @can('ticket-create')
-                    <span class="float-end ">
-                        <a class="btn btn-primary d-flex justify-content-center align-content-center m-2"
-                            href="{{ route('tickets.index') }}">Back</a>
+                    <span class=" ">
+                        <a class="btn btn-warning d-flex justify-content-center align-content-center mb-2"
+                            href="{{ route('home') }}">Home</a>
+                        <a class="btn btn-primary  justify-content-center align-content-center mb-2"
+                            href="{{ route('tickets.create') }}">Create</a>
                     </span>
                 @endcan
             </div>
-            <div class="text-center">
-                <span class="fs-6 d-flex rounded-2"
-                    style=" color:{{ $ticket->ticketsImportant->important_tc }};
-                                                background-color:{{ $ticket->ticketsImportant->important_bc }}
-                                                ">
-                    {{ $ticket->ticketsImportant->title }}
-                </span>
-                <div class="fs-6 d-flex flex-row text-black-50 "
-                    style=" color:{{ $ticket->ticketsStatus->status_tc }};
-                                                background-color:{{ $ticket->ticketsStatus->status_bc }}
-                                                ">
-                    {{ $ticket->ticketsStatus->title }}
-                </div>
-            </div>
+
             <form action="{{ route('ticket-message') }}" method="post">
                 <input type="hidden" name="id" value="{{ $ticket->id }}">
                 <div class="col-md-12 d-flex">
@@ -40,7 +29,7 @@
                 </div>
                 <div class="col-md-12 d-flex">
                     <div class="card-body">
-                        <button type="submit" class="btn btn-warning float-end mt-3">{{ __('Send') }}</button>
+                        <button type="submit" class="btn btn-success float-end mt-3">{{ __('Send') }}</button>
                     </div>
                 </div>
                 @csrf
