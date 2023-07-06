@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ConfirmOpenMail;
+use App\Mail\NewMessageMail;
+use App\Mail\StatusImportantMail;
 use App\Models\Important;
 use App\Models\Status;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
@@ -61,20 +66,24 @@ class TicketController extends Controller
             'message_json' => 'required',
             'important_id' => 'required',
         ]);
-
-        $input = $request->except(['_token']);
-        $input['user_id'] = Auth::user()->id;
-        $input['request'] = $request->message_json;
-
-        $input['status_id'] = 1;
-        // $input['important_id'] = array_search($request->important_id, $important);
-        $input['important_id'] = $request->important_id;
-
-
-        $input['message_json'] = [Auth::user()->id => ['user_name' => Auth::user()->name, 'message' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()]];
-        $input['message_json'] = json_encode($input['message_json']);
-
-        Ticket::create($input);
+        $ticket = new Ticket;
+        $ticket->id = $request->id;
+        $ticket->title = $request->title;
+        $ticket->request = $request->message_json;
+        $ticket->status_id = 1;
+        $ticket->user_id = Auth::user()->id;
+        $ticket->important_id = $request->important_id;
+        $ticket->message_json = [Auth::user()->id => ['user_name' => Auth::user()->name, 'message' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()]];
+        $ticket->message_json = json_encode($ticket->message_json);
+        $ticket->save();
+        // dd($ticket);
+        $to = User::find($ticket->user_id);
+        Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
+        $admin = User::where('role', 'like', 'admin')->get();
+        foreach ($admin as $to) {
+            $to = User::find($to->id);
+            Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
+        }
 
         return redirect()->route('tickets.index')
             ->with('success', 'Ticket created successfully.');
@@ -116,7 +125,6 @@ class TicketController extends Controller
         // $important = Important::pluck('title', 'title')->all();
         // $ticketsImportant = $ticket->ticketsImportant->title;
         // $ticketsImportant = [$ticketsImportant => $ticketsImportant];
-
         return view('back.tickets.edit', compact('ticket', 'important', 'status'));
         // return view('back.tickets.edit', compact('ticket', 'important', 'ticketsImportant', 'status'));
     }
@@ -152,6 +160,13 @@ class TicketController extends Controller
         $ticket->message_json = $request->message_json;
         $ticket->update();
 
+        $to = User::find($ticket->user_id);
+        Mail::to($to)->send(new StatusImportantMail($ticket, $to));
+        $admin = User::where('role', 'like', 'admin')->get();
+        foreach ($admin as $to) {
+            $to = User::find($to->id);
+            Mail::to($to)->send(new StatusImportantMail($ticket, $to));
+        }
         return redirect()->route('tickets.index')
             ->with('success', 'Ticket updated successfully.');
     }
@@ -188,6 +203,15 @@ class TicketController extends Controller
             usort($message, function ($b, $a) {
                 return $a['insert_at'] <=> $b['insert_at'];
             });
+        }
+        $ticket->message_json = $request->message_json;
+
+        $to = User::find($ticket->user_id);
+        Mail::to($to)->send(new NewMessageMail($ticket, $to));
+        $admin = User::where('role', 'like', 'admin')->get();
+        foreach ($admin as $to) {
+            $to = User::find($to->id);
+            Mail::to($to)->send(new NewMessageMail($ticket, $to));
         }
 
 

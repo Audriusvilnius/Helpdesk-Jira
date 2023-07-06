@@ -31,11 +31,6 @@
                         <h5 class="">{{ $ticket->title }}</h5>
                         {!! Form::hidden('title', null) !!}
                     @endcannot
-                    {{-- <div class="form-group">
-                        <strong>Important:</strong>
-                        {!! Form::select('important_id', $important, [], ['class' => 'form-control important-conteiner', 'multiple']) !!}
-                    </div> --}}
-
                     <label for="important_id">{{ __('Important:') }}</label>
                     <select class="form-select" name="important_id">
                         @foreach ($important as $status_s)

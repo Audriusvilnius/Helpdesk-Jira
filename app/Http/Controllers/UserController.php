@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Symfony\Component\Console\Input\Input;
 
 class UserController extends Controller
 {
@@ -69,6 +70,11 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
+        // add role from roles to users DB
+        $user['role'] = $request->roles;
+        $user->role = $user['role'][0];
+        $user->update();
+
         return redirect()->route('users.index')
             ->with('success', 'User created successfully.');
     }
@@ -126,6 +132,11 @@ class UserController extends Controller
         }
 
         $user = User::find($id);
+
+        // add role from roles to users DB
+        $user['role'] = $request->roles;
+        $user->role = $user['role'][0];
+
         $user->update($input);
 
         DB::table('model_has_roles')
@@ -133,6 +144,8 @@ class UserController extends Controller
             ->delete();
 
         $user->assignRole($request->input('roles'));
+
+
 
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully.');

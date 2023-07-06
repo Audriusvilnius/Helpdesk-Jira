@@ -20,11 +20,17 @@
         href="https://fonts.googleapis.com/css2?family=Inspiration&family=Kolker+Brush&family=WindSong:wght@500&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
+    {{-- <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css"> --}}
+    {{-- <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css"> --}}
+    <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/owl.theme.default.min.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/sass/style.scss', 'resources/js/app.js', 'resources/js/main.js', 'resources/js/jquery-3.6.4.min.js', 'resources/css/owl.carousel.min.css', 'resources/fonts/icomoon/style.css'])
+    @vite(['resources/sass/app.scss', 'resources/sass/style.scss', 'resources/js/app.js', 'resources/js/main.js', 'resources/fonts/icomoon/style.css'])
+
+    <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+
 
 </head>
 
