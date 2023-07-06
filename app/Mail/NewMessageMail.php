@@ -13,17 +13,17 @@ class NewMessageMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data, $text;
+    public $data, $id;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data, $text)
+    public function __construct($data, $id)
     {
         $this->data = $data;
-        $this->text = $text;
+        $this->id = $id;
     }
 
 

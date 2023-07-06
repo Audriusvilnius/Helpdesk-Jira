@@ -76,7 +76,7 @@ class TicketController extends Controller
         $ticket->message_json = [Auth::user()->id => ['user_name' => Auth::user()->name, 'message' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()]];
         $ticket->message_json = json_encode($ticket->message_json);
         $ticket->save();
-        // dd($ticket);
+
         $to = User::find($ticket->user_id);
         Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
         $admin = User::where('role', 'like', 'admin')->get();
