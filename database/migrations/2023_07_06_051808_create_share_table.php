@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('share', function (Blueprint $table) {
+        Schema::create('shares', function (Blueprint $table) {
             $table->id();
-            $table->text('user_id')->nullable();
-            $table->text('share_user_id')->nullable();
-            $table->text('share_ticket_id')->nullable();
+            $table->unsignedBigInteger('share_ticket_id')->nullable();
+            $table->unsignedBigInteger('share_user_id')->nullable();
+            $table->foreign('share_ticket_id')->references('id')->on('tickets');
+            $table->foreign('share_user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

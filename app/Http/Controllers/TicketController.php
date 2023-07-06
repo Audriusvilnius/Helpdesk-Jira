@@ -6,6 +6,7 @@ use App\Mail\ConfirmOpenMail;
 use App\Mail\NewMessageMail;
 use App\Mail\StatusImportantMail;
 use App\Models\Important;
+use App\Models\Share;
 use App\Models\Status;
 use App\Models\Ticket;
 use App\Models\User;
@@ -77,12 +78,17 @@ class TicketController extends Controller
         $ticket->message_json = json_encode($ticket->message_json);
         $ticket->save();
 
+        $share = new Share;
+        $share->share_ticket_id = $ticket->id;
+        $share->share_user_id = Auth::user()->id;
+        $share->save();
+
         $to = User::find($ticket->user_id);
-        Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
+        // Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
         $admin = User::where('role', 'like', 'admin')->get();
         foreach ($admin as $to) {
             $to = User::find($to->id);
-            Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
+            // Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
         }
 
         return redirect()->route('tickets.index')
