@@ -158,11 +158,11 @@ class TicketController extends Controller
         $ticket->update();
 
         $to = User::find($ticket->user_id);
-        Mail::to($to)->send(new StatusImportantMail($ticket, $to));
+        // Mail::to($to)->send(new StatusImportantMail($ticket, $to));
         $admin = User::where('role', 'like', 'admin')->get();
         foreach ($admin as $to) {
             $to = User::find($to->id);
-            Mail::to($to)->send(new StatusImportantMail($ticket, $to));
+            // Mail::to($to)->send(new StatusImportantMail($ticket, $to));
         }
         return redirect()->route('tickets.index')
             ->with('success', 'Ticket updated successfully.');
@@ -204,11 +204,11 @@ class TicketController extends Controller
         $ticket->message_json = $request->message_json;
 
         $to = User::find($ticket->user_id);
-        Mail::to($to)->send(new NewMessageMail($ticket, $to));
+        // Mail::to($to)->send(new NewMessageMail($ticket, $to));
         $admin = User::where('role', 'like', 'admin')->get();
         foreach ($admin as $to) {
             $to = User::find($to->id);
-            Mail::to($to)->send(new NewMessageMail($ticket, $to));
+            // Mail::to($to)->send(new NewMessageMail($ticket, $to));
         }
 
 

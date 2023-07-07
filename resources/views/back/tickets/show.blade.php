@@ -6,7 +6,9 @@
                 @include('alerts.alert-success')
                 @include('alerts.alert-danger')
                 <div class="card-header card-header justify-content-between align-content-between d-flex ">
-                    <h4 class="up text-center">{{ '# ' . $ticket->id }}</h4>
+                    <h4 class="up text-center"
+                        style="background-color: {{ $ticket->ticketsImportant->important_bc }}color:{{ $ticket->ticketsImportant->important_tc }}">
+                        {{ '# ' . $ticket->id }}</h4>
                     <h2 class="text-light ms-5 me-5 mb-5">{!! nl2br(e($ticket->title)) !!}</h2>
                     @can('ticket-create')
                         <span class=" ">
