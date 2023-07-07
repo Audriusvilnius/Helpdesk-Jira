@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 
 class TicketController extends Controller
 {
+
     /**
      * create a new instance of the class
      *

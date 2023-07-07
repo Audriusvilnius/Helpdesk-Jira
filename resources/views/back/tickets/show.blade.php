@@ -45,7 +45,7 @@
                             <div class="col-md-12 mt-4">
                                 <div id={{ $id }} class="card mt-2 mb-2 d-flex justify-content-md-between shadow">
                                     <div class="col-md-3 z-3 position-absolute text-center"
-                                        style="transform: translateX(0px) translateY(-5px) ">
+                                        style="transform: translateX(0px) translateY(-5px);">
                                         <div class="rounded-2 p-0 bg-dark-subtle shadow">
                                             <h5 class="text-muted ms-3 me-3 p-1"> {{ $data['user_name'] }}</h5>
                                         </div>
