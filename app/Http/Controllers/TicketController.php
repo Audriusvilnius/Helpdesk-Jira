@@ -38,7 +38,7 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Ticket::latest()->paginate(5);
+        $data = Ticket::latest()->paginate(3);
         return view('back.tickets.index', compact('data'));
     }
 
@@ -49,7 +49,6 @@ class TicketController extends Controller
      */
     public function create()
     {
-        // $important = Important::pluck('title', 'title')->all();
         $important = Important::orderBy('id', 'desc')->get();
         return view('back.tickets.create', compact('important'));
     }
@@ -128,11 +127,8 @@ class TicketController extends Controller
         $ticket = Ticket::find($id);
         $status = Status::all();
         $important = Important::all();
-        // $important = Important::pluck('title', 'title')->all();
-        // $ticketsImportant = $ticket->ticketsImportant->title;
-        // $ticketsImportant = [$ticketsImportant => $ticketsImportant];
+
         return view('back.tickets.edit', compact('ticket', 'important', 'status'));
-        // return view('back.tickets.edit', compact('ticket', 'important', 'ticketsImportant', 'status'));
     }
 
     /**
@@ -150,18 +146,13 @@ class TicketController extends Controller
         ]);
 
         $ticket = Ticket::find($id);
-        // $ticket->important_id = $request->important_id;
-        // $input['important_id'] = array_search($request->important_id, $important);
-        // dd($request->important_id);
         if ($request->important_id) {
             $ticket->important_id = $request->important_id;
         }
         if ($request->status_id) {
             $ticket->status_id = $request->status_id;
         }
-        // if ($request->important_id) {
-        //     $ticket->important_id = $input['important_id'];
-        // }
+
         $ticket->title = $request->title;
         $ticket->message_json = $request->message_json;
         $ticket->update();

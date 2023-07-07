@@ -21,18 +21,18 @@ class ImportantSeeder extends Seeder
             'Very low',
         ];
         $color_bg = [
-            'crimson',
-            'orangered',
-            'green',
-            'moccasin',
-            'whitesmoke',
+            'crimson;',
+            'orangered;',
+            'green;',
+            'moccasin;',
+            'whitesmoke;border: #282c34 solid 1px;',
         ];
         $color = [
-            'white',
-            'white',
-            'whitesmoke',
-            'black',
-            'black',
+            'whitesmoke;',
+            'white;',
+            'white;',
+            'black;',
+            'black;',
         ];
         foreach ($data as $key => $_) {
             Important::create([

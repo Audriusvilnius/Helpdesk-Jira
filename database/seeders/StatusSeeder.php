@@ -21,18 +21,19 @@ class StatusSeeder extends Seeder
             'Close',
         ];
         $color_bg = [
-            'skyblue',
-            'orangered',
-            'green',
-            'moccasin',
-            'whitesmoke',
+            'yellowgreen;',
+            'skyblue;',
+            // 'orangered',
+            'moccasin;',
+            'orangered;',
+            'rgb(138, 136, 136);',
         ];
         $color = [
-            'white',
-            'white',
-            'whitesmoke',
-            'black',
-            'black',
+            'black;',
+            'black;',
+            'black;',
+            'white;',
+            'white;',
         ];
 
         foreach ($data as $key => $_) {

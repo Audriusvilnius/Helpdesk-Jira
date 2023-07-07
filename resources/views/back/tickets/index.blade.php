@@ -25,17 +25,18 @@
                                     <div class="row">
                                         <div class="col-md-12 col-lg-2 col-xl-2">
                                             <div class="text-center row justify-content-center p-3">
-                                                <div class="fs-6 rounded-2 conteiner-status bg-info  m-1">
+                                                <div
+                                                    class="fs-6 conteiner-status m-1 text-white rounded-pill bg-black opacity-75">
                                                     {{ '# ' . $ticket->id }}
                                                 </div>
-                                                <div class="fs-6 rounded-2 conteiner-status m-1"
-                                                    style=" color:{{ $ticket->ticketsImportant->important_tc }};
+                                                <div class="fs-6 rounded-pill conteiner-status m-1"
+                                                    style=" color:{{ $ticket->ticketsImportant->important_tc }}
                                                 background-color:{{ $ticket->ticketsImportant->important_bc }}
                                                 ">
                                                     {{ $ticket->ticketsImportant->title }}
                                                 </div>
-                                                <div class="fs-6 rounded-2 conteiner-status m-1"
-                                                    style=" color:{{ $ticket->ticketsStatus->status_tc }};
+                                                <div class="fs-6 rounded-pill conteiner-status m-1"
+                                                    style=" color:{{ $ticket->ticketsStatus->status_tc }}
                                                 background-color:{{ $ticket->ticketsStatus->status_bc }}
                                                 ">
                                                     {{ $ticket->ticketsStatus->title }}
