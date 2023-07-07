@@ -44,6 +44,7 @@ class PermissionTableSeeder extends Seeder
             'ticket-status',
             'ticket-important',
             'edit-ticket',
+            'delete-btn',
         ];
 
         foreach ($data as $permission) {

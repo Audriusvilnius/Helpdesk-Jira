@@ -10,11 +10,11 @@
                 <h4 class="up text-center">{{ '# ' . $ticket->id }}</h4>
                 <h2 class="text-light ms-5 me-5 text-center">{!! nl2br(e($ticket->title)) !!}</h2>
                 @can('ticket-edit')
-                    <span class="float-end ">
-                        <a class="btn btn-warning justify-content-center align-content-center m-2"
+                    <span class="float-end">
+                        <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex"
                             href="{{ route('tickets.index') }}">Back</a>
-                        <a class="btn btn-primary  justify-content-center align-content-center m-2"
-                            href="{{ route('tickets.index') }}">Tickets</a>
+                        <a class="text-decoration-none text-black container-btn shadow bg-info d-flex"
+                            href="{{ route('tickets.create') }}">New Ticket</a>
                     </span>
                 @endcan
             </div>
@@ -41,44 +41,48 @@
                                             ]) !!}
                                         </div>
                                     @endcan
-                                    <div class="col-md-12 col-lg-12col-xl-12 ">
-                                        <label class=" text-white-50" for="important_id">
-                                            {{ __('Important:') }}</label>
-                                        <select class="form-select" name="important_id">
-                                            @foreach ($important as $status_s)
-                                                <option value="{{ $status_s->id }}"
-                                                    @if ($status_s->id == old('important_id', $ticket->important_id)) selected @endif>
-                                                    {{ $status_s->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-md-12 col-lg-12 col-xl-12">
-                                        <label class=" text-white-50" for="status_id">{{ __('Status:') }}</label>
-                                        <select class="form-select" name="status_id">
-                                            @foreach ($status as $status_s)
-                                                <option value="{{ $status_s->id }}"
-                                                    @if ($status_s->id == old('status_id', $ticket->status_id)) selected @endif>
-                                                    {{ $status_s->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    @can('edit-ticket')
-                                        <div class="form-group">
-                                            <strong>Message:</strong>
-                                            {!! Form::textarea('message_json', null, ['placeholder' => 'Message', 'class' => 'form-control']) !!}
-                                        </div>
-                                    @endcan
                                     @cannot('edit-ticket')
-                                        {!! Form::hidden('message_json', null) !!}
-                                    @endcannot
-                                    <button type="submit" class="btn btn-success float-end mt-3">Submit</button>
-                                    {!! Form::close() !!}
+                                        {!! Form::hidden('title', null) !!}
+                                    </div>
+                                @endcannot
+                                <div class="col-md-12 col-lg-12col-xl-12 ">
+                                    <label class=" text-white-50" for="important_id">
+                                        {{ __('Important:') }}</label>
+                                    <select class="form-select" name="important_id">
+                                        @foreach ($important as $status_s)
+                                            <option value="{{ $status_s->id }}"
+                                                @if ($status_s->id == old('important_id', $ticket->important_id)) selected @endif>
+                                                {{ $status_s->title }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                                <div class="col-md-12 col-lg-12 col-xl-12">
+                                    <label class=" text-white-50" for="status_id">{{ __('Status:') }}</label>
+                                    <select class="form-select" name="status_id">
+                                        @foreach ($status as $status_s)
+                                            <option value="{{ $status_s->id }}"
+                                                @if ($status_s->id == old('status_id', $ticket->status_id)) selected @endif>
+                                                {{ $status_s->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @can('edit-ticket')
+                                    <div class="form-group">
+                                        <strong>Message:</strong>
+                                        {!! Form::textarea('message_json', null, ['placeholder' => 'Message', 'class' => 'form-control']) !!}
+                                    </div>
+                                @endcan
+                                @cannot('edit-ticket')
+                                    {!! Form::hidden('message_json', null) !!}
+                                @endcannot
+                                <button type="submit" class="btn btn-success float-end mt-3">Submit</button>
+                                {!! Form::close() !!}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

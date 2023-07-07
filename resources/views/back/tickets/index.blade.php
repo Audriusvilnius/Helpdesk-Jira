@@ -1,92 +1,97 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container pt-5 pb-5 my-5">
-        <div class="justify-content-center">
-            @include('alerts.alert-success')
-            @include('alerts.alert-danger')
+    <div class="content">
+        <div class="container">
+            <div class="justify-content-center">
+                @include('alerts.alert-success')
+                @include('alerts.alert-danger')
 
-            <div class="card-header card-header justify-content-between align-content-between d-flex my-3">
-                <h2 class="text-light">Tickets list</h2>
-                @can('ticket-create')
-                    <span class=" d-flex">
-                        <a class="btn btn-warning d-flex justify-content-center align-content-center m-2"
-                            href="{{ route('home') }}">Home</a>
-                        <a class="btn btn-primary d-flex justify-content-center align-content-center m-2"
-                            href="{{ route('tickets.create') }}">New ticket</a>
-                    </span>
-                @endcan
-            </div>
-            <div class="card-body">
-                @foreach ($data as $key => $ticket)
-                    <div class="col-md-12 col-xl-12 mb-2">
-                        <div class="card shadow-0 border rounded-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0 ">
-                                        <div class="col-md-8 col-lg-8 col-xl-8">
-                                            <h6> {{ '# ' . $ticket->id }}
-                                                <span class="fs-6 d-flex float-end">{{ $ticket->ticketsUser->name }}</span>
-                                            </h6>
-                                        </div>
-                                        <div class="text-center">
-                                            <span class="fs-6 d-flex rounded-2"
-                                                style=" color:{{ $ticket->ticketsImportant->important_tc }};
+                <div class="card-header card-header justify-content-between align-content-between d-flex my-3">
+                    <h2 class="text-light">Tickets list</h2>
+                    @can('ticket-create')
+                        <span class=" d-flex">
+                            <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex"
+                                href="{{ route('home') }}">Home</a>
+                            <a class="text-decoration-none text-black container-btn shadow bg-info d-flex"
+                                href="{{ route('tickets.create') }}">New Ticket</a>
+                        </span>
+                    @endcan
+                </div>
+                <div class="card-body">
+                    @foreach ($data as $key => $ticket)
+                        <div class="col-md-12 col-xl-12 mb-2">
+                            <div class="card shadow-0 border rounded-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-2 col-xl-2">
+                                            <div class="text-center row justify-content-center p-3">
+                                                <div class="fs-6 rounded-2 conteiner-status bg-info  m-1">
+                                                    {{ '# ' . $ticket->id }}
+                                                </div>
+                                                <div class="fs-6 rounded-2 conteiner-status m-1"
+                                                    style=" color:{{ $ticket->ticketsImportant->important_tc }};
                                                 background-color:{{ $ticket->ticketsImportant->important_bc }}
                                                 ">
-                                                {{ $ticket->ticketsImportant->title }}
-                                            </span>
-                                            <div class="fs-6 d-flex flex-row text-black-50 "
-                                                style=" color:{{ $ticket->ticketsStatus->status_tc }};
+                                                    {{ $ticket->ticketsImportant->title }}
+                                                </div>
+                                                <div class="fs-6 rounded-2 conteiner-status m-1"
+                                                    style=" color:{{ $ticket->ticketsStatus->status_tc }};
                                                 background-color:{{ $ticket->ticketsStatus->status_bc }}
                                                 ">
-                                                {{ $ticket->ticketsStatus->title }}
+                                                    {{ $ticket->ticketsStatus->title }}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-6 border-sm-start-none border-start">
-                                        <div class="col-md-12 col-lg-12 col-xl-12 d-flex mb-1 justify-content-between">
-                                            <div class="fs-6 d-flex flex-row text-black-50">
-                                                Open: {{ $ticket->created_at->format('Y-m-d H:i') }}
-                                            </div>
-                                            <div class="fs-6 d-flex flex-row text-black-50 ">
-                                                Edit : {{ $ticket->updated_at->format('Y-m-d H:i') }}
-                                            </div>
+                                        <div class="col-md-6 col-lg-8 col-xl-8 border-sm-start-none border-start">
+                                            <div class="col-md-12 col-lg-12 col-xl-12">
+                                                <div class="fs-6 rounded-1 bg-dark-subtle ps-3 pe-3">
+                                                    {{ $ticket->ticketsUser->name }}
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50">
+                                                    Open: {{ $ticket->created_at->format('Y-m-d H:i') }}
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50 ">
+                                                    Edit : {{ $ticket->updated_at->format('Y-m-d H:i') }}
+                                                </div>
 
+                                            </div>
+                                            <h5 class="length_title">{{ $ticket->title }}</h5>
+                                            <div class="length_message">
+                                                <p class="length_message">{{ $ticket->request }}</p>
+                                            </div>
+                                            <div class="d-flex flex-row">
+                                                <span>{{ $ticket->attach }}</span>
+                                            </div>
                                         </div>
-                                        <h5 class="length_title">{{ $ticket->title }}</h5>
-                                        <div class="length_message">
-                                            <p class="length_message">{{ $ticket->request }}</p>
-                                        </div>
-                                        <div class="d-flex flex-row">
-                                            <span>{{ $ticket->attach }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
-                                        <div class=" d-flex justify-content-evenly">
-                                            <a class="btn btn-success m-1"
-                                                href="{{ route('tickets.show', $ticket->id) }}">Show</a>
-                                            @can('ticket-edit')
-                                                <a class="btn btn-primary m-1"
-                                                    href="{{ route('tickets.edit', $ticket->id) }}">Edit</a>
-                                            @endcan
-                                            @can('ticket-delete')
-                                                {!! Form::open([
-                                                    'method' => 'DELETE',
-                                                    'route' => ['tickets.destroy', $ticket->id],
-                                                ]) !!}
-                                                {!! Form::submit('Delete', [
-                                                    'class' => 'btn btn-danger m-1',
-                                                ]) !!}
-                                                {!! Form::close() !!}
-                                            @endcan
+                                        <div class="col-md-6 col-lg-2 col-xl-2 border-sm-start-none border-start">
+                                            <div class=" row justify-content-evenly align-content-cente m-1">
+                                                <a class="btn btn-success text-decoration-none text-white btn-index m-1"
+                                                    href="{{ route('tickets.show', $ticket->id) }}">Show</a>
+                                                @can('ticket-edit')
+                                                    <a class=" btn btn-primary text-decoration-none text-white btn-index m-1"
+                                                        href="{{ route('tickets.edit', $ticket->id) }}">Edit</a>
+                                                @endcan
+                                                @can('delete-btn')
+                                                    {!! Form::open([
+                                                        'method' => 'DELETE',
+                                                        'route' => ['tickets.destroy', $ticket->id],
+                                                    ]) !!}
+                                                    <div class="row justify-content-evenly align-content-cente">
+                                                        {!! Form::submit('Delete', [
+                                                            'class' => 'row col-12 btn btn-danger mt-1 btn-index ',
+                                                        ]) !!}
+                                                    </div>
+                                                    {!! Form::close() !!}
+                                                @endcan
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-                {{ $data->appends($_GET)->links() }}
+                    @endforeach
+                    {{ $data->appends($_GET)->links() }}
+                </div>
             </div>
         </div>
     </div>

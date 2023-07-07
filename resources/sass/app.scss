@@ -162,6 +162,15 @@ main {
     transform: translateY(-5px);
     // border: #282c34 solid 1px;
 }
+.btn-index{
+    line-height: 40px;
+    min-width: 110px;
+}
+.conteiner-status {
+    line-height: 30px;
+    min-width: 80px;
+    height: 30px; 
+}
 
 .typed {
     overflow: hidden;
