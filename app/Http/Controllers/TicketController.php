@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+
 
 class TicketController extends Controller
 {
@@ -191,7 +193,7 @@ class TicketController extends Controller
         if ($messaj_json) {
             $messaj_json[uniqid()] = ['user_name' => Auth::user()->name, 'message' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()];
         } else {
-            $messaj_json = [uniqid() => ['user_name' => Auth::user()->name, 'review' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()]];
+            $messaj_json = [uniqid() => ['user_name' => Auth::user()->name, 'message' => $request->message_json, 'date' => date('Y-m-d H:i', time()), 'insert_at' => time()]];
         }
 
         $messaj_json = json_encode($messaj_json);
@@ -258,7 +260,21 @@ class TicketController extends Controller
      */
     public function file(Request $request)
     {
-        // dd($request->file('file'));
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'file' => 'required|file|max:10000',
+            ]
+        );
+
+        if ($validator->fails()) {
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+            }
+        }
+
+        $ticket = Ticket::find($request->ticket_id);
         if ($request->file('file')) {
             $share_file = $request->file('file');
             $ext = $share_file->getClientOriginalExtension();
@@ -266,9 +282,24 @@ class TicketController extends Controller
             // $file = $name . '-' . uniqid() . '.' . $ext;
             $file = $name . '.' . $ext;
             $share_file->move(public_path() . '/ticket_#_' . $request->ticket_id, $file);
-            // $share_file->file = '/' . 'images/' . $file;
+            $share_file = '/ticket_#_' . $request->ticket_id . '/' . $file;
+            $attach_json = json_decode($ticket->attach_json, 1);
+
+            if ($attach_json) {
+                $attach_json[uniqid()] = ['file' => $share_file];
+            } else {
+                $attach_json = [uniqid() => ['file' => $share_file]];
+            }
         }
-        return "Done";
+        $ticket->attach_json = json_encode($attach_json);
+        $ticket->update();
+        // DB::table('tickets')->where('id', $request->ticket_id)->update(['attach_json' => $attach_json]);
+        $share = Share::where('share_ticket_id', 'like', $request->ticket_id)->get();
+        $status = Status::all();
+        $important = Important::all();
+        $users = User::all();
+
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share'));
     }
 
     /**
