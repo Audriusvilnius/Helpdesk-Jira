@@ -27,7 +27,7 @@ class TicketController extends Controller
     {
         $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show']]);
         $this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share']]);
         $this->middleware('permission:ticket-delete', ['only' => ['destroy']]);
         $this->middleware('permission:ticket-message', ['only' => ['message']]);
     }
@@ -114,7 +114,7 @@ class TicketController extends Controller
             });
         }
 
-        return view('back.tickets.show', compact('ticket', 'message', 'status'));
+        return view('back.tickets.show', compact('ticket', 'message', 'status',));
     }
 
     /**
@@ -128,8 +128,10 @@ class TicketController extends Controller
         $ticket = Ticket::find($id);
         $status = Status::all();
         $important = Important::all();
-
-        return view('back.tickets.edit', compact('ticket', 'important', 'status'));
+        $users = User::all();
+        $share = Share::where('share_ticket_id', 'like', $id)->get();
+        // dump($share);
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share'));
     }
 
     /**
@@ -214,6 +216,59 @@ class TicketController extends Controller
 
 
         return view('back.tickets.show', compact('ticket', 'message'))->with('success', 'Ticket updated successfully.');
+    }
+
+    /**
+     * Show the form for share the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function share(Request $request)
+    {
+        $share_new = new Share;
+        $share_new->share_ticket_id = $request->ticket_id;
+        $share_new->share_user_id = $request->user_id;
+        $count = 0;
+        $share_tickets = Share::where('share_ticket_id', 'like', $request->ticket_id)->get();
+        foreach ($share_tickets as $share_ticket) {
+            if ($share_ticket->share_user_id == $request->user_id) {
+                $share_new->update();
+                $count++;
+                break;
+            }
+        }
+        if ($count == 0) {
+            $share_new->save();
+        }
+
+        $share = Share::where('share_ticket_id', 'like', $request->ticket_id)->get();
+        $ticket = Ticket::find($request->ticket_id);
+        $status = Status::all();
+        $important = Important::all();
+        $users = User::all();
+
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share'));
+    }
+    /**
+     * Show the form for insert file the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function file(Request $request)
+    {
+        // dd($request->file('file'));
+        if ($request->file('file')) {
+            $share_file = $request->file('file');
+            $ext = $share_file->getClientOriginalExtension();
+            $name = pathinfo($share_file->getClientOriginalName(), PATHINFO_FILENAME);
+            // $file = $name . '-' . uniqid() . '.' . $ext;
+            $file = $name . '.' . $ext;
+            $share_file->move(public_path() . '/ticket_#_' . $request->ticket_id, $file);
+            // $share_file->file = '/' . 'images/' . $file;
+        }
+        return "Done";
     }
 
     /**

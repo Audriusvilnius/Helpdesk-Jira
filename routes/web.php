@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('important', ImportantController::class);
 });
 Route::post('/ticket/rewiew', [TicketController::class, 'message'])->name('ticket-message');
+Route::post('/ticket/share', [TicketController::class, 'share'])->name('ticket-share');
+Route::post('/ticket/file', [TicketController::class, 'file'])->name('ticket-file');
 
 Route::get('contact-us', [Contact::class, 'index']);
 Route::post('contact-us', [Contact::class, 'store'])->name('contact.us.store');

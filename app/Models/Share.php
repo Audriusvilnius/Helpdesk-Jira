@@ -12,4 +12,9 @@ class Share extends Model
         'share_ticket_id',
         'share_user_id',
     ];
+
+    public function shareUser()
+    {
+        return $this->belongsTo(User::class, 'share_user_id', 'id');
+    }
 }

@@ -66,6 +66,7 @@ main {
 .pagination>li>a,
 .pagination>li>span {
     color: rgb(65, 65, 65); // use your own color here
+    text-decoration: none;
 }
 
 .pagination>.active>a,
@@ -74,7 +75,7 @@ main {
 .pagination>.active>span,
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
-    background-color: rgba(65, 65, 65, 0.583);
+    background-color: rgba(65, 65, 65, 0.683);
     border-color: rgba(65, 65, 65, 0.483);
 }
 .btn{
@@ -172,6 +173,12 @@ main {
     line-height: 30px;
     min-width: 80px;
     height: 30px; 
+}
+.status-pill{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    line-height: 30px;
 }
 
 .typed {

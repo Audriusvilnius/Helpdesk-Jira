@@ -38,3 +38,9 @@ myTimeline
         delay: (el, i) => delay + 30 * i
     });
 
+const fileInput = document.getElementById('file');
+fileInput.onchange = () => {
+    const selectedFile = fileInput.files[0];
+    console.log(selectedFile);
+    document.getElementById('inputBox').value = selectedFile.name;
+}
