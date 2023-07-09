@@ -32,7 +32,7 @@ class TicketController extends Controller
     {
         $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show']]);
         $this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share', 'fole']]);
+        $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share', 'file']]);
         $this->middleware('permission:ticket-delete', ['only' => ['destroy']]);
         $this->middleware('permission:ticket-message', ['only' => ['message']]);
     }
@@ -287,9 +287,9 @@ class TicketController extends Controller
             $name = pathinfo($share_file->getClientOriginalName(), PATHINFO_FILENAME);
             // $file = $name . '-' . uniqid() . '.' . $ext;
             $file = $name . '.' . $ext;
-            $share_file->move(public_path() . '/ticket' . $request->ticket_id, $file);
+            $share_file->move(public_path() . '/ticket', $file);
 
-            $share_file = 'ticket' . $request->ticket_id . '/' . $file;
+            $share_file =  $file;
             // $share_file = storage_path() . 'ticket_#_' . $request->ticket_id . '/' . $file;
             $attach_json = json_decode($ticket->attach_json, 1);
             // dd($share_file);
@@ -319,11 +319,8 @@ class TicketController extends Controller
      */
     public function downloads($file_name)
     {
-        // return dd('ok');
-        // $filePath = public_path("assets/{$file_name}");
-
-        // dd($filePath);
-        // return Response::download($filePath);
+        $filePath = public_path() . '/ticket/' . $file_name;
+        return response()->download($filePath);
     }
     /**
      * Remove the specified resource from storage.
