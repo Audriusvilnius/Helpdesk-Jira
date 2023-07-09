@@ -10,10 +10,13 @@ use App\Models\Share;
 use App\Models\Status;
 use App\Models\Ticket;
 use App\Models\User;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -29,7 +32,7 @@ class TicketController extends Controller
     {
         $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show']]);
         $this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share']]);
+        $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share', 'fole']]);
         $this->middleware('permission:ticket-delete', ['only' => ['destroy']]);
         $this->middleware('permission:ticket-message', ['only' => ['message']]);
     }
@@ -132,8 +135,10 @@ class TicketController extends Controller
         $important = Important::all();
         $users = User::all();
         $share = Share::where('share_ticket_id', 'like', $id)->get();
-        // dump($share);
-        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share'));
+        $files = json_decode($ticket->attach_json, 1);
+        // $files = json_decode($ticket->attach_json, 1) ?: [];
+
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'files'));
     }
 
     /**
@@ -250,7 +255,8 @@ class TicketController extends Controller
         $important = Important::all();
         $users = User::all();
 
-        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share'));
+        $files = json_decode($ticket->attach_json, 1);
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'files'));
     }
     /**
      * Show the form for insert file the specified resource.
@@ -281,14 +287,17 @@ class TicketController extends Controller
             $name = pathinfo($share_file->getClientOriginalName(), PATHINFO_FILENAME);
             // $file = $name . '-' . uniqid() . '.' . $ext;
             $file = $name . '.' . $ext;
-            $share_file->move(public_path() . '/ticket_#_' . $request->ticket_id, $file);
-            $share_file = '/ticket_#_' . $request->ticket_id . '/' . $file;
+            $share_file->move(public_path() . '/ticket' . $request->ticket_id, $file);
+
+            $share_file = 'ticket' . $request->ticket_id . '/' . $file;
+            // $share_file = storage_path() . 'ticket_#_' . $request->ticket_id . '/' . $file;
             $attach_json = json_decode($ticket->attach_json, 1);
+            // dd($share_file);
 
             if ($attach_json) {
-                $attach_json[uniqid()] = ['file' => $share_file];
+                $attach_json[uniqid()] = ['file' => $share_file, 'name' => $file];
             } else {
-                $attach_json = [uniqid() => ['file' => $share_file]];
+                $attach_json = [uniqid() => ['file' => $share_file, 'name' => $file]];
             }
         }
         $ticket->attach_json = json_encode($attach_json);
@@ -298,10 +307,24 @@ class TicketController extends Controller
         $status = Status::all();
         $important = Important::all();
         $users = User::all();
+        $files = json_decode($ticket->attach_json, 1);
 
-        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share'));
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'files'));
     }
 
+    /**
+     * @param mixed $file_name 
+     * @return mixed 
+     * @throws BindingResolutionException 
+     */
+    public function downloads($file_name)
+    {
+        // return dd('ok');
+        // $filePath = public_path("assets/{$file_name}");
+
+        // dd($filePath);
+        // return Response::download($filePath);
+    }
     /**
      * Remove the specified resource from storage.
      *

@@ -39,9 +39,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('status', StatusController::class);
     Route::resource('important', ImportantController::class);
 });
-Route::post('/ticket/rewiew', [TicketController::class, 'message'])->name('ticket-message');
+Route::post('/ticket/message', [TicketController::class, 'message'])->name('ticket-message');
 Route::post('/ticket/share', [TicketController::class, 'share'])->name('ticket-share');
 Route::post('/ticket/file', [TicketController::class, 'file'])->name('ticket-file');
+Route::get('/downloads/ticket/{file}', [TicketController::class, 'downloads'])->name('downloads-file');
 
 Route::get('contact-us', [Contact::class, 'index']);
 Route::post('contact-us', [Contact::class, 'store'])->name('contact.us.store');

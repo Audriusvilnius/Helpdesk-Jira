@@ -94,7 +94,8 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-success float-end mt-3">Add</button>
+                                <button type="submit" class="btn btn-success float-end mt-3"><i
+                                        class="bi bi-person-plus fs-3"></i></button>
                                 {!! Form::close() !!}
                             </div>
                         </div>
@@ -113,7 +114,9 @@
                                     'class' => 'form-control',
                                     'type' => 'file',
                                 ]) !!}
-                                <button type="submit" class="btn btn-success float-end mt-3">Insert</button>
+
+                                <button type="submit" class="btn btn-success float-end mt-3"><i
+                                        class="bi bi-upload fs-3"></i></button>
                                 {!! Form::close() !!}
                             </div>
                         </div>
@@ -128,12 +131,12 @@
                             </div>
                             @foreach ($share as $share_user)
                                 <div class=" text-white fs-4">
-                                    <a class=" text-decoration-none text-white m-1 me-3"
+                                    <a href="#">
+                                        <i class="bi bi-person-x-fill text-white fs-4 me-3"></i>
+                                    </a>
+                                    <a class=" text-decoration-none text-white me-3"
                                         href="mailto:  {{ $share_user->shareUser->email }}">
                                         <i class="bi bi-envelope-at"></a></i> {{ $share_user->shareUser->name }}
-                                    <a href="#">
-                                        <i class="bi bi-x-circle-fill text-danger fs-4 float-end m-1"></i>
-                                    </a>
                                 </div>
                             @endforeach
                         </div>
@@ -141,10 +144,20 @@
                 </div>
                 <div class="col-md-4 contents ">
                     <div class="row justify-content-center">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                 <label class=" text-white-50" for="important_id">
                                     {{ __('Share file:') }}</label>
+                                <br>
+                                @if ($files)
+                                    @foreach ($files as $id => $file)
+                                        <div class=" text-white fs-6">
+                                            <a href=""><i class="bi bi-trash3 fs-6 me-4 text-white"></i></a>
+                                            <a class="text-decoration-none text-white m-1 me-3"
+                                                href="{{ route('downloads-file', $file['file']) }}">{{ $file['name'] }}</a>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
