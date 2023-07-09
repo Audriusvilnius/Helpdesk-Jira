@@ -26,8 +26,13 @@
                                         <div class="col-md-12 col-lg-2 col-xl-2">
                                             <div class="text-center row justify-content-center p-3">
                                                 <div
-                                                    class="fs-6 conteiner-status m-1 text-white rounded-pill bg-black opacity-75">
-                                                    {{ '# ' . $ticket->id }}
+                                                    class="conteiner-status m-1 text-white rounded-pill bg-black opacity-75">
+                                                    @if ($ticket->attach_json !== null)
+                                                        <i class="bi bi-paperclip fs-4  me-2"></i>
+                                                    @endif
+                                                    <span class="fs-5">
+                                                        {{ $ticket->id }}
+                                                    </span>
                                                 </div>
                                                 <div class="fs-6 rounded-pill conteiner-status m-1"
                                                     style=" color:{{ $ticket->ticketsImportant->important_tc }}
@@ -70,7 +75,7 @@
                                                     href="{{ route('tickets.show', $ticket->id) }}">Conversation</a>
                                                 @can('ticket-edit')
                                                     <a class=" btn btn-primary text-decoration-none text-white btn-index m-1"
-                                                        href="{{ route('tickets.edit', $ticket->id) }}">Edit</a>
+                                                        href="{{ route('tickets.edit', $ticket->id) }}">Desk</a>
                                                 @endcan
                                                 @can('delete-btn')
                                                     {!! Form::open([

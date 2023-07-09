@@ -10,10 +10,8 @@
                 <div class="card-header card-header justify-content-between align-content-between d-flex ">
                     <h2 class="text-light">Create ticket</h2>
                     @can('role-create')
-                        <span class=" ">
-                            <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex"
-                                href="{{ route('home') }}">Home</a>
-                        </span>
+                        <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex mb-4 "
+                            href="{{ route('home') }}">Home</a>
                     @endcan
                 </div>
                 <div class="card">

@@ -8,10 +8,12 @@
                 @include('alerts.alert-danger')
 
                 <div class="card-header card-header justify-content-between align-content-between d-flex ">
-                    <h4 class="up text-center">{{ '# ' . $ticket->id }}</h4>
+                    <h4 class="up text-center"
+                        style="background-color: {{ $ticket->ticketsImportant->important_bc }};color:{{ $ticket->ticketsImportant->important_tc }};border-color:{{ $ticket->ticketsStatus->status_bc }};">
+                        {{ $ticket->id }}</h4>
                     <h2 class="text-light ms-5 me-5 text-center">{!! nl2br(e($ticket->title)) !!}</h2>
                 </div>
-                <div class="card-header card-header justify-content-center align-content-between d-flex my-5">
+                <div class="card-header card-header justify-content-end align-content-end d-flex my-5">
                     @can('ticket-edit')
                         <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex"
                             href="{{ route('tickets.index') }}">Back</a>
@@ -130,13 +132,13 @@
                                     {{ __('Share to User:') }}</label>
                             </div>
                             @foreach ($share as $share_user)
-                                <div class=" text-white fs-4">
+                                <div class=" text-white fs-4 ">
                                     <a href="#">
                                         <i class="bi bi-person-x-fill text-white fs-4 me-3"></i>
                                     </a>
-                                    <a class=" text-decoration-none text-white me-3"
-                                        href="mailto:  {{ $share_user->shareUser->email }}">
-                                        <i class="bi bi-envelope-at"></a></i> {{ $share_user->shareUser->name }}
+                                    <a class=" text-white me-3" href="mailto:  {{ $share_user->shareUser->email }}">
+                                        <i class="bi bi-envelope-at "></a></i>
+                                    {{ $share_user->shareUser->name }}
                                 </div>
                             @endforeach
                         </div>
@@ -146,7 +148,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-12">
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                                <label class=" text-white-50" for="important_id">
+                                <label class=" text-white-50" for="important_id"><i class="bi bi-paperclip"></i>
                                     {{ __('Share file:') }}</label>
                                 <br>
                                 @if ($files)
@@ -154,7 +156,8 @@
                                         <div class=" text-white fs-6">
                                             <a href=""><i class="bi bi-trash3 fs-6 me-4 text-white"></i></a>
                                             <a class="text-decoration-none text-white m-1 me-3"
-                                                href="{{ route('downloads-file', $file['file']) }}"><strong>{{ $file['name'] }}</strong></a>
+                                                href="{{ route('downloads-file', $file['file']) }}"><strong><i
+                                                        class="bi bi-paperclip fs-6 me-4">{{ $file['name'] }}</i></strong></a>
                                         </div>
                                     @endforeach
                                 @endif

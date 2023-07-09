@@ -44,7 +44,7 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Ticket::latest()->paginate(3);
+        $data = Ticket::latest()->paginate(10);
         return view('back.tickets.index', compact('data'));
     }
 
@@ -174,8 +174,18 @@ class TicketController extends Controller
             $to = User::find($to->id);
             // Mail::to($to)->send(new StatusImportantMail($ticket, $to));
         }
-        return redirect()->route('tickets.index')
-            ->with('success', 'Ticket updated successfully.');
+        $ticket = Ticket::find($id);
+        $status = Status::all();
+        $important = Important::all();
+        $users = User::all();
+        $share = Share::where('share_ticket_id', 'like', $id)->get();
+        $files = json_decode($ticket->attach_json, 1);
+        // $files = json_decode($ticket->attach_json, 1) ?: [];
+
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'files'))->with('success', 'Ticket updated successfully.');
+
+        // return redirect()->route('tickets.index')
+        //     ->with('success', 'Ticket updated successfully.');
     }
     // /**
     //  * Update the specified resource in storage.
@@ -286,7 +296,7 @@ class TicketController extends Controller
             $ext = $share_file->getClientOriginalExtension();
             $name = pathinfo($share_file->getClientOriginalName(), PATHINFO_FILENAME);
             // $file = $name . '-' . uniqid() . '.' . $ext;
-            $file = $name . '.' . $ext;
+            $file = $name . '_' . date('Y-m-d_H:i:s', time()) . '.' . $ext;
             $share_file->move(public_path() . '/ticket', $file);
 
             $share_file =  $file;

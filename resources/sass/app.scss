@@ -124,16 +124,18 @@ main {
 .up {
     float: right;
     transform: translateX(-110%) translateY(calc(2em - 50px));
-    background-color: skyblue;
+    // background-color: skyblue;
     width: 100px;
     height: 100px;
     font-size: 20px;
     font-weight: 500;
-    line-height: 100px;
+    line-height: 70px;
     text-decoration: none;
     border-radius: 50%;
     position: fixed;
     z-index: 1;
+    border-style: solid;
+    border-width: 15px;
     color: #282c34;
 }
 
