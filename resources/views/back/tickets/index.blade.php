@@ -67,7 +67,7 @@
                                         <div class="col-md-6 col-lg-2 col-xl-2 border-sm-start-none border-start">
                                             <div class=" row justify-content-evenly align-content-cente m-1">
                                                 <a class="btn btn-success text-decoration-none text-white btn-index m-1"
-                                                    href="{{ route('tickets.show', $ticket->id) }}">Show</a>
+                                                    href="{{ route('tickets.show', $ticket->id) }}">Conversation</a>
                                                 @can('ticket-edit')
                                                     <a class=" btn btn-primary text-decoration-none text-white btn-index m-1"
                                                         href="{{ route('tickets.edit', $ticket->id) }}">Edit</a>

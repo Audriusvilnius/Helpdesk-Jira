@@ -111,7 +111,7 @@
                                 {!! Form::hidden('ticket_id', $ticket->id) !!}
                                 <label class=" text-white-50" for="file">{{ __('File:') }}</label>
                                 {!! Form::file('file', null, [
-                                    'class' => 'form-control',
+                                    'class' => 'form-control, text-white ',
                                     'type' => 'file',
                                 ]) !!}
 
@@ -154,7 +154,7 @@
                                         <div class=" text-white fs-6">
                                             <a href=""><i class="bi bi-trash3 fs-6 me-4 text-white"></i></a>
                                             <a class="text-decoration-none text-white m-1 me-3"
-                                                href="{{ route('downloads-file', $file['file']) }}">{{ $file['name'] }}</a>
+                                                href="{{ route('downloads-file', $file['file']) }}"><strong>{{ $file['name'] }}</strong></a>
                                         </div>
                                     @endforeach
                                 @endif
