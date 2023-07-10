@@ -106,7 +106,6 @@
                         <div class="col-md-8">
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                 {!! Form::model($ticket, [
-                                    // 'route' => ['ticket-file', $ticket->id],
                                     'route' => ['file-uploads', $ticket->id],
                                     'method' => 'post',
                                     'enctype' => 'multipart/form-data',
@@ -159,8 +158,9 @@
                                         <div class=" text-white fs-6">
                                             <a href="{{ route('file-delete', $file->id) }}"><i
                                                     class="bi bi-trash3 fs-6 me-4 text-white"></i></a>
-                                            <a class="text-decoration-none text-white m-1 me-3"
-                                                class="bi bi-paperclip fs-6 me-4">{{ $file->upload_file }}</i></strong></a>
+                                            <a href="{{ route('file-downloads', ['dir' => $file->upload_dir, 'file' => $file->upload_file]) }}"
+                                                class="text-decoration-none text-white m-1 me-3"><i
+                                                    class="bi bi-paperclip fs-6 me-4">{{ $file->upload_file }}</i></strong></a>
                                         </div>
                                     @endforeach
                                 @endif
