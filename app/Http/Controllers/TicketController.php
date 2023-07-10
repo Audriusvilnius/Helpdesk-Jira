@@ -57,6 +57,60 @@ class TicketController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function open(Request $request)
+    {
+        if (Auth::user()->role == 'admin') {
+            $data = Share::latest()->paginate(10);
+        } else {
+            $data = Share::where('share_user_id', '=', Auth::user()->id)
+                ->latest()
+                ->paginate(10);
+        }
+
+        return view('back.tickets.index', compact('data'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function close(Request $request)
+    {
+        if (Auth::user()->role == 'admin') {
+            $data = Share::latest()->paginate(10);
+        } else {
+            $data = Share::where('share_user_id', '=', Auth::user()->id)
+                ->latest()
+                ->paginate(10);
+        }
+
+        return view('back.tickets.index', compact('data'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function suspendet(Request $request)
+    {
+        if (Auth::user()->role == 'admin') {
+            $data = Share::latest()->paginate(10);
+        } else {
+            $data = Share::where('share_user_id', '=', Auth::user()->id)
+                ->latest()
+                ->paginate(10);
+        }
+
+        return view('back.tickets.index', compact('data'));
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -93,6 +147,8 @@ class TicketController extends Controller
 
         $share = new Share;
         $share->share_ticket_id = $ticket->id;
+        $share->share_status_id = $ticket->status_id;
+        $share->share_important_id = $ticket->important_id;
         $share->share_user_id = Auth::user()->id;
         $share->save();
 
@@ -160,12 +216,14 @@ class TicketController extends Controller
             'title' => 'required',
             'message_json' => 'required',
         ]);
-
         $ticket = Ticket::find($id);
+        $share = Share::find($id);
         if ($request->important_id) {
+            $share->share_important_id = $ticket->important_id;
             $ticket->important_id = $request->important_id;
         }
         if ($request->status_id) {
+            $share->share_status_id = $ticket->status_id;
             $ticket->status_id = $request->status_id;
         }
 

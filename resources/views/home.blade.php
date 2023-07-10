@@ -22,15 +22,15 @@
                             class="text-decoration-none text-black container-btn shadow bg-warning">
                             Create
                         </a>
-                        <a href="{{ route('tickets.index') }}"
-                            class="text-decoration-none text-white container-btn shadow bg-danger">
+                        <a href="{{ route('open-tickets') }}"
+                            class="text-decoration-none text-black container-btn shadow bg-info">
                             Open
                         </a>
-                        <a href="{{ route('tickets.index') }}"
-                            class="text-decoration-none text-black container-btn shadow bg-info">
-                            Processing
+                        <a href="{{ route('suspendet-tickets') }}"
+                            class="text-decoration-none text-white container-btn shadow bg-danger">
+                            Suspendet
                         </a>
-                        <a href="{{ route('tickets.index') }}"
+                        <a href="{{ route('close-tickets') }}"
                             class="text-decoration-none text-white container-btn shadow bg-success">
                             Closed
                         </a>
