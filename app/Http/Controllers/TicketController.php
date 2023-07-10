@@ -9,6 +9,7 @@ use App\Models\Important;
 use App\Models\Share;
 use App\Models\Status;
 use App\Models\Ticket;
+use App\Models\Upload;
 use App\Models\User;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class TicketController extends Controller
     {
         $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show']]);
         $this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share', 'file']]);
+        $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share']]);
         $this->middleware('permission:ticket-delete', ['only' => ['destroy']]);
         $this->middleware('permission:ticket-message', ['only' => ['message']]);
     }
@@ -135,9 +136,7 @@ class TicketController extends Controller
         $important = Important::all();
         $users = User::all();
         $share = Share::where('share_ticket_id', 'like', $id)->get();
-        $uploads = json_decode($ticket->attach_json, 1);
-        // $files = json_decode($ticket->attach_json, 1) ?: [];
-
+        $uploads = Upload::where('upload_ticket_id', 'like', $id)->get();
         return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
     }
 
@@ -268,77 +267,8 @@ class TicketController extends Controller
         $uploads = json_decode($ticket->attach_json, 1);
         return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
     }
-    /**
-     * Show the form for insert file the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function file(Request $request)
-    {
-        $this->validate($request, [
-            'upload' => 'required|file|max:10240',
-            // 'upload' => 'required|max:10240|size:10485760',
-        ]);
 
 
-
-        // $validator = Validator::make(
-        //     $request->all(),
-        //     [
-        //         'file' => 'required|file|max:10000',
-        //     ]
-        // );
-
-        // if ($validator->fails()) {
-        //     if ($validator->fails()) {
-        //         $request->flash();
-        //         return redirect()->back()->withErrors($validator);
-        //     }
-        // }
-
-        $ticket = Ticket::find($request->ticket_id);
-        if ($request->file('upload')) {
-            $share_file = $request->file('upload');
-            $ext = $share_file->getClientOriginalExtension();
-            $name = pathinfo($share_file->getClientOriginalName(), PATHINFO_FILENAME);
-            // $file = $name . '-' . uniqid() . '.' . $ext;
-            $file = $name . '_' . date('Y-m-d_H:i:s', time()) . '.' . $ext;
-            $share_file->move(public_path() . '/ticket', $file);
-
-            $share_file =  $file;
-            // $share_file = storage_path() . 'ticket_#_' . $request->ticket_id . '/' . $file;
-            $attach_json = json_decode($ticket->attach_json, 1);
-            // dd($share_file);
-
-            if ($attach_json) {
-                $attach_json[uniqid()] = ['upload' => $share_file, 'name' => $file];
-            } else {
-                $attach_json = [uniqid() => ['upload' => $share_file, 'name' => $file]];
-            }
-        }
-        $ticket->attach_json = json_encode($attach_json);
-        $ticket->update();
-        // DB::table('tickets')->where('id', $request->ticket_id)->update(['attach_json' => $attach_json]);
-        $share = Share::where('share_ticket_id', 'like', $request->ticket_id)->get();
-        $status = Status::all();
-        $important = Important::all();
-        $users = User::all();
-        $uploads = json_decode($ticket->attach_json, 1);
-
-        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
-    }
-
-    /**
-     * @param mixed $file_name 
-     * @return mixed 
-     * @throws BindingResolutionException 
-     */
-    public function downloads($file_name)
-    {
-        $filePath = public_path() . '/ticket/' . $file_name;
-        return response()->download($filePath);
-    }
     /**
      * Remove the specified resource from storage.
      *

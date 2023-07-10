@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\UploadController as Upload;
 use App\Http\Controllers\ContactController as Contact;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,8 +42,13 @@ Route::group(['middleware' => ['auth']], function () {
 });
 Route::post('/ticket/message', [TicketController::class, 'message'])->name('ticket-message');
 Route::post('/ticket/share', [TicketController::class, 'share'])->name('ticket-share');
-Route::post('/ticket/file', [TicketController::class, 'file'])->name('ticket-file');
-Route::get('/downloads/ticket/{file}', [TicketController::class, 'downloads'])->name('downloads-file');
+
+// Route::post('/ticket/file', [TicketController::class, 'file'])->name('ticket-file');
+// Route::get('/downloads/ticket/{file}', [TicketController::class, 'downloads'])->name('downloads-file');
+
+Route::post('/upload/file', [Upload::class, 'uploads'])->name('uploads-file');
+Route::get('/downloads/{dir?}/{file?}', [Upload::class, 'download'])->name('downloads-file');
+Route::get('/file/delete/{id}', [Upload::class, 'destroy'])->name('upload-delete');
 
 Route::get('contact-us', [Contact::class, 'index']);
 Route::post('contact-us', [Contact::class, 'store'])->name('contact.us.store');
