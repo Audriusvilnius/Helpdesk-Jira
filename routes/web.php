@@ -10,6 +10,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UploadController as Upload;
 use App\Http\Controllers\ContactController as Contact;
+use App\Http\Controllers\ShareController as Share;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -40,15 +41,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('status', StatusController::class);
     Route::resource('important', ImportantController::class);
 });
+
 Route::post('/ticket/message', [TicketController::class, 'message'])->name('ticket-message');
-Route::post('/ticket/share', [TicketController::class, 'share'])->name('ticket-share');
 
-// Route::post('/ticket/file', [TicketController::class, 'file'])->name('ticket-file');
-// Route::get('/downloads/ticket/{file}', [TicketController::class, 'downloads'])->name('downloads-file');
+Route::post('/ticket/share', [Share::class, 'share'])->name('ticket-share');
+Route::get('/share/remove/{id}', [Share::class, 'destroy'])->name('share-remove');
 
-Route::post('/upload/file', [Upload::class, 'uploads'])->name('uploads-file');
-Route::get('/downloads/{dir?}/{file?}', [Upload::class, 'download'])->name('downloads-file');
-Route::get('/file/delete/{id}', [Upload::class, 'destroy'])->name('upload-delete');
+Route::prefix('file')->name('file-')->group(function () {
+    Route::post('/upload', [Upload::class, 'uploads'])->name('uploads');
+    Route::get('/downloads/{dir?}/{file?}', [Upload::class, 'download'])->name('downloads');
+    Route::get('/delete/{id}', [Upload::class, 'destroy'])->name('delete');
+});
 
 Route::get('contact-us', [Contact::class, 'index']);
 Route::post('contact-us', [Contact::class, 'store'])->name('contact.us.store');

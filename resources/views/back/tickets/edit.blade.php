@@ -107,7 +107,7 @@
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                 {!! Form::model($ticket, [
                                     // 'route' => ['ticket-file', $ticket->id],
-                                    'route' => ['uploads-file', $ticket->id],
+                                    'route' => ['file-uploads', $ticket->id],
                                     'method' => 'post',
                                     'enctype' => 'multipart/form-data',
                                 ]) !!}
@@ -134,9 +134,11 @@
                             </div>
                             @foreach ($share as $share_user)
                                 <div class=" text-white fs-4 ">
-                                    <a href="#">
-                                        <i class="bi bi-person-x-fill text-white fs-4 me-3"></i>
-                                    </a>
+                                    @if ($ticket->user_id != $share_user->shareUser->id)
+                                        <a href="{{ route('share-remove', $share_user->id) }}">
+                                            <i class="bi bi-person-x-fill text-white fs-4 me-3"></i>
+                                        </a>
+                                    @endif
                                     <a class=" text-white me-3" href="mailto:  {{ $share_user->shareUser->email }}">
                                         <i class="bi bi-envelope-at "></a></i>
                                     {{ $share_user->shareUser->name }}
@@ -155,12 +157,10 @@
                                 @if ($uploads)
                                     @foreach ($uploads as $id => $file)
                                         <div class=" text-white fs-6">
-                                            <a href="{{ route('upload-delete', $file->id) }}"><i
+                                            <a href="{{ route('file-delete', $file->id) }}"><i
                                                     class="bi bi-trash3 fs-6 me-4 text-white"></i></a>
-                                            <a class="text-decoration-none text-white m-1 me-3" {{-- href="{{ route('downloads-file', $file['upload']) }}"><strong><i --}}
-                                                href="{{ route('downloads-file', ['dir' => $file->upload_dir, 'file' => $file->upload_file]) }}"><strong><i
-                                                        {{-- class="bi bi-paperclip fs-6 me-4">{{ $file['name'] }}</i></strong></a> --}}
-                                                        class="bi bi-paperclip fs-6 me-4">{{ $file->upload_file }}</i></strong></a>
+                                            <a class="text-decoration-none text-white m-1 me-3"
+                                                class="bi bi-paperclip fs-6 me-4">{{ $file->upload_file }}</i></strong></a>
                                         </div>
                                     @endforeach
                                 @endif

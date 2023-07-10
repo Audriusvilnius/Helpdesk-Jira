@@ -178,16 +178,12 @@ class TicketController extends Controller
         $important = Important::all();
         $users = User::all();
         $share = Share::where('share_ticket_id', 'like', $id)->get();
-        $uploads = json_decode($ticket->attach_json, 1);
-        // $files = json_decode($ticket->attach_json, 1) ?: [];
+        $uploads = Upload::where('upload_ticket_id', 'like', $id)->get();
 
         return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'))->with('success', 'Ticket updated successfully.');
-
-        // return redirect()->route('tickets.index')
-        //     ->with('success', 'Ticket updated successfully.');
     }
     // /**
-    //  * Update the specified resource in storage.
+    //  * Message Update the specified resource in storage.
     //  *
     //  * @param  \Illuminate\Http\Request  $request
     //  * @param  int  $id
@@ -229,45 +225,8 @@ class TicketController extends Controller
             $to = User::find($to->id);
             // Mail::to($to)->send(new NewMessageMail($ticket, $to));
         }
-
-
         return view('back.tickets.show', compact('ticket', 'message'))->with('success', 'Ticket updated successfully.');
     }
-
-    /**
-     * Show the form for share the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function share(Request $request)
-    {
-        $share_new = new Share;
-        $share_new->share_ticket_id = $request->ticket_id;
-        $share_new->share_user_id = $request->user_id;
-        $count = 0;
-        $share_tickets = Share::where('share_ticket_id', 'like', $request->ticket_id)->get();
-        foreach ($share_tickets as $share_ticket) {
-            if ($share_ticket->share_user_id == $request->user_id) {
-                $share_new->update();
-                $count++;
-                break;
-            }
-        }
-        if ($count == 0) {
-            $share_new->save();
-        }
-
-        $share = Share::where('share_ticket_id', 'like', $request->ticket_id)->get();
-        $ticket = Ticket::find($request->ticket_id);
-        $status = Status::all();
-        $important = Important::all();
-        $users = User::all();
-
-        $uploads = json_decode($ticket->attach_json, 1);
-        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
-    }
-
 
     /**
      * Remove the specified resource from storage.

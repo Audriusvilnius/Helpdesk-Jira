@@ -74,7 +74,7 @@ class UploadController extends Controller
             $name = pathinfo($share_file->getClientOriginalName(), PATHINFO_FILENAME);
             $file = $name . '_' . date('Y-m-d_H:i:s', time()) . '.' . $ext;
             $dir = 'ticket_' . $request->ticket_id;
-            $share_file->move(public_path() . '/' . $dir, $file);
+            $share_file->move(public_path() . '/requests' . '/' . $dir, $file);
             $share_file =  $file;
             $upload->upload_dir = $dir;
             $upload->upload_ticket_id = $request->ticket_id;
@@ -94,7 +94,7 @@ class UploadController extends Controller
 
     public function download($dir, $file)
     {
-        $filePath = public_path() . $dir . '/' . $file;
+        $filePath = public_path() . '/requests' . '/' . $dir . '/' . $file;
         return response()->download($filePath);
     }
 

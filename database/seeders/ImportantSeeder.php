@@ -25,7 +25,7 @@ class ImportantSeeder extends Seeder
             'orangered;',
             'green;',
             'moccasin;',
-            'whitesmoke;border: #282c34 solid 1px;',
+            'rgb(207, 206, 206);',
         ];
         $color = [
             'whitesmoke;',
