@@ -17,6 +17,7 @@ class Ticket extends Model
         'status_id',
         'user_name',
         'request',
+        // 'upload',
     ];
 
     public function ticketsImportant()

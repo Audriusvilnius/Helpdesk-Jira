@@ -111,8 +111,8 @@
                                     'enctype' => 'multipart/form-data',
                                 ]) !!}
                                 {!! Form::hidden('ticket_id', $ticket->id) !!}
-                                <label class=" text-white-50" for="file">{{ __('File:') }}</label>
-                                {!! Form::file('file', null, [
+                                <label class=" text-white-50" for="upload">{{ __('Upload:') }}</label>
+                                {!! Form::file('upload', null, [
                                     'class' => 'form-control, text-white ',
                                     'type' => 'file',
                                 ]) !!}
@@ -148,15 +148,15 @@
                     <div class="row justify-content-center">
                         <div class="col-md-12">
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                                <label class=" text-white-50" for="important_id"><i class="bi bi-paperclip"></i>
-                                    {{ __('Share file:') }}</label>
+                                <label class=" text-white-50" for="upload"><i class="bi bi-paperclip"></i>
+                                    {{ __('Uploads file:') }}</label>
                                 <br>
-                                @if ($files)
-                                    @foreach ($files as $id => $file)
+                                @if ($uploads)
+                                    @foreach ($uploads as $id => $file)
                                         <div class=" text-white fs-6">
                                             <a href=""><i class="bi bi-trash3 fs-6 me-4 text-white"></i></a>
                                             <a class="text-decoration-none text-white m-1 me-3"
-                                                href="{{ route('downloads-file', $file['file']) }}"><strong><i
+                                                href="{{ route('downloads-file', $file['upload']) }}"><strong><i
                                                         class="bi bi-paperclip fs-6 me-4">{{ $file['name'] }}</i></strong></a>
                                         </div>
                                     @endforeach

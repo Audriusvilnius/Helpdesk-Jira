@@ -135,10 +135,10 @@ class TicketController extends Controller
         $important = Important::all();
         $users = User::all();
         $share = Share::where('share_ticket_id', 'like', $id)->get();
-        $files = json_decode($ticket->attach_json, 1);
+        $uploads = json_decode($ticket->attach_json, 1);
         // $files = json_decode($ticket->attach_json, 1) ?: [];
 
-        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'files'));
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
     }
 
     /**
@@ -179,10 +179,10 @@ class TicketController extends Controller
         $important = Important::all();
         $users = User::all();
         $share = Share::where('share_ticket_id', 'like', $id)->get();
-        $files = json_decode($ticket->attach_json, 1);
+        $uploads = json_decode($ticket->attach_json, 1);
         // $files = json_decode($ticket->attach_json, 1) ?: [];
 
-        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'files'))->with('success', 'Ticket updated successfully.');
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'))->with('success', 'Ticket updated successfully.');
 
         // return redirect()->route('tickets.index')
         //     ->with('success', 'Ticket updated successfully.');
@@ -265,8 +265,8 @@ class TicketController extends Controller
         $important = Important::all();
         $users = User::all();
 
-        $files = json_decode($ticket->attach_json, 1);
-        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'files'));
+        $uploads = json_decode($ticket->attach_json, 1);
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
     }
     /**
      * Show the form for insert file the specified resource.
@@ -276,23 +276,30 @@ class TicketController extends Controller
      */
     public function file(Request $request)
     {
-        $validator = Validator::make(
-            $request->all(),
-            [
-                'file' => 'required|file|max:10000',
-            ]
-        );
+        $this->validate($request, [
+            'upload' => 'required|file|max:10240',
+            // 'upload' => 'required|max:10240|size:10485760',
+        ]);
 
-        if ($validator->fails()) {
-            if ($validator->fails()) {
-                $request->flash();
-                return redirect()->back()->withErrors($validator);
-            }
-        }
+
+
+        // $validator = Validator::make(
+        //     $request->all(),
+        //     [
+        //         'file' => 'required|file|max:10000',
+        //     ]
+        // );
+
+        // if ($validator->fails()) {
+        //     if ($validator->fails()) {
+        //         $request->flash();
+        //         return redirect()->back()->withErrors($validator);
+        //     }
+        // }
 
         $ticket = Ticket::find($request->ticket_id);
-        if ($request->file('file')) {
-            $share_file = $request->file('file');
+        if ($request->file('upload')) {
+            $share_file = $request->file('upload');
             $ext = $share_file->getClientOriginalExtension();
             $name = pathinfo($share_file->getClientOriginalName(), PATHINFO_FILENAME);
             // $file = $name . '-' . uniqid() . '.' . $ext;
@@ -305,9 +312,9 @@ class TicketController extends Controller
             // dd($share_file);
 
             if ($attach_json) {
-                $attach_json[uniqid()] = ['file' => $share_file, 'name' => $file];
+                $attach_json[uniqid()] = ['upload' => $share_file, 'name' => $file];
             } else {
-                $attach_json = [uniqid() => ['file' => $share_file, 'name' => $file]];
+                $attach_json = [uniqid() => ['upload' => $share_file, 'name' => $file]];
             }
         }
         $ticket->attach_json = json_encode($attach_json);
@@ -317,9 +324,9 @@ class TicketController extends Controller
         $status = Status::all();
         $important = Important::all();
         $users = User::all();
-        $files = json_decode($ticket->attach_json, 1);
+        $uploads = json_decode($ticket->attach_json, 1);
 
-        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'files'));
+        return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
     }
 
     /**
