@@ -17,4 +17,8 @@ class Share extends Model
     {
         return $this->belongsTo(User::class, 'share_user_id', 'id');
     }
+    public function shareTicket()
+    {
+        return $this->belongsTo(Ticket::class, 'share_ticket_id', 'id');
+    }
 }

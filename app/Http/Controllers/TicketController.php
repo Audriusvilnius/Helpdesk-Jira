@@ -45,7 +45,14 @@ class TicketController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Ticket::latest()->paginate(10);
+        if (Auth::user()->role == 'admin') {
+            $data = Share::latest()->paginate(10);
+        } else {
+            $data = Share::where('share_user_id', '=', Auth::user()->id)
+                ->latest()
+                ->paginate(10);
+        }
+
         return view('back.tickets.index', compact('data'));
     }
 
