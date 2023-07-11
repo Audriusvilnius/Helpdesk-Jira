@@ -11,6 +11,8 @@ class Share extends Model
     protected $fillable = [
         'share_ticket_id',
         'share_user_id',
+        'share_status_id',
+        'share_important_id',
     ];
 
     public function shareUser()

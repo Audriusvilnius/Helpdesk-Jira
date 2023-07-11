@@ -66,7 +66,7 @@
                         @else
                             {{-- Menu start --}}
                             @can('ticket-list')
-                                <li><a class="nav-link" href="{{ route('tickets.index') }}">My Tickets</a></li>
+                                <li><a class="nav-link" href="{{ route('open-tickets') }}">My Tickets</a></li>
                             @endcan
                             @can('setings')
                                 <li class="nav-item dropdown">

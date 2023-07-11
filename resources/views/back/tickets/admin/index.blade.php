@@ -27,60 +27,60 @@
                                             <div class="text-center row justify-content-center p-3">
                                                 <div
                                                     class="conteiner-status m-1 text-white rounded-pill bg-black opacity-75">
-                                                    @if ($ticket->shareTicket->attach_json !== null)
+                                                    @if ($ticket->attach_json !== null)
                                                         <i class="bi bi-paperclip fs-4  me-2"></i>
                                                     @endif
                                                     <span class="fs-5">
-                                                        {{ $ticket->shareTicket->id }}
+                                                        {{ $ticket->id }}
                                                     </span>
                                                 </div>
                                                 <div class="fs-6 rounded-pill conteiner-status m-1"
-                                                    style=" color:{{ $ticket->shareTicket->ticketsImportant->important_tc }}
-                                                background-color:{{ $ticket->shareTicket->ticketsImportant->important_bc }}
+                                                    style=" color:{{ $ticket->ticketsImportant->important_tc }}
+                                                background-color:{{ $ticket->ticketsImportant->important_bc }}
                                                 ">
-                                                    {{ $ticket->shareTicket->ticketsImportant->title }}
+                                                    {{ $ticket->ticketsImportant->title }}
                                                 </div>
                                                 <div class="fs-6 rounded-pill conteiner-status m-1"
-                                                    style=" color:{{ $ticket->shareTicket->ticketsStatus->status_tc }}
-                                                background-color:{{ $ticket->shareTicket->ticketsStatus->status_bc }}
+                                                    style=" color:{{ $ticket->ticketsStatus->status_tc }}
+                                                background-color:{{ $ticket->ticketsStatus->status_bc }}
                                                 ">
-                                                    {{ $ticket->shareTicket->ticketsStatus->title }}
+                                                    {{ $ticket->ticketsStatus->title }}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-8 col-xl-8 border-sm-start-none border-start">
                                             <div class="col-md-12 col-lg-12 col-xl-12">
                                                 <div class="fs-6 rounded-1 bg-dark-subtle ps-3 pe-3">
-                                                    {{ $ticket->shareTicket->ticketsUser->name }}
+                                                    {{ $ticket->ticketsUser->name }}
                                                 </div>
                                                 <div class="fs-6 d-flex flex-row text-black-50">
-                                                    Open: {{ $ticket->shareTicket->created_at->format('Y-m-d H:i') }}
+                                                    Open: {{ $ticket->created_at->format('Y-m-d H:i') }}
                                                 </div>
                                                 <div class="fs-6 d-flex flex-row text-black-50 ">
-                                                    Edit : {{ $ticket->shareTicket->updated_at->format('Y-m-d H:i') }}
+                                                    Edit : {{ $ticket->updated_at->format('Y-m-d H:i') }}
                                                 </div>
 
                                             </div>
-                                            <h5 class="length_title">{{ $ticket->shareTicket->title }}</h5>
+                                            <h5 class="length_title">{{ $ticket->title }}</h5>
                                             <div class="length_message">
-                                                <p class="length_message">{{ $ticket->shareTicket->request }}</p>
+                                                <p class="length_message">{{ $ticket->request }}</p>
                                             </div>
                                             <div class="d-flex flex-row">
-                                                <span>{{ $ticket->shareTicket->attach }}</span>
+                                                <span>{{ $ticket->attach }}</span>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-lg-2 col-xl-2 border-sm-start-none border-start">
                                             <div class=" row justify-content-evenly align-content-cente m-1">
                                                 <a class="btn btn-success text-decoration-none text-white btn-index m-1"
-                                                    href="{{ route('tickets.show', $ticket->shareTicket->id) }}">Conversation</a>
+                                                    href="{{ route('tickets.show', $ticket->id) }}">Conversation</a>
                                                 @can('ticket-edit')
                                                     <a class=" btn btn-primary text-decoration-none text-white btn-index m-1"
-                                                        href="{{ route('tickets.edit', $ticket->shareTicket->id) }}">Desk</a>
+                                                        href="{{ route('tickets.edit', $ticket->id) }}">Desk</a>
                                                 @endcan
                                                 @can('delete-btn')
                                                     {!! Form::open([
                                                         'method' => 'DELETE',
-                                                        'route' => ['tickets.destroy', $ticket->shareTicket->id],
+                                                        'route' => ['tickets.destroy', $ticket->id],
                                                     ]) !!}
                                                     <div class="row justify-content-evenly align-content-cente">
                                                         {!! Form::submit('Delete', [

@@ -31,7 +31,7 @@ class TicketController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show']]);
+        $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show', 'open', 'close', 'suspendet']]);
         $this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share']]);
         $this->middleware('permission:ticket-delete', ['only' => ['destroy']]);
@@ -46,14 +46,14 @@ class TicketController extends Controller
     public function index(Request $request)
     {
         if (Auth::user()->role == 'admin') {
-            $data = Share::latest()->paginate(10);
+            $data = Ticket::latest()->paginate(10);
+            return view('back.tickets.admin.index', compact('data'));
         } else {
             $data = Share::where('share_user_id', '=', Auth::user()->id)
                 ->latest()
                 ->paginate(10);
+            return view('back.tickets.index', compact('data'));
         }
-
-        return view('back.tickets.index', compact('data'));
     }
 
     /**
@@ -64,14 +64,17 @@ class TicketController extends Controller
     public function open(Request $request)
     {
         if (Auth::user()->role == 'admin') {
-            $data = Share::latest()->paginate(10);
-        } else {
-            $data = Share::where('share_user_id', '=', Auth::user()->id)
+            $data = Ticket::whereIn('status_id', [1, 2, 3])
                 ->latest()
                 ->paginate(10);
+            return view('back.tickets.admin.index', compact('data'));
+        } else {
+            $data = Share::where('share_user_id', '=', Auth::user()->id)
+                ->whereIn('share_status_id', [1, 2, 3])
+                ->latest()
+                ->paginate(10);
+            return view('back.tickets.index', compact('data'));
         }
-
-        return view('back.tickets.index', compact('data'));
     }
 
     /**
@@ -82,14 +85,17 @@ class TicketController extends Controller
     public function close(Request $request)
     {
         if (Auth::user()->role == 'admin') {
-            $data = Share::latest()->paginate(10);
-        } else {
-            $data = Share::where('share_user_id', '=', Auth::user()->id)
+            $data = Ticket::whereIn('status_id', [5])
                 ->latest()
                 ->paginate(10);
+            return view('back.tickets.admin.index', compact('data'));
+        } else {
+            $data = Share::where('share_user_id', '=', Auth::user()->id)
+                ->whereIn('share_status_id', [5])
+                ->latest()
+                ->paginate(10);
+            return view('back.tickets.index', compact('data'));
         }
-
-        return view('back.tickets.index', compact('data'));
     }
     /**
      * Display a listing of the resource.
@@ -99,14 +105,18 @@ class TicketController extends Controller
     public function suspendet(Request $request)
     {
         if (Auth::user()->role == 'admin') {
-            $data = Share::latest()->paginate(10);
-        } else {
-            $data = Share::where('share_user_id', '=', Auth::user()->id)
+            $data = Ticket::where('status_id', [4])
+                ->whereIn('status_id', [4])
                 ->latest()
                 ->paginate(10);
+            return view('back.tickets.admin.index', compact('data'));
+        } else {
+            $data = Share::where('share_user_id', '=', Auth::user()->id)
+                ->whereIn('share_status_id', [4])
+                ->latest()
+                ->paginate(10);
+            return view('back.tickets.index', compact('data'));
         }
-
-        return view('back.tickets.index', compact('data'));
     }
 
 
@@ -217,14 +227,20 @@ class TicketController extends Controller
             'message_json' => 'required',
         ]);
         $ticket = Ticket::find($id);
-        $share = Share::find($id);
+        $shares = Share::where('share_ticket_id', '=', $id)->get();
         if ($request->important_id) {
-            $share->share_important_id = $ticket->important_id;
             $ticket->important_id = $request->important_id;
+            foreach ($shares as $share) {
+                $share->share_important_id = $request->important_id;
+                $share->update();
+            }
         }
         if ($request->status_id) {
-            $share->share_status_id = $ticket->status_id;
             $ticket->status_id = $request->status_id;
+            foreach ($shares as $share) {
+                $share->share_status_id = $request->status_id;
+                $share->update();
+            }
         }
 
         $ticket->title = $request->title;

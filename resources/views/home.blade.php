@@ -14,10 +14,6 @@
                             status and
                             progres.
                         </p>
-                        <a href="{{ route('tickets.index') }}"
-                            class="text-decoration-none text-black container-btn shadow ">
-                            All
-                        </a>
                         <a href="{{ route('tickets.create') }}"
                             class="text-decoration-none text-black container-btn shadow bg-warning">
                             Create
@@ -34,6 +30,13 @@
                             class="text-decoration-none text-white container-btn shadow bg-success">
                             Closed
                         </a>
+                        @if (Auth::user()->role == 'admin')
+                            <a href="{{ route('tickets.index') }}"
+                                class="text-decoration-none text-black container-btn shadow ">
+                                All
+                            </a>
+                        @endif
+
                         <section class="mb-4">
                             <h3 class="h1-responsive text-white font-weight-bold text-center my-4 mt-5">Contact us</h3>
                             <p class="fw-lighter text-white text-center mt-3">Do you have any questions? Please do not
