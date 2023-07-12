@@ -81,8 +81,20 @@ class UploadController extends Controller
     /**
      * Delete the specified resource from storage.
      */
-    public function remove(Request $request)
+    public function remove(Request $request, Upload $file)
     {
-        dd($request->remove);
+        // $file->upload_dir = $request->upload_dir;
+
+
+        if ($request->remove) {
+            dd($request->upload_file);
+            if (file_exists(public_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file)) {
+                unlink(public_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file);
+                dd('ok');
+                $file->save();
+            }
+        }
+
+        return redirect()->back()->with('ok', 'File deleted');
     }
 }

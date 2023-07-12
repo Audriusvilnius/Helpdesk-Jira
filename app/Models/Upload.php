@@ -14,15 +14,4 @@ class Upload extends Model
         'upload_dir',
         'upload_file',
     ];
-
-    public function deleteFile()
-    {
-        $fileName = $this->file;
-        $fileDir = $this->dir;
-
-        if (file_exists(public_path() . $fileDir . '/' . $fileName)) {
-            unlink(public_path() . $fileDir . '/' .  $fileName);
-        }
-        $this->save();
-    }
 }
