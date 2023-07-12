@@ -40,9 +40,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('tickets', TicketController::class);
     Route::resource('status', StatusController::class);
     Route::resource('important', ImportantController::class);
+    Route::resource('upload', Upload::class);
+    Route::resource('share', Share::class);
+    Route::resource('contact', Contact::class);
 });
 
-Route::post('/ticket/message', [TicketController::class, 'message'])->name('ticket-message');
+Route::post('/message', [TicketController::class, 'message'])->name('ticket-message');
 Route::get('/open', [TicketController::class, 'open'])->name('open-tickets');
 Route::get('/close', [TicketController::class, 'close'])->name('close-tickets');
 Route::get('/suspendet', [TicketController::class, 'suspendet'])->name('suspendet-tickets');
@@ -53,6 +56,7 @@ Route::get('/share/remove/{id}', [Share::class, 'destroy'])->name('share-remove'
 Route::prefix('file')->name('file-')->group(function () {
     Route::post('/upload', [Upload::class, 'uploads'])->name('uploads');
     Route::get('/downloads/{dir?}/{file?}', [Upload::class, 'download'])->name('downloads');
+    Route::delete('/remove/{id}', [Upload::class, 'remove'])->name('remove');
     Route::get('/delete/{id}', [Upload::class, 'destroy'])->name('delete');
 });
 

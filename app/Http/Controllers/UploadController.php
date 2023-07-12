@@ -15,46 +15,6 @@ use Illuminate\Support\Facades\Redirect;
 class UploadController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Upload the specified resource in storage.
      */
     public function uploads(Request $request)
@@ -65,7 +25,6 @@ class UploadController extends Controller
         ]);
 
         $upload = new Upload;
-
 
         $ticket = Ticket::find($request->ticket_id);
         if ($request->file('upload')) {
@@ -92,6 +51,9 @@ class UploadController extends Controller
         return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
     }
 
+    /**
+     * Download the specified resource.
+     */
     public function download($dir, $file)
     {
         $filePath = public_path() . '/requests' . '/' . $dir . '/' . $file;
@@ -114,5 +76,13 @@ class UploadController extends Controller
         $uploads = Upload::where('upload_ticket_id', 'like', $ticket_id)->get();
 
         return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
+    }
+
+    /**
+     * Delete the specified resource from storage.
+     */
+    public function remove(Request $request)
+    {
+        dd($request->remove);
     }
 }
