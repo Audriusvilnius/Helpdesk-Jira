@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
@@ -61,13 +62,19 @@ class UploadController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete the specified resource from storage.
      */
-    public function destroy($id)
+    public function remove(Upload $file)
     {
-        $tickets = Upload::find($id)->first();
+
+        if (file_exists(public_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file)) {
+            unlink(public_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file);
+            $s = public_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file;
+            $file->save();
+        }
+        $tickets = Upload::find($file->id)->first();
         $ticket_id = $tickets->upload_ticket_id;
-        Upload::find($id)->delete();
+        Upload::find($file->id)->delete();
         $ticket = Ticket::find($ticket_id);
         $status = Status::all();
         $important = Important::all();
@@ -76,25 +83,5 @@ class UploadController extends Controller
         $uploads = Upload::where('upload_ticket_id', 'like', $ticket_id)->get();
 
         return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
-    }
-
-    /**
-     * Delete the specified resource from storage.
-     */
-    public function remove(Request $request, Upload $file)
-    {
-        // $file->upload_dir = $request->upload_dir;
-
-
-        if ($request->remove) {
-            dd($request->upload_file);
-            if (file_exists(public_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file)) {
-                unlink(public_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file);
-                dd('ok');
-                $file->save();
-            }
-        }
-
-        return redirect()->back()->with('ok', 'File deleted');
     }
 }
