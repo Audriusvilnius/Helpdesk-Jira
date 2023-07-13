@@ -57,7 +57,6 @@ Route::prefix('file')->name('file-')->group(function () {
     Route::post('/upload', [Upload::class, 'uploads'])->name('uploads');
     Route::get('/downloads/{dir?}/{file?}', [Upload::class, 'download'])->name('downloads');
     Route::put('/remove/{file}', [Upload::class, 'remove'])->name('remove');
-    Route::get('/delete/{id}', [Upload::class, 'destroy'])->name('delete');
 });
 
 Route::get('contact-us', [Contact::class, 'index']);
