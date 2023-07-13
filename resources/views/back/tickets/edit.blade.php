@@ -8,10 +8,12 @@
                 @include('alerts.alert-danger')
 
                 <div class="card-header card-header justify-content-between align-content-between d-flex ">
-                    <h4 class="up text-center"
-                        style="background-color: {{ $ticket->ticketsImportant->important_bc }};color:{{ $ticket->ticketsImportant->important_tc }};border-color:{{ $ticket->ticketsStatus->status_bc }};">
-                        {{ $ticket->id }}</h4>
-                    <h2 class="text-light ms-5 me-5 text-center">{!! nl2br(e($ticket->title)) !!}</h2>
+                    <a id="backToOpen" href="">
+                        <h4 class="up text-center"
+                            style="background-color: {{ $ticket->ticketsImportant->important_bc }};color:{{ $ticket->ticketsImportant->important_tc }};border-color:{{ $ticket->ticketsStatus->status_bc }};">
+                            {{ $ticket->id }}</h4>
+                        <h2 class="text-light ms-5 me-5 text-center">{!! nl2br(e($ticket->title)) !!}</h2>
+                    </a>
                 </div>
                 <div class="card-header card-header justify-content-end align-content-end d-flex my-5">
                     @can('ticket-edit')
@@ -28,9 +30,9 @@
                 <img src="{{ asset('/assets/images/undraw_remotely_2j6y.svg') }}" alt="Image" class="img-fluid">
             </div> --}}
             <div class="row">
-                <div class="col-md-4 contents ">
+                <div class="col-md-3 contents ">
                     <div class="row justify-content-center">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                 {!! Form::model($ticket, ['route' => ['tickets.update', $ticket->id], 'method' => 'PATCH']) !!}
                                 @can('edit-ticket')
@@ -82,7 +84,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                 {!! Form::model($ticket, ['route' => ['ticket-share', $ticket->id], 'method' => 'post']) !!}
                                 {!! Form::hidden('ticket_id', $ticket->id) !!}
@@ -103,7 +105,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                 {!! Form::model($ticket, [
                                     'route' => ['file-uploads', $ticket->id],
@@ -116,7 +118,6 @@
                                     'class' => 'form-control, text-white ',
                                     'type' => 'file',
                                 ]) !!}
-
                                 <button type="submit" class="btn btn-success float-end mt-3"><i
                                         class="bi bi-upload fs-3"></i></button>
                                 {!! Form::close() !!}
@@ -124,9 +125,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 contents">
+                <div class="col-md-4 contents ps-5">
                     <div class="row justify-content-center">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                 <label class=" text-white-50" for="important_id">
                                     {{ __('Share to User:') }}</label>
@@ -146,7 +147,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 contents ">
+                <div class="col-md-5 contents ">
                     <div class="row justify-content-center">
                         <div class="col-md-12">
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
@@ -161,19 +162,15 @@
                                             {!! Form::hidden('upload_dir', $file->upload_dir) !!}
                                             {!! Form::hidden('upload_file', $file->upload_file) !!}
                                             {!! Form::hidden('upload_ticket_id', $file->upload_ticket_id) !!}
-                                            {!! Form::submit('Remove', ['class' => 'btn btn-danger', 'name' => 'remove']) !!}
-
-                                            {{-- <button type="submit" name="remove" class="btn  float-end mt-3">
-                                                <i class="bi bi-trash3 fs-6 me-4 text-white"></i>
-                                            </button> --}}
-                                            {!! Form::close() !!}
-
-                                            {{-- <a href="{{ route('file-delete', $file->id) }}">
-                                                <i class="bi bi-trash3 fs-6 me-4 text-white"></i>
-                                            </a> --}}
+                                            {!! Form::submit('Remove', [
+                                                'class' => 'btn btn-danger mt-1',
+                                                'style' => 'max-height: 30px;line-height: 10px; ',
+                                                'name' => 'remove',
+                                            ]) !!}
                                             <a href="{{ route('file-downloads', ['dir' => $file->upload_dir, 'file' => $file->upload_file]) }}"
                                                 class="text-decoration-none text-white m-1 me-3"><i
                                                     class="bi bi-paperclip fs-6 me-4">{{ $file->upload_file }}</i></strong></a>
+                                            {!! Form::close() !!}
                                         </div>
                                     @endforeach
                                 @endif
