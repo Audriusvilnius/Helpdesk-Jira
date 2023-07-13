@@ -157,15 +157,15 @@
                                     @foreach ($uploads as $id => $file)
                                         <div class=" text-white fs-6 edit">
                                             {!! Form::open(['method' => 'put', 'route' => ['file-remove', $file]]) !!}
-                                            {{-- {!! Form::hidden('id', $file->id) !!} --}}
+                                            {!! Form::hidden('id', $file->id) !!}
                                             {!! Form::hidden('upload_dir', $file->upload_dir) !!}
                                             {!! Form::hidden('upload_file', $file->upload_file) !!}
                                             {!! Form::hidden('upload_ticket_id', $file->upload_ticket_id) !!}
-                                            {{-- {!! Form::submit('remove', ['class' => 'btn btn-danger', 'name' => 'remove']) !!} --}}
+                                            {!! Form::submit('Remove', ['class' => 'btn btn-danger', 'name' => 'remove']) !!}
 
-                                            <button type="submit" name="remove" class="btn  float-end mt-3">
+                                            {{-- <button type="submit" name="remove" class="btn  float-end mt-3">
                                                 <i class="bi bi-trash3 fs-6 me-4 text-white"></i>
-                                            </button>
+                                            </button> --}}
                                             {!! Form::close() !!}
 
                                             {{-- <a href="{{ route('file-delete', $file->id) }}">
