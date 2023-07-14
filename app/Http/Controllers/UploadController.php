@@ -41,7 +41,6 @@ class UploadController extends Controller
             $name = pathinfo($share_file->getClientOriginalName(), PATHINFO_FILENAME);
             $file = $name . '_' . date('Y-m-d_H:i:s', time()) . '.' . $ext;
             $dir = 'ticket_' . $request->ticket_id;
-            //storage_path
             $share_file->move(storage_path() . '/uploads' . '/' . $dir, $file);
             $share_file =  $file;
             $upload->upload_dir = $dir;
