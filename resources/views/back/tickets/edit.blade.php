@@ -8,12 +8,10 @@
                 @include('alerts.alert-danger')
 
                 <div class="card-header card-header justify-content-between align-content-between d-flex ">
-                    <a id="backToOpen" href="">
-                        <h4 class="up text-center"
-                            style="background-color: {{ $ticket->ticketsImportant->important_bc }};color:{{ $ticket->ticketsImportant->important_tc }};border-color:{{ $ticket->ticketsStatus->status_bc }};">
-                            {{ $ticket->id }}</h4>
-                        <h2 class="text-light ms-5 me-5 text-center">{!! nl2br(e($ticket->title)) !!}</h2>
-                    </a>
+                    <h4 class="up text-center"
+                        style="background-color: {{ $ticket->ticketsImportant->important_bc }};color:{{ $ticket->ticketsImportant->important_tc }};border-color:{{ $ticket->ticketsStatus->status_bc }};">
+                        {{ $ticket->id }}</h4>
+                    <h2 class="text-light ms-5 me-5 text-center">{!! nl2br(e($ticket->title)) !!}</h2>
                 </div>
                 <div class="card-header card-header justify-content-end align-content-end d-flex my-5">
                     @can('ticket-edit')
