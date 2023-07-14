@@ -317,6 +317,24 @@ class TicketController extends Controller
      */
     public function destroy($id)
     {
+
+        $tickets = Upload::where('upload_ticket_id', $id)->get();
+        if ($tickets) {
+            $del_dir = storage_path() . '/uploads';
+            foreach ($tickets as $ticket) {
+                $del_dir = storage_path() . '/uploads' . '/' . $ticket->upload_dir;
+                if (file_exists(storage_path() . '/uploads' . '/' . $ticket->upload_dir . '/' . $ticket->upload_file)) {
+                    unlink(storage_path() . '/uploads' . '/' . $ticket->upload_dir . '/' . $ticket->upload_file);
+                    $ticket->save();
+                }
+                $ticket->delete();
+            }
+            if ($del_dir != storage_path() . '/uploads') {
+                if (is_dir($del_dir)) {
+                    rmdir($del_dir);
+                }
+            }
+        }
         Ticket::find($id)->delete();
 
         return redirect()->route('tickets.index')

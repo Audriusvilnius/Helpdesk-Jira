@@ -54,9 +54,9 @@ Route::post('/ticket/share', [Share::class, 'share'])->name('ticket-share');
 Route::get('/share/remove/{id}', [Share::class, 'destroy'])->name('share-remove');
 
 Route::prefix('file')->name('file-')->group(function () {
-    Route::post('/upload', [Upload::class, 'uploads'])->name('uploads');
-    Route::get('/downloads/{dir?}/{file?}', [Upload::class, 'download'])->name('downloads');
-    Route::put('/remove/{file}', [Upload::class, 'remove'])->name('remove');
+    Route::post('/upload', [Upload::class, 'uploads'])->name('uploads')->middleware('roles:A|U');
+    Route::get('/downloads/{dir?}/{file?}', [Upload::class, 'download'])->name('downloads')->middleware('roles:A|U');
+    Route::put('/remove/{file}', [Upload::class, 'remove'])->name('remove')->middleware('roles:A|U');
 });
 
 Route::get('contact-us', [Contact::class, 'index']);

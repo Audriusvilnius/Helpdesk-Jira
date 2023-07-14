@@ -17,7 +17,8 @@ class UploadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth'); // Auth middleware used to protect the middleware.
+        // $this->middleware('auth'); // Auth middleware used to protect the middleware.
+        $this->middleware('roles:A|U');
     }
 
 
@@ -41,7 +42,7 @@ class UploadController extends Controller
             $file = $name . '_' . date('Y-m-d_H:i:s', time()) . '.' . $ext;
             $dir = 'ticket_' . $request->ticket_id;
             //storage_path
-            $share_file->move(storage_path() . '/requests' . '/' . $dir, $file);
+            $share_file->move(storage_path() . '/uploads' . '/' . $dir, $file);
             $share_file =  $file;
             $upload->upload_dir = $dir;
             $upload->upload_ticket_id = $request->ticket_id;
@@ -64,8 +65,8 @@ class UploadController extends Controller
      */
     public function download($dir, $file)
     {
-        if (file_exists(storage_path() . '/requests' . '/' . $dir . '/' . $file)) {
-            $filePath = storage_path() . '/requests' . '/' . $dir . '/' . $file;
+        if (file_exists(storage_path() . '/uploads' . '/' . $dir . '/' . $file)) {
+            $filePath = storage_path() . '/uploads' . '/' . $dir . '/' . $file;
             return response()->download($filePath);
         } else {
             abort(404, 'File not found!');
@@ -78,9 +79,8 @@ class UploadController extends Controller
     public function remove(Upload $file)
     {
 
-        if (file_exists(storage_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file)) {
-            unlink(storage_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file);
-            $s = storage_path() . '/requests' . '/' . $file->upload_dir . '/' . $file->upload_file;
+        if (file_exists(storage_path() . '/uploads' . '/' . $file->upload_dir . '/' . $file->upload_file)) {
+            unlink(storage_path() . '/uploads' . '/' . $file->upload_dir . '/' . $file->upload_file);
             $file->save();
         }
         $tickets = Upload::find($file->id)->first();
