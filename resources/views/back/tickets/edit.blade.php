@@ -160,9 +160,10 @@
                                             {!! Form::hidden('upload_dir', $file->upload_dir) !!}
                                             {!! Form::hidden('upload_file', $file->upload_file) !!}
                                             {!! Form::hidden('upload_ticket_id', $file->upload_ticket_id) !!}
-                                            {!! Form::submit('Remove', [
-                                                'class' => 'btn btn-danger mt-1',
-                                                'style' => 'max-height: 30px;line-height: 10px; ',
+                                            {!! Form::submit('', [
+                                                'class' => 'btn btn-danger mt-1 btn-close',
+                                                // 'class' => 'btn mt-1 btn-close btn-close-white',
+                                                'style' => 'max-height: 30px; min-width: 10px;line-height: 5px; ',
                                                 'name' => 'remove',
                                             ]) !!}
                                             <a href="{{ route('file-downloads', ['dir' => $file->upload_dir, 'file' => $file->upload_file]) }}"
