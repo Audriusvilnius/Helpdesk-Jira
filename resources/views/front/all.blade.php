@@ -98,6 +98,94 @@
                     @endforeach
                     {{ $data->appends($_GET)->links() }}
                 </div>
+                <div class="row row-cols-1 row-cols-md-4 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header"> TO DO</div>
+                            @foreach ($data as $key => $open)
+                                @if ($open->status_id == 1)
+                                    <div class="card m-1">
+                                        <p class="card-text">{{ $open->id }}</p>
+                                        <img src="..." class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            @if ($ticket->attach_json !== null)
+                                                <i class="bi bi-paperclip fs-4"></i>
+                                            @endif
+                                            <samp class="card-title">{{ $open->title }}</samp>
+                                            <p class="card-text">{{ $open->user_id }}</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-body-secondary">{{ $ticket->id }}</small>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header">IN PROGRESS</div>
+                            @foreach ($data as $open)
+                                @if ($open->status_id == 2)
+                                    <div class="card m-1">
+                                        @if ($open->attach_json !== null)
+                                            <i class="bi bi-paperclip fs-4"></i>
+                                        @endif
+                                        <p class="card-text">{{ $open->id }}</p>
+                                        <img src="..." class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <samp class="card-title">{{ $open->title }}</samp>
+                                            <p class="card-text">{{ $open->user_id }}</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-body-secondary">{{ $ticket->id }}</small>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header">WAIT ANSWER</div>
+                            @foreach ($data as $key => $open)
+                                @if ($open->status_id == 3)
+                                    <div class="card m-1">
+                                        <p class="card-text">{{ $open->id }}</p>
+                                        <img src="..." class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <samp class="card-title">{{ $open->title }}</samp>
+                                            <p class="card-text">{{ $open->user_id }}</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-body-secondary">{{ $ticket->id }}</small>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header">DONE</div>
+                            @foreach ($data as $key => $open)
+                                @if ($open->status_id > 3)
+                                    <div class="card m-1">
+                                        <p class="card-text">{{ $open->id }}</p>
+                                        <img src="..." class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <samp class="card-title">{{ $open->title }}</samp>
+                                            <p class="card-text">{{ $open->user_id }}</p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <small class="text-body-secondary">{{ $ticket->id }}</small>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

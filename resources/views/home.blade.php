@@ -36,6 +36,12 @@
                                 All
                             </a>
                         @endif
+                        @if (Auth::user()->role == 'admin')
+                            <a href="{{ route('all-tickets') }}"
+                                class="text-decoration-none text-black container-btn shadow ">
+                                All New
+                            </a>
+                        @endif
 
                         <section class="mb-4">
                             <h3 class="h1-responsive text-white font-weight-bold text-center my-4 mt-5">Contact us</h3>

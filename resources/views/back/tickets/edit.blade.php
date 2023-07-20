@@ -60,6 +60,13 @@
                             </div>
                             <div class="col-md-12 col-lg-12 col-xl-12">
                                 <label class=" text-white-50" for="status_id">{{ __('Status:') }}</label>
+                                {{-- <input type="range" class="form-range mt-2 mb-2" min="1" max="5"
+                                    steps="1" value="1" id="customRange2">
+                                <ul class="range-labels justify-content-between align-content-between">
+                                    @foreach ($status as $status_s)
+                                        <li class="ms-1 text-white-50"> {{ $status_s->title }}</li>
+                                    @endforeach
+                                </ul> --}}
                                 <select class="form-select" name="status_id">
                                     @foreach ($status as $status_s)
                                         <option value="{{ $status_s->id }}"

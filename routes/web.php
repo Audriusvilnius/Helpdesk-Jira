@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::post('/message', [TicketController::class, 'message'])->name('ticket-message');
 Route::get('/open', [TicketController::class, 'open'])->name('open-tickets');
 Route::get('/close', [TicketController::class, 'close'])->name('close-tickets');
+Route::get('/all', [TicketController::class, 'all'])->name('all-tickets');
 Route::get('/suspendet', [TicketController::class, 'suspendet'])->name('suspendet-tickets');
 
 Route::post('/ticket/share', [Share::class, 'share'])->name('ticket-share');

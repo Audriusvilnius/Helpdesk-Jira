@@ -31,7 +31,7 @@ class TicketController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show', 'open', 'close', 'suspendet']]);
+        $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show', 'open', 'close', 'suspendet', 'all']]);
         $this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share']]);
         $this->middleware('permission:ticket-delete', ['only' => ['destroy']]);
@@ -97,6 +97,26 @@ class TicketController extends Controller
             return view('back.tickets.index', compact('data'));
         }
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all(Request $request)
+    {
+        if (Auth::user()->role == 'admin') {
+            $data = Ticket::latest()->paginate(10);
+            return view('front.all', compact('data'));
+        } else {
+            $data = Share::where('share_user_id', '=', Auth::user()->id)
+                ->latest()
+                ->paginate(10);
+            return view('front.all', compact('data'));
+        }
+    }
+
+
     /**
      * Display a listing of the resource.
      *
