@@ -7,7 +7,7 @@
                 @include('alerts.alert-danger')
 
                 <div class="card-header card-header justify-content-between align-content-between d-flex my-3">
-                    <h2 class="text-light">Tickets list</h2>
+                    <h2 class="text-light">Board</h2>
                     @can('ticket-create')
                         <span class=" d-flex">
                             <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex"
@@ -17,106 +17,66 @@
                         </span>
                     @endcan
                 </div>
-                <div class="card-body">
-                    @foreach ($data as $key => $ticket)
-                        <div class="col-md-12 col-xl-12 mb-2">
-                            <div class="card shadow-0 border rounded-3">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-12 col-lg-2 col-xl-2">
-                                            <div class="text-center row justify-content-center p-3">
-                                                <div
-                                                    class="conteiner-status m-1 text-white rounded-pill bg-black opacity-75">
-                                                    @if ($ticket->attach_json !== null)
-                                                        <i class="bi bi-paperclip fs-4  me-2"></i>
-                                                    @endif
-                                                    <span class="fs-5">
-                                                        {{ $ticket->id }}
-                                                    </span>
-                                                </div>
-                                                <div class="fs-6 rounded-pill conteiner-status m-1"
-                                                    style=" color:{{ $ticket->ticketsImportant->important_tc }}
-                                                background-color:{{ $ticket->ticketsImportant->important_bc }}
-                                                ">
-                                                    {{ $ticket->ticketsImportant->title }}
-                                                </div>
-                                                <div class="fs-6 rounded-pill conteiner-status m-1"
-                                                    style=" color:{{ $ticket->ticketsStatus->status_tc }}
-                                                background-color:{{ $ticket->ticketsStatus->status_bc }}
-                                                ">
-                                                    {{ $ticket->ticketsStatus->title }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-8 col-xl-8 border-sm-start-none border-start">
-                                            <div class="col-md-12 col-lg-12 col-xl-12">
-                                                <div class="fs-6 rounded-1 bg-dark-subtle ps-3 pe-3">
-                                                    {{ $ticket->ticketsUser->name }}
-                                                </div>
-                                                <div class="fs-6 d-flex flex-row text-black-50">
-                                                    Open: {{ $ticket->created_at->format('Y-m-d H:i') }}
-                                                </div>
-                                                <div class="fs-6 d-flex flex-row text-black-50 ">
-                                                    Edit : {{ $ticket->updated_at->format('Y-m-d H:i') }}
-                                                </div>
-
-                                            </div>
-                                            <h5 class="length_title">{{ $ticket->title }}</h5>
-                                            <div class="length_message">
-                                                <p class="length_message">{{ $ticket->request }}</p>
-                                            </div>
-                                            <div class="d-flex flex-row">
-                                                <span>{{ $ticket->attach }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-2 col-xl-2 border-sm-start-none border-start">
-                                            <div class=" row justify-content-evenly align-content-cente m-1">
-                                                <a class="btn btn-success text-decoration-none text-white btn-index m-1"
-                                                    href="{{ route('tickets.show', $ticket->id) }}">Conversation</a>
-                                                @can('ticket-edit')
-                                                    <a class=" btn btn-primary text-decoration-none text-white btn-index m-1"
-                                                        href="{{ route('tickets.edit', $ticket->id) }}">Desk</a>
-                                                @endcan
-                                                @can('delete-btn')
-                                                    {!! Form::open([
-                                                        'method' => 'DELETE',
-                                                        'route' => ['tickets.destroy', $ticket->id],
-                                                    ]) !!}
-                                                    <div class="row justify-content-evenly align-content-cente">
-                                                        {!! Form::submit('Delete', [
-                                                            'class' => 'row col-12 btn btn-danger mt-1 btn-index ',
-                                                        ]) !!}
-                                                    </div>
-                                                    {!! Form::close() !!}
-                                                @endcan
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    {{ $data->appends($_GET)->links() }}
-                </div>
-                <div class="row row-cols-1 row-cols-md-4 g-4">
+            </div>
+            <div class="card h-100 p-3">
+                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-4 row-cols-xxl-4 g-4">
                     <div class="col">
                         <div class="card h-100">
                             <div class="card-header"> TO DO</div>
                             @foreach ($data as $key => $open)
                                 @if ($open->status_id == 1)
                                     <div class="card m-1">
-                                        <p class="card-text">{{ $open->id }}</p>
-                                        <img src="..." class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            @if ($ticket->attach_json !== null)
-                                                <i class="bi bi-paperclip fs-4"></i>
-                                            @endif
-                                            <samp class="card-title">{{ $open->title }}</samp>
-                                            <p class="card-text">{{ $open->user_id }}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-body-secondary">{{ $ticket->id }}</small>
-                                        </div>
+                                        <a class=" text-decoration-none text-black"
+                                            href="{{ route('tickets.show', $open->id) }}">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="board-pill"
+                                                        style="background-color:{{ $open->ticketsImportant->important_bc }};">
+                                                        @if ($open->attach_json !== null)
+                                                            <i class="bi bi-paperclip fs-4 board-att"
+                                                                style="color:{{ $open->ticketsImportant->important_tc }};"></i>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="card-text d-flex ms-3 me-3">{{ $open->id }}</h6>
+                                                    {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                                    <h6 class="card-text d-flex"> {{ $open->ticketsUser->name }}</h6>
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50">
+                                                    Open: {{ $open->created_at->format('Y-m-d H:i') }}
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50 ">
+                                                    Edit : {{ $open->updated_at->format('Y-m-d H:i') }}
+                                                </div>
+                                                <h6>{{ $open->title }}</h6>
+                                                {{-- <p> {!! nl2br(e($open->title)) !!}</p> --}}
+                                                {{-- <h6 class="length_title">{{ $open->title }}</h6> --}}
+                                                {{-- <samp class="card-title">{{ $open->title }}</samp> --}}
+                                                {{-- <p class="card-text">{{ $open->user_id }}</p> --}}
+                                                <p class="length_message">{{ $open->request }}</p>
+                                                @can('ticket-edit')
+                                                    <a class="icon-edit text-decoration-none fs-2 text-black-50 float-end"
+                                                        href="{{ route('tickets.edit', $open->id) }}"></a>
+                                                @endcan
+                                            </div>
+                                        </a>
+                                        @can('delete-btn')
+                                            <div class="card-footer">
+                                                <div class="border-sm-start-none">
+                                                    <div class=" row justify-content-evenly align-content-cente m-1">
+                                                        {!! Form::open([
+                                                            'method' => 'DELETE',
+                                                            'route' => ['tickets.destroy', $open->id],
+                                                        ]) !!}
+                                                        <div class="row justify-content-evenly align-content-cente">
+                                                            {!! Form::submit('Delete', [
+                                                                'class' => 'row col-12 btn btn-danger mt-1 btn-index ',
+                                                            ]) !!}
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endcan
                                     </div>
                                 @endif
                             @endforeach
@@ -128,18 +88,57 @@
                             @foreach ($data as $open)
                                 @if ($open->status_id == 2)
                                     <div class="card m-1">
-                                        @if ($open->attach_json !== null)
-                                            <i class="bi bi-paperclip fs-4"></i>
-                                        @endif
-                                        <p class="card-text">{{ $open->id }}</p>
-                                        <img src="..." class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <samp class="card-title">{{ $open->title }}</samp>
-                                            <p class="card-text">{{ $open->user_id }}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-body-secondary">{{ $ticket->id }}</small>
-                                        </div>
+                                        <a class=" text-decoration-none text-black"
+                                            href="{{ route('tickets.show', $open->id) }}">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="board-pill"
+                                                        style="background-color:{{ $open->ticketsImportant->important_bc }};">
+                                                        @if ($open->attach_json !== null)
+                                                            <i class="bi bi-paperclip fs-4 board-att"
+                                                                style="color:{{ $open->ticketsImportant->important_tc }};"></i>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="card-text d-flex ms-3 me-3">{{ $open->id }}</h6>
+                                                    {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                                    <h6 class="card-text d-flex"> {{ $open->ticketsUser->name }}</h6>
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50">
+                                                    Open: {{ $open->created_at->format('Y-m-d H:i') }}
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50 ">
+                                                    Edit : {{ $open->updated_at->format('Y-m-d H:i') }}
+                                                </div>
+                                                <h6>{{ $open->title }}</h6>
+                                                {{-- <p> {!! nl2br(e($open->title)) !!}</p> --}}
+                                                {{-- <h6 class="length_title">{{ $open->title }}</h6> --}}
+                                                {{-- <samp class="card-title">{{ $open->title }}</samp> --}}
+                                                {{-- <p class="card-text">{{ $open->user_id }}</p> --}}
+                                                <p class="length_message">{{ $open->request }}</p>
+                                                @can('ticket-edit')
+                                                    <a class="icon-edit text-decoration-none fs-2 text-black-50 float-end"
+                                                        href="{{ route('tickets.edit', $open->id) }}"></a>
+                                                @endcan
+                                            </div>
+                                        </a>
+                                        @can('delete-btn')
+                                            <div class="card-footer">
+                                                <div class="border-sm-start-none">
+                                                    <div class=" row justify-content-evenly align-content-cente m-1">
+                                                        {!! Form::open([
+                                                            'method' => 'DELETE',
+                                                            'route' => ['tickets.destroy', $open->id],
+                                                        ]) !!}
+                                                        <div class="row justify-content-evenly align-content-cente">
+                                                            {!! Form::submit('Delete', [
+                                                                'class' => 'row col-12 btn btn-danger mt-1 btn-index ',
+                                                            ]) !!}
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endcan
                                     </div>
                                 @endif
                             @endforeach
@@ -151,15 +150,57 @@
                             @foreach ($data as $key => $open)
                                 @if ($open->status_id == 3)
                                     <div class="card m-1">
-                                        <p class="card-text">{{ $open->id }}</p>
-                                        <img src="..." class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <samp class="card-title">{{ $open->title }}</samp>
-                                            <p class="card-text">{{ $open->user_id }}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-body-secondary">{{ $ticket->id }}</small>
-                                        </div>
+                                        <a class=" text-decoration-none text-black"
+                                            href="{{ route('tickets.show', $open->id) }}">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="board-pill"
+                                                        style="background-color:{{ $open->ticketsImportant->important_bc }};">
+                                                        @if ($open->attach_json !== null)
+                                                            <i class="bi bi-paperclip fs-4 board-att"
+                                                                style="color:{{ $open->ticketsImportant->important_tc }};"></i>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="card-text d-flex ms-3 me-3">{{ $open->id }}</h6>
+                                                    {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                                    <h6 class="card-text d-flex"> {{ $open->ticketsUser->name }}</h6>
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50">
+                                                    Open: {{ $open->created_at->format('Y-m-d H:i') }}
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50 ">
+                                                    Edit : {{ $open->updated_at->format('Y-m-d H:i') }}
+                                                </div>
+                                                <h6>{{ $open->title }}</h6>
+                                                {{-- <p> {!! nl2br(e($open->title)) !!}</p> --}}
+                                                {{-- <h6 class="length_title">{{ $open->title }}</h6> --}}
+                                                {{-- <samp class="card-title">{{ $open->title }}</samp> --}}
+                                                {{-- <p class="card-text">{{ $open->user_id }}</p> --}}
+                                                <p class="length_message">{{ $open->request }}</p>
+                                                @can('ticket-edit')
+                                                    <a class="icon-edit text-decoration-none fs-2 text-black-50 float-end"
+                                                        href="{{ route('tickets.edit', $open->id) }}"></a>
+                                                @endcan
+                                            </div>
+                                        </a>
+                                        @can('delete-btn')
+                                            <div class="card-footer">
+                                                <div class="border-sm-start-none">
+                                                    <div class=" row justify-content-evenly align-content-cente m-1">
+                                                        {!! Form::open([
+                                                            'method' => 'DELETE',
+                                                            'route' => ['tickets.destroy', $open->id],
+                                                        ]) !!}
+                                                        <div class="row justify-content-evenly align-content-cente">
+                                                            {!! Form::submit('Delete', [
+                                                                'class' => 'row col-12 btn btn-danger mt-1 btn-index ',
+                                                            ]) !!}
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endcan
                                     </div>
                                 @endif
                             @endforeach
@@ -171,15 +212,57 @@
                             @foreach ($data as $key => $open)
                                 @if ($open->status_id > 3)
                                     <div class="card m-1">
-                                        <p class="card-text">{{ $open->id }}</p>
-                                        <img src="..." class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <samp class="card-title">{{ $open->title }}</samp>
-                                            <p class="card-text">{{ $open->user_id }}</p>
-                                        </div>
-                                        <div class="card-footer">
-                                            <small class="text-body-secondary">{{ $ticket->id }}</small>
-                                        </div>
+                                        <a class=" text-decoration-none text-black"
+                                            href="{{ route('tickets.show', $open->id) }}">
+                                            <div class="card-body">
+                                                <div class="d-flex">
+                                                    <div class="board-pill"
+                                                        style="background-color:{{ $open->ticketsImportant->important_bc }};">
+                                                        @if ($open->attach_json !== null)
+                                                            <i class="bi bi-paperclip fs-4 board-att"
+                                                                style="color:{{ $open->ticketsImportant->important_tc }};"></i>
+                                                        @endif
+                                                    </div>
+                                                    <h6 class="card-text d-flex ms-3 me-3">{{ $open->id }}</h6>
+                                                    {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                                    <h6 class="card-text d-flex"> {{ $open->ticketsUser->name }}</h6>
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50">
+                                                    Open: {{ $open->created_at->format('Y-m-d H:i') }}
+                                                </div>
+                                                <div class="fs-6 d-flex flex-row text-black-50 ">
+                                                    Edit : {{ $open->updated_at->format('Y-m-d H:i') }}
+                                                </div>
+                                                <h6>{{ $open->title }}</h6>
+                                                {{-- <p> {!! nl2br(e($open->title)) !!}</p> --}}
+                                                {{-- <h6 class="length_title">{{ $open->title }}</h6> --}}
+                                                {{-- <samp class="card-title">{{ $open->title }}</samp> --}}
+                                                {{-- <p class="card-text">{{ $open->user_id }}</p> --}}
+                                                <p class="length_message">{{ $open->request }}</p>
+                                                @can('ticket-edit')
+                                                    <a class="icon-edit text-decoration-none fs-2 text-black-50 float-end"
+                                                        href="{{ route('tickets.edit', $open->id) }}"></a>
+                                                @endcan
+                                            </div>
+                                        </a>
+                                        @can('delete-btn')
+                                            <div class="card-footer">
+                                                <div class="border-sm-start-none">
+                                                    <div class=" row justify-content-evenly align-content-cente m-1">
+                                                        {!! Form::open([
+                                                            'method' => 'DELETE',
+                                                            'route' => ['tickets.destroy', $open->id],
+                                                        ]) !!}
+                                                        <div class="row justify-content-evenly align-content-cente">
+                                                            {!! Form::submit('Delete', [
+                                                                'class' => 'row col-12 btn btn-danger mt-1 btn-index ',
+                                                            ]) !!}
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endcan
                                     </div>
                                 @endif
                             @endforeach

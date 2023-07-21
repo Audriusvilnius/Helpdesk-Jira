@@ -39,7 +39,7 @@
                         @if (Auth::user()->role == 'admin')
                             <a href="{{ route('all-tickets') }}"
                                 class="text-decoration-none text-black container-btn shadow ">
-                                All New
+                                Board
                             </a>
                         @endif
 
