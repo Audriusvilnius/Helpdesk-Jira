@@ -16,7 +16,7 @@
                 <div class="card-header card-header justify-content-end align-content-end d-flex my-5">
                     @can('ticket-edit')
                         <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex"
-                            href="{{ route('open-tickets') }}">Back</a>
+                            href="{{ route('board-tickets') }}">Board</a>
                         <a class="text-decoration-none text-black container-btn shadow bg-info d-flex"
                             href="{{ route('tickets.create') }}">New Ticket</a>
                     @endcan
@@ -93,6 +93,8 @@
                             <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                 {!! Form::model($ticket, ['route' => ['ticket-share', $ticket->id], 'method' => 'post']) !!}
                                 {!! Form::hidden('ticket_id', $ticket->id) !!}
+                                {!! Form::hidden('important_id', $ticket->important_id) !!}
+                                {!! Form::hidden('status_id', $ticket->status_id) !!}
                                 <div class="col-md-12 col-lg-12col-xl-12 ">
                                     <label class=" text-white-50" for="user_id">{{ __('User:') }}</label>
                                     <select class="form-select" name="user_id">

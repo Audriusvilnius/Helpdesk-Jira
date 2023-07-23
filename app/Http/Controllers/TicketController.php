@@ -109,7 +109,7 @@ class TicketController extends Controller
             $data = Ticket::all();
             return view('back.tickets.admin.board', compact('data'));
         } else {
-            $data = Share::where('share_user_id', '=', Auth::user()->id);
+            $data = Share::where('share_user_id', '=', Auth::user()->id)->get();
             return view('front.board', compact('data'));
         }
     }
@@ -192,13 +192,11 @@ class TicketController extends Controller
             ->latest()
             ->paginate(10);
 
-        dump($data);
+
         return view('front.board', compact('data'));
 
-
-
-        return redirect()->route('front.index')
-            ->with('success', 'Ticket created successfully.');
+        // return redirect()->route('front.index')
+        //     ->with('success', 'Ticket created successfully.');
     }
 
     /**

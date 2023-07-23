@@ -28,7 +28,7 @@
                                             <div class="text-center row justify-content-center p-3">
                                                 <div
                                                     class="conteiner-status m-1 text-white rounded-pill bg-black opacity-75">
-                                                    @if ($ticket->attach_json !== null)
+                                                    @if ($ticket->attach !== null)
                                                         <i class="bi bi-paperclip fs-4  me-2"></i>
                                                     @endif
                                                     <span class="fs-5">

@@ -22,20 +22,20 @@
                             class="text-decoration-none text-black container-btn shadow ">
                             Board
                         </a>
-                        {{-- @if (Auth::user()->role == 'admin') --}}
-                        <a href="{{ route('open-tickets') }}"
-                            class="text-decoration-none text-black container-btn shadow bg-info">
-                            Open
-                        </a>
-                        <a href="{{ route('suspendet-tickets') }}"
-                            class="text-decoration-none text-white container-btn shadow bg-danger">
-                            Suspendet
-                        </a>
-                        <a href="{{ route('close-tickets') }}"
-                            class="text-decoration-none text-white container-btn shadow bg-success">
-                            Closed
-                        </a>
-                        {{-- @endif --}}
+                        @if (Auth::user()->role == 'admin')
+                            <a href="{{ route('open-tickets') }}"
+                                class="text-decoration-none text-black container-btn shadow bg-info">
+                                Open
+                            </a>
+                            <a href="{{ route('suspendet-tickets') }}"
+                                class="text-decoration-none text-white container-btn shadow bg-danger">
+                                Suspendet
+                            </a>
+                            <a href="{{ route('close-tickets') }}"
+                                class="text-decoration-none text-white container-btn shadow bg-success">
+                                Closed
+                            </a>
+                        @endif
 
                         <section class="mb-4">
                             <h3 class="h1-responsive text-white font-weight-bold text-center my-4 mt-5">Contact us</h3>

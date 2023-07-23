@@ -27,7 +27,7 @@
                                             <div class="text-center row justify-content-center p-3">
                                                 <div
                                                     class="conteiner-status m-1 text-white rounded-pill bg-black opacity-75">
-                                                    @if ($ticket->shareTicket->attach_json != null)
+                                                    @if ($ticket->shareTicket->attach != null)
                                                         <i class="bi bi-paperclip fs-4  me-2"></i>
                                                     @endif
                                                     <span class="fs-5">
@@ -66,7 +66,7 @@
                                                 <p class="length_message">{{ $ticket->shareTicket->request }}</p>
                                             </div>
                                             {{-- <div class="d-flex flex-row">
-                                                <span>{{ $ticke->shareTicket->attach_json }}</span>
+                                                <span>{{ $ticke->shareTicket->attach }}</span>
                                             </div> --}}
                                         </div>
                                         <div class="col-md-6 col-lg-2 col-xl-2 border-sm-start-none border-start">

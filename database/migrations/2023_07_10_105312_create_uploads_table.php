@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('upload_user_id')->nullable();
             $table->text('upload_dir')->nullable();
             $table->foreign('upload_ticket_id')->references('id')->on('tickets')->onDelete('cascade');
+            // $table->foreign('upload_ticket_id')->references('id')->on('shares')->onDelete('cascade');
             $table->timestamps();
         });
     }

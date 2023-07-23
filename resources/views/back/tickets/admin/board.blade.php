@@ -36,7 +36,7 @@
                                                 <div class="d-flex">
                                                     <div class="board-pill shadow"
                                                         style="background-color:{{ $open->ticketsImportant->important_bc }};">
-                                                        @if ($open->attach_json !== null)
+                                                        @if ($open->attach != null)
                                                             <i class="bi bi-paperclip fs-4 board-att"
                                                                 style="color:{{ $open->ticketsImportant->important_tc }};"></i>
                                                         @endif
@@ -96,7 +96,7 @@
                                                 <div class="d-flex">
                                                     <div class="board-pill shadow"
                                                         style="background-color:{{ $open->ticketsImportant->important_bc }};">
-                                                        @if ($open->attach_json !== null)
+                                                        @if ($open->attach != null)
                                                             <i class="bi bi-paperclip fs-4 board-att"
                                                                 style="color:{{ $open->ticketsImportant->important_tc }};"></i>
                                                         @endif
@@ -156,7 +156,7 @@
                                                 <div class="d-flex">
                                                     <div class="board-pill shadow"
                                                         style="background-color:{{ $open->ticketsImportant->important_bc }};">
-                                                        @if ($open->attach_json !== null)
+                                                        @if ($open->attach != null)
                                                             <i class="bi bi-paperclip fs-4 board-att"
                                                                 style="color:{{ $open->ticketsImportant->important_tc }};"></i>
                                                         @endif
@@ -216,7 +216,7 @@
                                                 <div class="d-flex">
                                                     <div class="board-pill shadow"
                                                         style="background-color:{{ $open->ticketsImportant->important_bc }};">
-                                                        @if ($open->attach_json !== null)
+                                                        @if ($open->attach != null)
                                                             <i class="bi bi-paperclip fs-4 board-att"
                                                                 style="color:{{ $open->ticketsImportant->important_tc }};"></i>
                                                         @endif

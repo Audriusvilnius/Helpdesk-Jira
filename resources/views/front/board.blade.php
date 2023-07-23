@@ -24,7 +24,7 @@
                         <div class="card bg-dark-subtle h-100">
                             <div class="card-header ">TO DO</div>
                             @foreach ($data as $key => $open)
-                                @if ($open->status_id == 1)
+                                @if ($open->share_status_id == 1)
                                     <div class="card m-2 board-card">
                                         <a class=" text-decoration-none text-black"
                                             href="{{ route('tickets.show', $open->share_ticket_id) }}">
@@ -35,14 +35,14 @@
                                                 </span>
                                                 <div class="d-flex">
                                                     <div class="board-pill shadow"
-                                                        style="background-color:{{ $open->ticketsImportant->important_bc }};">
-                                                        @if ($open->attach_json !== null)
+                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                        @if ($open->shareTicket->attach != null)
                                                             <i class="bi bi-paperclip fs-4 board-att"
-                                                                style="color:{{ $open->ticketsImportant->important_tc }};"></i>
+                                                                style="color:{{ $open->shareImportant->important_tc }};"></i>
                                                         @endif
                                                     </div>
                                                     <div class=" justify-content-end align-content-center">
-                                                        <h2 class="card-text ms-2">{{ $open->id }}</h2>
+                                                        <h2 class="card-text ms-2">{{ $open->share_ticket_id }}</h2>
                                                     </div>
                                                 </div>
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
@@ -84,36 +84,36 @@
                         <div class="card bg-dark-subtle h-100">
                             <div class="card-header">IN PROGRESS</div>
                             @foreach ($data as $open)
-                                @if ($open->status_id == 2)
+                                @if ($open->share_status_id == 2)
                                     <div class="card m-2 board-card">
                                         <a class=" text-decoration-none text-black"
-                                            href="{{ route('tickets.show', $open->id) }}">
+                                            href="{{ route('tickets.show', $open->share_ticket_id) }}">
                                             <div class="card-body shadow">
                                                 {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                                 <span class="card-text float-end board-date">
-                                                    {{ $open->ticketsUser->name }}
+                                                    {{ $open->shareUser->name }}
                                                 </span>
                                                 <div class="d-flex">
                                                     <div class="board-pill shadow"
-                                                        style="background-color:{{ $open->ticketsImportant->important_bc }};">
-                                                        @if ($open->attach_json !== null)
+                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                        @if ($open->shareTicket->attach != null)
                                                             <i class="bi bi-paperclip fs-4 board-att"
-                                                                style="color:{{ $open->ticketsImportant->important_tc }};"></i>
+                                                                style="color:{{ $open->shareImportant->important_tc }};"></i>
                                                         @endif
                                                     </div>
                                                     <div class=" justify-content-end align-content-center">
-                                                        <h2 class="card-text ms-2">{{ $open->id }}</h2>
+                                                        <h2 class="card-text ms-2">{{ $open->share_ticket_id }}</h2>
                                                     </div>
                                                 </div>
-                                                <h6 class="mt-3 fw-light">{{ $open->title }}</h6>
-                                                <p class="length_message fw-lighter">{{ $open->request }}</p>
+                                                <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
+                                                <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
                                                 @can('ticket-edit')
                                                     <a class="text-decoration-none text-black-50 float-end"
-                                                        href="{{ route('tickets.edit', $open->id) }}"><i
+                                                        href="{{ route('tickets.edit', $open->shareTicket->id) }}"><i
                                                             class="bi bi-pencil-square"></i></a>
                                                 @endcan
                                                 <div class="py-1 board-date d-flex flex-row text-black-50">
-                                                    {{ $open->updated_at->format('Y-m-d, H:m') }}
+                                                    {{ $open->shareTicket->updated_at->format('Y-m-d, H:m') }}
                                                 </div>
                                             </div>
                                         </a>
@@ -123,7 +123,7 @@
                                                     <div class=" row justify-content-evenly align-content-cente m-1">
                                                         {!! Form::open([
                                                             'method' => 'DELETE',
-                                                            'route' => ['tickets.destroy', $open->id],
+                                                            'route' => ['tickets.destroy', $open->shareTicket->id],
                                                         ]) !!}
                                                         <div class="row justify-content-evenly align-content-cente">
                                                             {!! Form::submit('Delete', [
@@ -144,36 +144,36 @@
                         <div class="card bg-dark-subtle h-100">
                             <div class="card-header">WAIT ANSWER</div>
                             @foreach ($data as $key => $open)
-                                @if ($open->status_id == 3)
+                                @if ($open->share_status_id == 3)
                                     <div class="card m-2 board-card">
                                         <a class=" text-decoration-none text-black"
-                                            href="{{ route('tickets.show', $open->id) }}">
+                                            href="{{ route('tickets.show', $open->share_ticket_id) }}">
                                             <div class="card-body shadow">
                                                 {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                                 <span class="card-text float-end board-date">
-                                                    {{ $open->ticketsUser->name }}
+                                                    {{ $open->shareUser->name }}
                                                 </span>
                                                 <div class="d-flex">
                                                     <div class="board-pill shadow"
-                                                        style="background-color:{{ $open->ticketsImportant->important_bc }};">
-                                                        @if ($open->attach_json !== null)
+                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                        @if ($open->shareTicket->attach != null)
                                                             <i class="bi bi-paperclip fs-4 board-att"
-                                                                style="color:{{ $open->ticketsImportant->important_tc }};"></i>
+                                                                style="color:{{ $open->shareImportant->important_tc }};"></i>
                                                         @endif
                                                     </div>
                                                     <div class=" justify-content-end align-content-center">
-                                                        <h2 class="card-text ms-2">{{ $open->id }}</h2>
+                                                        <h2 class="card-text ms-2">{{ $open->share_ticket_id }}</h2>
                                                     </div>
                                                 </div>
-                                                <h6 class="mt-3 fw-light">{{ $open->title }}</h6>
-                                                <p class="length_message fw-lighter">{{ $open->request }}</p>
+                                                <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
+                                                <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
                                                 @can('ticket-edit')
                                                     <a class="text-decoration-none text-black-50 float-end"
-                                                        href="{{ route('tickets.edit', $open->id) }}"><i
+                                                        href="{{ route('tickets.edit', $open->shareTicket->id) }}"><i
                                                             class="bi bi-pencil-square"></i></a>
                                                 @endcan
                                                 <div class="py-1 board-date d-flex flex-row text-black-50">
-                                                    {{ $open->updated_at->format('Y-m-d, H:m') }}
+                                                    {{ $open->shareTicket->updated_at->format('Y-m-d, H:m') }}
                                                 </div>
                                             </div>
                                         </a>
@@ -183,7 +183,7 @@
                                                     <div class=" row justify-content-evenly align-content-cente m-1">
                                                         {!! Form::open([
                                                             'method' => 'DELETE',
-                                                            'route' => ['tickets.destroy', $open->id],
+                                                            'route' => ['tickets.destroy', $open->shareTicket->id],
                                                         ]) !!}
                                                         <div class="row justify-content-evenly align-content-cente">
                                                             {!! Form::submit('Delete', [
@@ -204,40 +204,36 @@
                         <div class="card bg-dark-subtle h-100">
                             <div class="card-header">DONE</div>
                             @foreach ($data as $key => $open)
-                                @if ($open->status_id > 3)
+                                @if ($open->share_status_id > 3)
                                     <div class="card m-2 board-card">
                                         <a class=" text-decoration-none text-black"
-                                            href="{{ route('tickets.show', $open->id) }}">
+                                            href="{{ route('tickets.show', $open->share_ticket_id) }}">
                                             <div class="card-body shadow">
                                                 {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                                 <span class="card-text float-end board-date">
-                                                    {{ $open->ticketsUser->name }}
+                                                    {{ $open->shareUser->name }}
                                                 </span>
                                                 <div class="d-flex">
                                                     <div class="board-pill shadow"
-                                                        style="background-color:{{ $open->ticketsImportant->important_bc }};">
-                                                        @if ($open->attach_json !== null)
+                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                        @if ($open->attach != null)
                                                             <i class="bi bi-paperclip fs-4 board-att"
                                                                 style="color:{{ $open->ticketsImportant->important_tc }};"></i>
                                                         @endif
                                                     </div>
                                                     <div class=" justify-content-end align-content-center">
-                                                        <h2 class="card-text ms-2">{{ $open->id }}</h2>
+                                                        <h2 class="card-text ms-2">{{ $open->share_ticket_id }}</h2>
                                                     </div>
                                                 </div>
-                                                <h6 class="mt-3 fw-light">{{ $open->title }}</h6>
-                                                {{-- <p> {!! nl2br(e($open->title)) !!}</p> --}}
-                                                {{-- <h6 class="length_title">{{ $open->title }}</h6> --}}
-                                                {{-- <samp class="card-title">{{ $open->title }}</samp> --}}
-                                                {{-- <p class="card-text">{{ $open->user_id }}</p> --}}
-                                                <p class="length_message fw-lighter">{{ $open->request }}</p>
+                                                <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
+                                                <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
                                                 @can('ticket-edit')
                                                     <a class="text-decoration-none text-black-50 float-end"
-                                                        href="{{ route('tickets.edit', $open->id) }}"><i
+                                                        href="{{ route('tickets.edit', $open->shareTicket->id) }}"><i
                                                             class="bi bi-pencil-square"></i></a>
                                                 @endcan
                                                 <div class="py-1 board-date d-flex flex-row text-black-50">
-                                                    {{ $open->updated_at->format('Y-m-d, H:m') }}
+                                                    {{ $open->shareTicket->updated_at->format('Y-m-d, H:m') }}
                                                 </div>
                                             </div>
                                         </a>
@@ -247,7 +243,7 @@
                                                     <div class=" row justify-content-evenly align-content-cente m-1">
                                                         {!! Form::open([
                                                             'method' => 'DELETE',
-                                                            'route' => ['tickets.destroy', $open->id],
+                                                            'route' => ['tickets.destroy', $open->shareTicket->id],
                                                         ]) !!}
                                                         <div class="row justify-content-evenly align-content-cente">
                                                             {!! Form::submit('Delete', [

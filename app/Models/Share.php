@@ -31,4 +31,8 @@ class Share extends Model
     {
         return $this->belongsTo(Status::class, 'share_status_id', 'id');
     }
+    public function uploadFile()
+    {
+        return $this->hasMany(Upload::class, 'upload_ticket_id', 'id');
+    }
 }
