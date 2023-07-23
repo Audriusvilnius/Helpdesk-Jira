@@ -231,15 +231,30 @@ main {
 }
 
 .board-card {
-    transition: 500ms;
-        background-color: #ffffffd9;
+    transition: 800ms;
+    background-color: #ffffffe4;
+    min-height: 250px;
 }
 
 .board-card:hover {
     transition: 500ms;
     color: #282c34;
     background-color: #fff;
-    /* line-height: 15px; */
     filter: drop-shadow(5px 10px 15px rgba(35, 18, 18, 0.37));
     transform: translateX(3px) translateY(-3px);
+}
+.board-date{
+    font-size: 12px;
+}
+
+.bi-pencil-square{
+    font-size: 20px;
+    transition: 500ms;
+    margin: 15px;
+}
+.bi-pencil-square:hover {
+    font-size: 26px;
+    transition: 500ms;
+    padding: 0px;
+    transform: translateX(2px) translateY(-2px);
 }

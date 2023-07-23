@@ -18,6 +18,11 @@
                             class="text-decoration-none text-black container-btn shadow bg-warning">
                             Create
                         </a>
+                        <a href="{{ route('board-tickets') }}"
+                            class="text-decoration-none text-black container-btn shadow ">
+                            Board
+                        </a>
+                        {{-- @if (Auth::user()->role == 'admin') --}}
                         <a href="{{ route('open-tickets') }}"
                             class="text-decoration-none text-black container-btn shadow bg-info">
                             Open
@@ -30,18 +35,7 @@
                             class="text-decoration-none text-white container-btn shadow bg-success">
                             Closed
                         </a>
-                        @if (Auth::user()->role == 'admin')
-                            <a href="{{ route('tickets.index') }}"
-                                class="text-decoration-none text-black container-btn shadow ">
-                                All
-                            </a>
-                        @endif
-                        @if (Auth::user()->role == 'admin')
-                            <a href="{{ route('all-tickets') }}"
-                                class="text-decoration-none text-black container-btn shadow ">
-                                Board
-                            </a>
-                        @endif
+                        {{-- @endif --}}
 
                         <section class="mb-4">
                             <h3 class="h1-responsive text-white font-weight-bold text-center my-4 mt-5">Contact us</h3>

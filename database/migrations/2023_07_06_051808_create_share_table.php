@@ -19,6 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('share_important_id')->nullable();
             $table->foreign('share_ticket_id')->references('id')->on('tickets')->onDelete('cascade');
             $table->foreign('share_user_id')->references('id')->on('users');
+            $table->foreign('share_status_id')->references('id')->on('shares');
+            $table->foreign('share_important_id')->references('id')->on('importants');
             $table->timestamps();
         });
     }

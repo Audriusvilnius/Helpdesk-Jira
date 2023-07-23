@@ -23,4 +23,12 @@ class Share extends Model
     {
         return $this->belongsTo(Ticket::class, 'share_ticket_id', 'id');
     }
+    public function shareImportant()
+    {
+        return $this->belongsTo(Important::class, 'share_important_id', 'id');
+    }
+    public function shareStatus()
+    {
+        return $this->belongsTo(Status::class, 'share_status_id', 'id');
+    }
 }
