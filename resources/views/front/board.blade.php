@@ -38,14 +38,14 @@
                                                     <div class="d-flex">
                                                         <div class="board-pill shadow"
                                                             style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                            {{-- @if ($open->upload_File()->count()) --}}
-                                                            <i class="bi bi-paperclip fs-4 board-att"
-                                                                style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                            {{-- @endif --}}
+                                                            @if ($open->upload_User_File()->count())
+                                                                <i class="bi bi-paperclip fs-4 board-att"
+                                                                    style="color:{{ $open->shareImportant->important_tc }};"></i>
+                                                            @endif
                                                         </div>
-                                                        {{-- +{{ $open->upload_File()->count() }} --}}
+                                                        +{{ $open->upload_User_File()->count() }}
                                                     </div>
-                                                </div>x
+                                                </div>
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
                                                 <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
                                                 @can('ticket-edit')
@@ -99,12 +99,12 @@
                                                     <div class="d-flex">
                                                         <div class="board-pill shadow"
                                                             style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                            {{-- @if ($open->upload_File()->count()) --}}
-                                                            <i class="bi bi-paperclip fs-4 board-att"
-                                                                style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                            {{-- @endif --}}
+                                                            @if ($open->upload_User_File()->count())
+                                                                <i class="bi bi-paperclip fs-4 board-att"
+                                                                    style="color:{{ $open->shareImportant->important_tc }};"></i>
+                                                            @endif
                                                         </div>
-                                                        {{-- +{{ $open->upload_File()->count() }} --}}
+                                                        +{{ $open->upload_User_File()->count() }}
                                                     </div>
                                                 </div>
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
@@ -161,12 +161,12 @@
                                                     <div class="d-flex">
                                                         <div class="board-pill shadow"
                                                             style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                            {{-- @if ($open->upload_File()->count()) --}}
-                                                            <i class="bi bi-paperclip fs-4 board-att"
-                                                                style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                            {{-- @endif --}}
+                                                            @if ($open->upload_User_File()->count())
+                                                                <i class="bi bi-paperclip fs-4 board-att"
+                                                                    style="color:{{ $open->shareImportant->important_tc }};"></i>
+                                                            @endif
                                                         </div>
-                                                        {{-- +{{ $open->upload_File()->count() }} --}}
+                                                        +{{ $open->upload_User_File()->count() }}
                                                     </div>
                                                 </div>
 
@@ -223,12 +223,12 @@
                                                     <div class="d-flex">
                                                         <div class="board-pill shadow"
                                                             style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                            {{-- @if ($open->upload_File()->count()) --}}
-                                                            <i class="bi bi-paperclip fs-4 board-att"
-                                                                style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                            {{-- @endif --}}
+                                                            @if ($open->upload_User_File()->count())
+                                                                <i class="bi bi-paperclip fs-4 board-att"
+                                                                    style="color:{{ $open->shareImportant->important_tc }};"></i>
+                                                            @endif
                                                         </div>
-                                                        {{-- +{{ $open->upload_File()->count() }} --}}
+                                                        +{{ $open->upload_User_File()->count() }}
                                                     </div>
                                                 </div>
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
