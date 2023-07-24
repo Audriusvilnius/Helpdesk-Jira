@@ -33,18 +33,19 @@
                                                 <span class="card-text float-end board-date">
                                                     {{ $open->shareUser->name }}
                                                 </span>
-                                                <div class="d-flex">
-                                                    <div class="board-pill shadow"
-                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                        @if ($open->shareTicket->attach != null)
+                                                <div class=" justify-content-start align-content-center d-flex">
+                                                    <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
+                                                    <div class="d-flex">
+                                                        <div class="board-pill shadow"
+                                                            style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                            {{-- @if ($open->upload_File()->count()) --}}
                                                             <i class="bi bi-paperclip fs-4 board-att"
                                                                 style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                        @endif
+                                                            {{-- @endif --}}
+                                                        </div>
+                                                        {{-- +{{ $open->upload_File()->count() }} --}}
                                                     </div>
-                                                    <div class=" justify-content-end align-content-center">
-                                                        <h2 class="card-text ms-2">{{ $open->share_ticket_id }}</h2>
-                                                    </div>
-                                                </div>
+                                                </div>x
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
                                                 <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
                                                 @can('ticket-edit')
@@ -93,16 +94,17 @@
                                                 <span class="card-text float-end board-date">
                                                     {{ $open->shareUser->name }}
                                                 </span>
-                                                <div class="d-flex">
-                                                    <div class="board-pill shadow"
-                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                        @if ($open->shareTicket->attach != null)
+                                                <div class=" justify-content-start align-content-center d-flex">
+                                                    <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
+                                                    <div class="d-flex">
+                                                        <div class="board-pill shadow"
+                                                            style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                            {{-- @if ($open->upload_File()->count()) --}}
                                                             <i class="bi bi-paperclip fs-4 board-att"
                                                                 style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                        @endif
-                                                    </div>
-                                                    <div class=" justify-content-end align-content-center">
-                                                        <h2 class="card-text ms-2">{{ $open->share_ticket_id }}</h2>
+                                                            {{-- @endif --}}
+                                                        </div>
+                                                        {{-- +{{ $open->upload_File()->count() }} --}}
                                                     </div>
                                                 </div>
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
@@ -153,18 +155,21 @@
                                                 <span class="card-text float-end board-date">
                                                     {{ $open->shareUser->name }}
                                                 </span>
-                                                <div class="d-flex">
-                                                    <div class="board-pill shadow"
-                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                        @if ($open->shareTicket->attach != null)
+
+                                                <div class=" justify-content-start align-content-center d-flex">
+                                                    <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
+                                                    <div class="d-flex">
+                                                        <div class="board-pill shadow"
+                                                            style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                            {{-- @if ($open->upload_File()->count()) --}}
                                                             <i class="bi bi-paperclip fs-4 board-att"
                                                                 style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                        @endif
-                                                    </div>
-                                                    <div class=" justify-content-end align-content-center">
-                                                        <h2 class="card-text ms-2">{{ $open->share_ticket_id }}</h2>
+                                                            {{-- @endif --}}
+                                                        </div>
+                                                        {{-- +{{ $open->upload_File()->count() }} --}}
                                                     </div>
                                                 </div>
+
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
                                                 <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
                                                 @can('ticket-edit')
@@ -213,16 +218,17 @@
                                                 <span class="card-text float-end board-date">
                                                     {{ $open->shareUser->name }}
                                                 </span>
-                                                <div class="d-flex">
-                                                    <div class="board-pill shadow"
-                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                        @if ($open->attach != null)
+                                                <div class=" justify-content-start align-content-center d-flex">
+                                                    <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
+                                                    <div class="d-flex">
+                                                        <div class="board-pill shadow"
+                                                            style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                            {{-- @if ($open->upload_File()->count()) --}}
                                                             <i class="bi bi-paperclip fs-4 board-att"
-                                                                style="color:{{ $open->ticketsImportant->important_tc }};"></i>
-                                                        @endif
-                                                    </div>
-                                                    <div class=" justify-content-end align-content-center">
-                                                        <h2 class="card-text ms-2">{{ $open->share_ticket_id }}</h2>
+                                                                style="color:{{ $open->shareImportant->important_tc }};"></i>
+                                                            {{-- @endif --}}
+                                                        </div>
+                                                        {{-- +{{ $open->upload_File()->count() }} --}}
                                                     </div>
                                                 </div>
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>

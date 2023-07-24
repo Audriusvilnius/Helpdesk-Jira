@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreign('important_id')->references('id')->on('importants');
             $table->foreign('status_id')->references('id')->on('statuses');
             $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('upload_ticket_id')->on('uploads');
             $table->timestamps();
         });
     }
