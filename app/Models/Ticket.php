@@ -36,4 +36,8 @@ class Ticket extends Model
     {
         return $this->hasMany(Upload::class, 'upload_ticket_id', 'id');
     }
+    public function share_User()
+    {
+        return $this->hasMany(Share::class, 'share_ticket_id', 'id');
+    }
 }

@@ -220,14 +220,23 @@ main {
 }
 
 .board-pill {
+    min-width: 33px;
+    height: 33px;
+    border-radius: 30px;
+    line-height: 10px;
+    // transform: rotate(25deg);
+}
+.board-user {
     width: 33px;
     height: 33px;
     border-radius: 20px;
-    transform: rotate(25deg);
+    color: white;
+    margin: 6px;
+    // transform: rotate(-25deg);
 }
 
 .board-att {
-    margin: 6px;
+    transform: rotate(25deg);
 }
 
 .board-card {

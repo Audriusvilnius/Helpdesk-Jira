@@ -5,7 +5,6 @@
             <div class="justify-content-center">
                 @include('alerts.alert-success')
                 @include('alerts.alert-danger')
-
                 <div class="card-header card-header justify-content-between align-content-between d-flex my-3">
                     <h2 class="text-light">Board</h2>
                     @can('ticket-create')
@@ -26,26 +25,30 @@
                             @foreach ($data as $key => $open)
                                 @if ($open->share_status_id == 1)
                                     <div class="card m-2 board-card">
-                                        <a class=" text-decoration-none text-black"
-                                            href="{{ route('tickets.show', $open->share_ticket_id) }}">
-                                            <div class="card-body shadow">
-                                                {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                                                <span class="card-text float-end board-date">
-                                                    {{ $open->shareUser->name }}
-                                                </span>
-                                                <div class=" justify-content-start align-content-center d-flex">
-                                                    <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
-                                                    <div class="d-flex">
-                                                        <div class="board-pill shadow"
-                                                            style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                            @if ($open->upload_User_File()->count())
-                                                                <i class="bi bi-paperclip fs-4 board-att"
-                                                                    style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                            @endif
-                                                        </div>
-                                                        +{{ $open->upload_User_File()->count() }}
+                                        <div class="card-body shadow">
+                                            {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                            <span class="card-text float-end board-date">
+                                                {{ $open->shareUser->name }}
+                                            </span>
+                                            <div class=" justify-content-start align-content-center d-flex">
+                                                <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
+                                                <div class="d-flex">
+                                                    <div class="board-pill shadow"
+                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                        @can('ticket-edit')
+                                                            <a href="{{ route('tickets.edit', $open->shareTicket->id) }}">
+                                                                @if ($open->upload_User_File()->count())
+                                                                    <i class="bi bi-paperclip fs-4 board-att"
+                                                                        style="color:{{ $open->shareImportant->important_tc }};"></i>
+                                                                @endif
+                                                            </a>
+                                                        @endcan
                                                     </div>
+                                                    +{{ $open->upload_User_File()->count() }}
                                                 </div>
+                                            </div>
+                                            <a class=" text-decoration-none text-black"
+                                                href="{{ route('tickets.show', $open->share_ticket_id) }}">
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
                                                 <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
                                                 @can('ticket-edit')
@@ -56,8 +59,8 @@
                                                 <div class="py-1 d-flex flex-row text-black-50 board-date">
                                                     {{ $open->shareTicket->created_at->format('Y-m-d, H:m') }}
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        </div>
                                         @can('delete-btn')
                                             <div class="card-footer">
                                                 <div class="border-sm-start-none">
@@ -87,26 +90,30 @@
                             @foreach ($data as $open)
                                 @if ($open->share_status_id == 2)
                                     <div class="card m-2 board-card">
-                                        <a class=" text-decoration-none text-black"
-                                            href="{{ route('tickets.show', $open->share_ticket_id) }}">
-                                            <div class="card-body shadow">
-                                                {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                                                <span class="card-text float-end board-date">
-                                                    {{ $open->shareUser->name }}
-                                                </span>
-                                                <div class=" justify-content-start align-content-center d-flex">
-                                                    <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
-                                                    <div class="d-flex">
-                                                        <div class="board-pill shadow"
-                                                            style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                            @if ($open->upload_User_File()->count())
-                                                                <i class="bi bi-paperclip fs-4 board-att"
-                                                                    style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                            @endif
-                                                        </div>
-                                                        +{{ $open->upload_User_File()->count() }}
+                                        <div class="card-body shadow">
+                                            {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                            <span class="card-text float-end board-date">
+                                                {{ $open->shareUser->name }}
+                                            </span>
+                                            <div class=" justify-content-start align-content-center d-flex">
+                                                <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
+                                                <div class="d-flex">
+                                                    <div class="board-pill shadow"
+                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                        @can('ticket-edit')
+                                                            <a href="{{ route('tickets.edit', $open->shareTicket->id) }}">
+                                                                @if ($open->upload_User_File()->count())
+                                                                    <i class="bi bi-paperclip fs-4 board-att"
+                                                                        style="color:{{ $open->shareImportant->important_tc }};"></i>
+                                                                @endif
+                                                            </a>
+                                                        @endcan
                                                     </div>
+                                                    +{{ $open->upload_User_File()->count() }}
                                                 </div>
+                                            </div>
+                                            <a class=" text-decoration-none text-black"
+                                                href="{{ route('tickets.show', $open->share_ticket_id) }}">
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
                                                 <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
                                                 @can('ticket-edit')
@@ -117,8 +124,8 @@
                                                 <div class="py-1 board-date d-flex flex-row text-black-50">
                                                     {{ $open->shareTicket->updated_at->format('Y-m-d, H:m') }}
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        </div>
                                         @can('delete-btn')
                                             <div class="card-footer">
                                                 <div class="border-sm-start-none">
@@ -148,27 +155,31 @@
                             @foreach ($data as $key => $open)
                                 @if ($open->share_status_id == 3)
                                     <div class="card m-2 board-card">
-                                        <a class=" text-decoration-none text-black"
-                                            href="{{ route('tickets.show', $open->share_ticket_id) }}">
-                                            <div class="card-body shadow">
-                                                {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                                                <span class="card-text float-end board-date">
-                                                    {{ $open->shareUser->name }}
-                                                </span>
+                                        <div class="card-body shadow">
+                                            {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                            <span class="card-text float-end board-date">
+                                                {{ $open->shareUser->name }}
+                                            </span>
 
-                                                <div class=" justify-content-start align-content-center d-flex">
-                                                    <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
-                                                    <div class="d-flex">
-                                                        <div class="board-pill shadow"
-                                                            style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                            @if ($open->upload_User_File()->count())
-                                                                <i class="bi bi-paperclip fs-4 board-att"
-                                                                    style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                            @endif
-                                                        </div>
-                                                        +{{ $open->upload_User_File()->count() }}
+                                            <div class=" justify-content-start align-content-center d-flex">
+                                                <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
+                                                <div class="d-flex">
+                                                    <div class="board-pill shadow"
+                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                        @can('ticket-edit')
+                                                            <a href="{{ route('tickets.edit', $open->shareTicket->id) }}">
+                                                                @if ($open->upload_User_File()->count())
+                                                                    <i class="bi bi-paperclip fs-4 board-att"
+                                                                        style="color:{{ $open->shareImportant->important_tc }};"></i>
+                                                                @endif
+                                                            </a>
+                                                        @endcan
                                                     </div>
+                                                    +{{ $open->upload_User_File()->count() }}
                                                 </div>
+                                            </div>
+                                            <a class=" text-decoration-none text-black"
+                                                href="{{ route('tickets.show', $open->share_ticket_id) }}">
 
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
                                                 <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
@@ -180,8 +191,8 @@
                                                 <div class="py-1 board-date d-flex flex-row text-black-50">
                                                     {{ $open->shareTicket->updated_at->format('Y-m-d, H:m') }}
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        </div>
                                         @can('delete-btn')
                                             <div class="card-footer">
                                                 <div class="border-sm-start-none">
@@ -211,26 +222,31 @@
                             @foreach ($data as $key => $open)
                                 @if ($open->share_status_id > 3)
                                     <div class="card m-2 board-card">
-                                        <a class=" text-decoration-none text-black"
-                                            href="{{ route('tickets.show', $open->share_ticket_id) }}">
-                                            <div class="card-body shadow">
-                                                {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                                                <span class="card-text float-end board-date">
-                                                    {{ $open->shareUser->name }}
-                                                </span>
-                                                <div class=" justify-content-start align-content-center d-flex">
-                                                    <h2 class="card-text me-3">{{ $open->share_ticket_id }}</h2>
-                                                    <div class="d-flex">
-                                                        <div class="board-pill shadow"
-                                                            style="background-color:{{ $open->shareImportant->important_bc }};">
-                                                            @if ($open->upload_User_File()->count())
-                                                                <i class="bi bi-paperclip fs-4 board-att"
-                                                                    style="color:{{ $open->shareImportant->important_tc }};"></i>
-                                                            @endif
-                                                        </div>
-                                                        +{{ $open->upload_User_File()->count() }}
+                                        <div class="card-body shadow">
+                                            {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                            <span class="card-text float-end board-date">
+                                                <i class="bi bi-person-circle"></i>+2
+                                                {{ $open->shareUser->name }}
+                                            </span>
+                                            <div class=" justify-content-start align-content-center d-flex">
+                                                <h2 class="card-text me-3"> {{ $open->share_ticket_id }}</h2>
+                                                <div class="d-flex">
+                                                    <div class="board-pill shadow"
+                                                        style="background-color:{{ $open->shareImportant->important_bc }};">
+                                                        @can('ticket-edit')
+                                                            <a href="{{ route('tickets.edit', $open->shareTicket->id) }}">
+                                                                @if ($open->upload_User_File()->count())
+                                                                    <i class="bi bi-paperclip fs-4 board-att"
+                                                                        style="color:{{ $open->shareImportant->important_tc }};"></i>
+                                                                @endif
+                                                            </a>
+                                                        @endcan
                                                     </div>
+                                                    +{{ $open->upload_User_File()->count() }}
                                                 </div>
+                                            </div>
+                                            <a class=" text-decoration-none text-black"
+                                                href="{{ route('tickets.show', $open->share_ticket_id) }}">
                                                 <h6 class="mt-3 fw-light">{{ $open->shareTicket->title }}</h6>
                                                 <p class="length_message fw-lighter">{{ $open->shareTicket->request }}</p>
                                                 @can('ticket-edit')
@@ -241,8 +257,8 @@
                                                 <div class="py-1 board-date d-flex flex-row text-black-50">
                                                     {{ $open->shareTicket->updated_at->format('Y-m-d, H:m') }}
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        </div>
                                         @can('delete-btn')
                                             <div class="card-footer">
                                                 <div class="border-sm-start-none">
