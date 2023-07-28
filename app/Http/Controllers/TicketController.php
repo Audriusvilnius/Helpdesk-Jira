@@ -175,6 +175,7 @@ class TicketController extends Controller
 
         $share = new Share;
         $share->share_ticket_id = $ticket->id;
+        $share->user = $ticket->user_id;
         $share->share_status_id = $ticket->status_id;
         $share->share_important_id = $ticket->important_id;
         $share->share_user_id = Auth::user()->id;

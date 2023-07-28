@@ -26,7 +26,6 @@
                                 @if ($open->share_status_id == 1)
                                     <div class="card m-2 board-card">
                                         <div class="card-body shadow">
-
                                             <div class=" justify-content-between align-content-center d-flex">
                                                 <h2 class="card-text me-3 fst-italic fw-light">#
                                                     {{ $open->share_ticket_id }}.
@@ -43,10 +42,10 @@
                                                                     </sup>
                                                                 </i>
                                                             @endif
-                                                            @if ($open->shareUser->count() > 1)
+                                                            @if ($open->share_Users()->count() > 1)
                                                                 <i class="fs-5 bi bi-person-circle">
                                                                     <sup class="me-1">
-                                                                        +{{ $open->shareUser->count() - 1 }}
+                                                                        +{{ $open->share_Users()->count() - 1 }}
                                                                     </sup>
                                                                 </i>
                                                             @endif
@@ -54,7 +53,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <small class="fst-italic"><b>{{ $open->shareUser->name }}</b></small>
+                                            <small class="fst-italic"><b>{{ $open->ovner->name }}</b></small>
                                             {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                             <a class=" text-decoration-none text-black"
                                                 href="{{ route('tickets.show', $open->share_ticket_id) }}">
@@ -116,10 +115,10 @@
                                                                     </sup>
                                                                 </i>
                                                             @endif
-                                                            @if ($open->shareUser->count() > 1)
+                                                            @if ($open->share_Users()->count() > 1)
                                                                 <i class="fs-5 bi bi-person-circle">
                                                                     <sup class="me-1">
-                                                                        +{{ $open->shareUser->count() - 1 }}
+                                                                        +{{ $open->share_Users()->count() - 1 }}
                                                                     </sup>
                                                                 </i>
                                                             @endif
@@ -127,7 +126,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <small class="fst-italic"><b>{{ $open->shareUser->name }}</b></small>
+                                            <small class="fst-italic"><b>{{ $open->ovner->name }}</b></small>
                                             {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                             <a class=" text-decoration-none text-black"
                                                 href="{{ route('tickets.show', $open->share_ticket_id) }}">
@@ -189,10 +188,10 @@
                                                                     </sup>
                                                                 </i>
                                                             @endif
-                                                            @if ($open->shareUser->count() > 1)
+                                                            @if ($open->share_Users()->count() > 1)
                                                                 <i class="fs-5 bi bi-person-circle">
                                                                     <sup class="me-1">
-                                                                        +{{ $open->shareUser->count() - 1 }}
+                                                                        +{{ $open->share_Users()->count() - 1 }}
                                                                     </sup>
                                                                 </i>
                                                             @endif
@@ -200,7 +199,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <small class="fst-italic"><b>{{ $open->shareUser->name }}</b></small>
+                                            <small class="fst-italic"><b>{{ $open->ovner->name }}</b></small>
                                             {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                             <a class=" text-decoration-none text-black"
                                                 href="{{ route('tickets.show', $open->share_ticket_id) }}">
@@ -262,10 +261,10 @@
                                                                     </sup>
                                                                 </i>
                                                             @endif
-                                                            @if ($open->shareUser->count() > 1)
+                                                            @if ($open->share_Users()->count() > 1)
                                                                 <i class="fs-5 bi bi-person-circle">
                                                                     <sup class="me-1">
-                                                                        +{{ $open->shareUser->count() - 1 }}
+                                                                        +{{ $open->share_Users()->count() - 1 }}
                                                                     </sup>
                                                                 </i>
                                                             @endif
@@ -273,7 +272,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <small class="fst-italic"><b>{{ $open->shareUser->name }}</b></small>
+                                            <small class="fst-italic"><b>{{ $open->ovner->name }}</b></small>
                                             {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                             <a class=" text-decoration-none text-black"
                                                 href="{{ route('tickets.show', $open->share_ticket_id) }}">

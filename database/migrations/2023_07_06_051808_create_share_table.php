@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('shares', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('share_ticket_id')->nullable();
+            $table->unsignedBigInteger('user')->nullable();
             $table->unsignedBigInteger('share_user_id')->nullable();
             $table->unsignedBigInteger('share_status_id')->nullable();
             $table->unsignedBigInteger('share_important_id')->nullable();

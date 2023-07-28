@@ -12,6 +12,9 @@
                         <span class=" d-flex">
                             <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex"
                                 href="{{ route('home') }}">Home</a>
+                            <a href="{{ route('board-tickets') }}" class="text-decoration-none text-black container-btn shadow ">
+                                Board
+                            </a>
                             <a class="text-decoration-none text-black container-btn shadow bg-info d-flex"
                                 href="{{ route('tickets.create') }}">New Ticket</a>
                         </span>

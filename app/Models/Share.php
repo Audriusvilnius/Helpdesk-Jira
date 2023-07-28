@@ -19,6 +19,10 @@ class Share extends Model
     {
         return $this->belongsTo(User::class, 'share_user_id', 'id');
     }
+    public function ovner()
+    {
+        return $this->belongsTo(User::class, 'user', 'id');
+    }
     public function shareTicket()
     {
         return $this->belongsTo(Ticket::class, 'share_ticket_id', 'id');
@@ -35,8 +39,8 @@ class Share extends Model
     {
         return $this->hasMany(Upload::class, 'upload_ticket_id', 'share_ticket_id');
     }
-    public function share_User_User()
+    public function share_Users()
     {
-        return $this->hasMany(Share::class, 'share_ticket_id', 'id');
+        return $this->hasMany(Share::class, 'share_ticket_id', 'share_ticket_id');
     }
 }
