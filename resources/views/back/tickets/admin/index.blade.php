@@ -17,6 +17,7 @@
                         </span>
                     @endcan
                 </div>
+                {{-- <div class="card bg-dark-subtle h-100"> --}}
                 <div class="card-body">
                     @foreach ($data as $key => $ticket)
                         <div class="col-md-12 col-xl-12 mb-2">
@@ -27,7 +28,7 @@
                                             <div class="text-center row justify-content-center p-3">
                                                 <div
                                                     class="conteiner-status m-1 text-white rounded-pill bg-black opacity-75">
-                                                    @if ($ticket->attach_json !== null)
+                                                    @if ($ticket->attach !== null)
                                                         <i class="bi bi-paperclip fs-4  me-2"></i>
                                                     @endif
                                                     <span class="fs-5">
@@ -101,4 +102,5 @@
             </div>
         </div>
     </div>
+    {{-- </div> --}}
 @endsection

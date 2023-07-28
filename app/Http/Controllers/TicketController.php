@@ -31,7 +31,7 @@ class TicketController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show', 'open', 'close', 'suspendet', 'all']]);
+        $this->middleware('permission:ticket-list|ticket-create|ticket-edit|ticket-delete|ticket-message', ['only' => ['index', 'show', 'open', 'close', 'suspendet', 'board']]);
         $this->middleware('permission:ticket-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:ticket-edit', ['only' => ['edit', 'update', 'share']]);
         $this->middleware('permission:ticket-delete', ['only' => ['destroy']]);
@@ -52,7 +52,7 @@ class TicketController extends Controller
             $data = Share::where('share_user_id', '=', Auth::user()->id)
                 ->latest()
                 ->paginate(10);
-            return view('back.tickets.index', compact('data'));
+            return view('front.index', compact('data'));
         }
     }
 
@@ -73,7 +73,7 @@ class TicketController extends Controller
                 ->whereIn('share_status_id', [1, 2, 3])
                 ->latest()
                 ->paginate(10);
-            return view('back.tickets.index', compact('data'));
+            return view('front.index', compact('data'));
         }
     }
 
@@ -94,7 +94,7 @@ class TicketController extends Controller
                 ->whereIn('share_status_id', [5])
                 ->latest()
                 ->paginate(10);
-            return view('back.tickets.index', compact('data'));
+            return view('front.index', compact('data'));
         }
     }
 
@@ -103,16 +103,14 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function all(Request $request)
+    public function board(Request $request)
     {
         if (Auth::user()->role == 'admin') {
-            $data = Ticket::latest()->paginate(10);
-            return view('front.all', compact('data'));
+            $data = Ticket::all();
+            return view('back.tickets.admin.board', compact('data'));
         } else {
-            $data = Share::where('share_user_id', '=', Auth::user()->id)
-                ->latest()
-                ->paginate(10);
-            return view('front.all', compact('data'));
+            $data = Share::where('share_user_id', '=', Auth::user()->id)->get();
+            return view('front.board', compact('data'));
         }
     }
 
@@ -135,7 +133,7 @@ class TicketController extends Controller
                 ->whereIn('share_status_id', [4])
                 ->latest()
                 ->paginate(10);
-            return view('back.tickets.index', compact('data'));
+            return view('front.index', compact('data'));
         }
     }
 
@@ -177,6 +175,7 @@ class TicketController extends Controller
 
         $share = new Share;
         $share->share_ticket_id = $ticket->id;
+        $share->user = $ticket->user_id;
         $share->share_status_id = $ticket->status_id;
         $share->share_important_id = $ticket->important_id;
         $share->share_user_id = Auth::user()->id;
@@ -190,8 +189,15 @@ class TicketController extends Controller
             // Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
         }
 
-        return redirect()->route('tickets.index')
-            ->with('success', 'Ticket created successfully.');
+        $data = Share::where('share_user_id', '=', Auth::user()->id)
+            ->latest()
+            ->paginate(10);
+
+
+        return view('front.board', compact('data'));
+
+        // return redirect()->route('front.index')
+        //     ->with('success', 'Ticket created successfully.');
     }
 
     /**

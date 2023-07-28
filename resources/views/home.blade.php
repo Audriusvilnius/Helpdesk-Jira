@@ -18,28 +18,22 @@
                             class="text-decoration-none text-black container-btn shadow bg-warning">
                             Create
                         </a>
-                        <a href="{{ route('open-tickets') }}"
-                            class="text-decoration-none text-black container-btn shadow bg-info">
-                            Open
-                        </a>
-                        <a href="{{ route('suspendet-tickets') }}"
-                            class="text-decoration-none text-white container-btn shadow bg-danger">
-                            Suspendet
-                        </a>
-                        <a href="{{ route('close-tickets') }}"
-                            class="text-decoration-none text-white container-btn shadow bg-success">
-                            Closed
+                        <a href="{{ route('board-tickets') }}"
+                            class="text-decoration-none text-black container-btn shadow ">
+                            Board
                         </a>
                         @if (Auth::user()->role == 'admin')
-                            <a href="{{ route('tickets.index') }}"
-                                class="text-decoration-none text-black container-btn shadow ">
-                                All
+                            <a href="{{ route('open-tickets') }}"
+                                class="text-decoration-none text-black container-btn shadow bg-info">
+                                Open
                             </a>
-                        @endif
-                        @if (Auth::user()->role == 'admin')
-                            <a href="{{ route('all-tickets') }}"
-                                class="text-decoration-none text-black container-btn shadow ">
-                                All New
+                            <a href="{{ route('suspendet-tickets') }}"
+                                class="text-decoration-none text-white container-btn shadow bg-danger">
+                                Suspendet
+                            </a>
+                            <a href="{{ route('close-tickets') }}"
+                                class="text-decoration-none text-white container-btn shadow bg-success">
+                                Closed
                             </a>
                         @endif
 

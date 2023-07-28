@@ -20,13 +20,13 @@ return new class extends Migration
             $table->text('request')->nullable();
             $table->text('message_json');
             $table->unsignedBigInteger('user_group')->nullable();
-            $table->text('share_user_id_json')->nullable();
-            $table->text('attach_json')->nullable();
+            $table->text('attach')->nullable();
             $table->text('photo_json')->nullable();
             $table->string('photo', 500)->nullable()->nullable();
             $table->foreign('important_id')->references('id')->on('importants');
             $table->foreign('status_id')->references('id')->on('statuses');
             $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id')->references('upload_ticket_id')->on('uploads');
             $table->timestamps();
         });
     }

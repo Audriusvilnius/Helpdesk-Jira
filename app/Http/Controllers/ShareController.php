@@ -14,9 +14,15 @@ class ShareController extends Controller
 {
     public function share(Request $request)
     {
+
+        $ticket = Ticket::find($request->ticket_id);
+
         $share_new = new Share;
         $share_new->share_ticket_id = $request->ticket_id;
         $share_new->share_user_id = $request->user_id;
+        $share_new->user = $ticket->user_id;
+        $share_new->share_status_id = $request->status_id;
+        $share_new->share_important_id = $request->important_id;
         $count = 0;
         $share_tickets = Share::where('share_ticket_id', 'like', $request->ticket_id)->get();
         foreach ($share_tickets as $share_ticket) {
@@ -31,7 +37,6 @@ class ShareController extends Controller
         }
 
         $share = Share::where('share_ticket_id', 'like', $request->ticket_id)->get();
-        $ticket = Ticket::find($request->ticket_id);
         $status = Status::all();
         $important = Important::all();
         $users = User::all();
