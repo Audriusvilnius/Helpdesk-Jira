@@ -27,7 +27,7 @@ class SignUpMail extends Mailable
 
     public function build()
     {
-        return $this->subject('New user sign up, name:' . $this->name . ' email: ' . $this->email)
+        return $this->subject('New user ' . $this->name . ' sign up, email: ' . $this->email)
             ->view('emails.signup');
     }
 }
