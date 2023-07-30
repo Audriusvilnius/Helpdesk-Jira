@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SignUpMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -64,6 +66,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // $new_user_email = $data['email'];
+        // $new_user_name = $data['name'];
+        $admin = User::where('role', 'like', 'admin')->get();
+        foreach ($admin as $to) {
+            $to = User::find($to->id);
+            Mail::to($to)->send(new SignUpMail($data['email'], $data['name'], $to));
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
