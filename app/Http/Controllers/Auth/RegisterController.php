@@ -66,8 +66,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // $new_user_email = $data['email'];
-        // $new_user_name = $data['name'];
+
         $admin = User::where('role', 'like', 'admin')->get();
         foreach ($admin as $to) {
             $to = User::find($to->id);
