@@ -182,11 +182,11 @@ class TicketController extends Controller
         $share->save();
 
         $to = User::find($ticket->user_id);
-        // Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
+        Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
         $admin = User::where('role', 'like', 'admin')->get();
         foreach ($admin as $to) {
             $to = User::find($to->id);
-            // Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
+            Mail::to($to)->send(new ConfirmOpenMail($ticket, $to));
         }
 
         $data = Share::where('share_user_id', '=', Auth::user()->id)
@@ -274,11 +274,11 @@ class TicketController extends Controller
         $ticket->update();
 
         $to = User::find($ticket->user_id);
-        // Mail::to($to)->send(new StatusImportantMail($ticket, $to));
+        Mail::to($to)->send(new StatusImportantMail($ticket, $to));
         $admin = User::where('role', 'like', 'admin')->get();
         foreach ($admin as $to) {
             $to = User::find($to->id);
-            // Mail::to($to)->send(new StatusImportantMail($ticket, $to));
+            Mail::to($to)->send(new StatusImportantMail($ticket, $to));
         }
         $ticket = Ticket::find($id);
         $status = Status::all();
@@ -326,11 +326,11 @@ class TicketController extends Controller
         $ticket->message_json = $request->message_json;
 
         $to = User::find($ticket->user_id);
-        // Mail::to($to)->send(new NewMessageMail($ticket, $to));
+        Mail::to($to)->send(new NewMessageMail($ticket, $to));
         $admin = User::where('role', 'like', 'admin')->get();
         foreach ($admin as $to) {
             $to = User::find($to->id);
-            // Mail::to($to)->send(new NewMessageMail($ticket, $to));
+            Mail::to($to)->send(new NewMessageMail($ticket, $to));
         }
         return view('back.tickets.show', compact('ticket', 'message'))->with('success', 'Ticket updated successfully.');
     }

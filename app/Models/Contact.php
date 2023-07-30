@@ -31,7 +31,7 @@ class Contact extends Model
 
         static::created(function ($item) {
 
-            $adminEmail = "audrius@ivko.org";
+            $adminEmail = "helpdesk@ivko.org";
             Mail::to($adminEmail)->send(new ContactMail($item));
         });
     }
