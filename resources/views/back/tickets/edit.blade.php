@@ -15,6 +15,10 @@
                 </div>
                 <div class="card-header card-header justify-content-end align-content-end d-flex my-5">
                     @can('ticket-edit')
+                        <a class="text-decoration-none text-black container-btn bg-outline float-start"
+                            href="{{ url()->previous() }}">
+                            <span>Back</span>
+                        </a>
                         <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex"
                             href="{{ route('board-tickets') }}">Board</a>
                         <a class="text-decoration-none text-black container-btn shadow bg-info d-flex"

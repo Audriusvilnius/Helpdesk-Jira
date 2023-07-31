@@ -9,6 +9,10 @@
                     <h2 class="text-light">Board</h2>
                     @can('ticket-create')
                         <span class=" d-flex">
+                            <a class="text-decoration-none text-black container-btn bg-outline float-start"
+                                href="{{ url()->previous() }}">
+                                <span>Back</span>
+                            </a>
                             <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex"
                                 href="{{ route('home') }}">Home</a>
                             <a class="text-decoration-none text-black container-btn shadow bg-info d-flex"
