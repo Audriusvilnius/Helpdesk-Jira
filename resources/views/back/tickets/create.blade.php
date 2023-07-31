@@ -10,8 +10,10 @@
                 <div class="card-header card-header justify-content-between align-content-between d-flex ">
                     <h2 class="text-light">Create ticket</h2>
                     @can('role-create')
-                        <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex mb-4 "
-                            href="{{ route('home') }}">Home</a>
+                        <a class="text-decoration-none text-black container-btn shadow bg-warning d-flex mb-4 float-end"
+                            href="{{ route('home') }}">
+                            <span>Home</span>
+                        </a>
                     @endcan
                 </div>
                 <div class="card">
@@ -51,6 +53,10 @@
                         </div>
                         <button type="submit" class="btn btn-success float-end mt-3">Create</button>
                         {!! Form::close() !!}
+                        <a class="text-decoration-none text-black container-btn bg-outline mt-3 float-start"
+                            href="{{ url()->previous() }}">
+                            <span>Back</span>
+                        </a>
                     </div>
                 </div>
             </div>
