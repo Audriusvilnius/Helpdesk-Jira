@@ -24,12 +24,15 @@
     {{-- <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css"> --}}
     <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/owl.theme.default.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/fonts/icomoon/style.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/sass/style.scss', 'resources/js/app.js', 'resources/js/main.js', 'resources/fonts/icomoon/style.css'])
+    @vite(['resources/sass/app.scss', 'resources/sass/style.scss', 'resources/js/app.js', 'resources/js/main.js', 'resources/js/jquery-3.6.4.min.js', 'resources/js/bootstrap.min.js', 'resources/js/popper.min.js', 'resources/fonts/icomoon/style.css'])
 
     <script src="{{ asset('assets/js/jquery-3.6.4.min.js') }}"></script>
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 
 </head>
 
