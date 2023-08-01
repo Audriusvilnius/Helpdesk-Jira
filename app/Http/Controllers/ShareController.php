@@ -40,7 +40,6 @@ class ShareController extends Controller
         $status = Status::all();
         $important = Important::all();
         $users = User::all();
-
         $uploads = Upload::where('upload_ticket_id', 'like', $request->ticket_id)->get();
 
         return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'))->with('success', 'Ticket updated successfully.');
