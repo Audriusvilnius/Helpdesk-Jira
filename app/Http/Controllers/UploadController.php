@@ -82,15 +82,13 @@ class UploadController extends Controller
             unlink(storage_path() . '/uploads' . '/' . $file->upload_dir . '/' . $file->upload_file);
             $file->save();
         }
-        $tickets = Upload::find($file->id)->first();
-        $ticket_id = $tickets->upload_ticket_id;
         Upload::find($file->id)->delete();
-        $ticket = Ticket::find($ticket_id);
+        $ticket = Ticket::find($file->upload_ticket_id);
         $status = Status::all();
         $important = Important::all();
         $users = User::all();
-        $share = Share::where('share_ticket_id', 'like', $ticket_id)->get();
-        $uploads = Upload::where('upload_ticket_id', 'like', $ticket_id)->get();
+        $share = Share::where('share_ticket_id', 'like', $file->upload_ticket_id)->get();
+        $uploads = Upload::where('upload_ticket_id', 'like', $file->upload_ticket_id)->get();
 
         return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
     }

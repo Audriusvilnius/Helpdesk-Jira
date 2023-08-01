@@ -49,15 +49,14 @@ class ShareController extends Controller
 
     public function destroy($id)
     {
-        $tickets = Share::find($id)->first();
-        $ticket_id = $tickets->share_ticket_id;
+        $tickets = Share::find($id);
         Share::find($id)->delete();
-        $ticket = Ticket::find($ticket_id);
+        $ticket = Ticket::find($tickets->share_ticket_id);
         $status = Status::all();
         $important = Important::all();
         $users = User::all();
-        $share = Share::where('share_ticket_id', 'like', $ticket_id)->get();
-        $uploads = Upload::where('upload_ticket_id', 'like', $ticket_id)->get();
+        $share = Share::where('share_ticket_id', 'like', $tickets->share_ticket_id)->get();
+        $uploads = Upload::where('upload_ticket_id', 'like', $tickets->share_ticket_id)->get();
 
         return view('back.tickets.edit', compact('ticket', 'important', 'status', 'users', 'share', 'uploads'));
     }
