@@ -121,6 +121,15 @@
         <main class="py-4">
             @yield('content')
         </main>
+        <footer class="bg-dark text-center text-white opacity-75">
+            <div class="text-center  text-white-50 p-3">
+                All rights reserved &copy; 2023
+                {{-- Copyright:
+                <a class="text-white-50 text-decoration-none" href="https://www.ivko.org/">
+                    www.ivko.org
+                </a> --}}
+            </div>
+        </footer>
     </div>
 </body>
 
