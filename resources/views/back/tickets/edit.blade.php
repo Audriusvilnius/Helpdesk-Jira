@@ -129,6 +129,9 @@
                                     'class' => 'form-control, text-white ',
                                     'type' => 'file',
                                 ]) !!}
+                                <small>
+                                    <p class="text-white-50">Choose file to upload ( up to 10MB )</p>
+                                </small>
                                 <button type="submit" class="btn btn-success float-end mt-3"><i
                                         class="bi bi-upload fs-3"></i></button>
                                 {!! Form::close() !!}
