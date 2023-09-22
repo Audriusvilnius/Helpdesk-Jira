@@ -11,7 +11,7 @@
 </h3>
 {{ asset('/tickets' . '/' . $data->id) }}<br><br>
 
-<strong style="back-">Important: </strong>{{ $data->ticketsImportant->title }}<br>
+<strong style="">Important: </strong>{{ $data->ticketsImportant->title }}<br>
 <strong>Status: </strong>{{ $data->ticketsStatus->title }}<br><br>
 <strong>Ticket title:</strong><br>
 {{ $data->title }}<br><br>

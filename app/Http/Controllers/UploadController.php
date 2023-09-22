@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AddFileMail;
 use App\Models\Important;
 use App\Models\Share;
 use App\Models\Status;
@@ -10,6 +11,7 @@ use App\Models\Upload;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
@@ -48,6 +50,14 @@ class UploadController extends Controller
             $upload->upload_file = $file;
             $upload->upload_user_id = Auth::user()->id;
             $upload->save();
+
+            $to = User::find($ticket->user_id);
+            Mail::to($to)->send(new AddFileMail($ticket, $upload, $to));
+            $admin = User::where('role', 'like', 'admin')->get();
+            foreach ($admin as $to) {
+                $to = User::find($to->id);
+                Mail::to($to)->send(new AddFileMail($ticket, $upload, $to));
+            }
         }
 
         $share = Share::where('share_ticket_id', 'like', $request->ticket_id)->get();
