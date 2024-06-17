@@ -44,7 +44,7 @@ class UploadController extends Controller
             $file = $name . '_' . date('Y-m-d_H:i:s', time()) . '.' . $ext;
             $dir = 'ticket_' . $request->ticket_id;
             $share_file->move(storage_path() . '/uploads' . '/' . $dir, $file);
-            $share_file =  $file;
+            $share_file = $file;
             $upload->upload_dir = $dir;
             $upload->upload_ticket_id = $request->ticket_id;
             $upload->upload_file = $file;
