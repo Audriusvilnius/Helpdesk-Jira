@@ -33,7 +33,7 @@
                             <br />
                         @endforeach
                     </div>
-                    {{-- <button type="submit" class="btn btn-primary float-end mt-3">Submit</button> --}}
+                    <button type="submit" class="btn btn-primary float-end mt-3">Submit</button>
                     {!! Form::close() !!}
                 </div>
             </div>
